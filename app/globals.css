@@ -1,26 +1,249 @@
 @import "tailwindcss";
 
+/* ─────────────────────────────────────────────────────────────────────────────
+   ECHOING HOLISTIC HEALTH — Design System
+   Editorial luxury wellness. Closer to Vogue than a supplement store.
+───────────────────────────────────────────────────────────────────────────── */
+
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  /* ── Palette ── */
+  --cream:        #FAF8F5;
+  --ivory:        #F5F0E8;
+  --warm-white:   #FDFCFA;
+  --parchment:    #ECE7DD;
+  --bone:         #E8E2D8;
+  --gold:         #B8965A;
+  --gold-light:   #C9A96E;
+  --gold-pale:    #E8D9BE;
+  --gold-ghost:   rgba(184, 150, 90, 0.12);
+  --espresso:     #1A1208;
+  --espresso-mid: #2A1F10;
+  --charcoal:     #2C2C2C;
+  --muted:        #7A7268;
+  --muted-light:  #9A9188;
+  --border:       #E2DDD4;
+  --border-dark:  rgba(250, 248, 245, 0.1);
+  --bg:           #FAF8F5;
+
+  /* ── Typography ── */
+  --font-serif:   'Cormorant Garamond', Georgia, 'Times New Roman', serif;
+  --font-sans:    'Inter', system-ui, -apple-system, sans-serif;
+
+  /* ── Spacing scale ── */
+  --section-y:    clamp(6rem, 10vw, 12rem);
+  --section-x:    clamp(1.5rem, 5vw, 5rem);
+  --container:    1440px;
+
+  /* ── Motion ── */
+  --ease-luxury:  cubic-bezier(0.22, 1, 0.36, 1);
+  --duration-slow: 1s;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+/* ─── Base ──────────────────────────────────────────────────────────────── */
+
+*, *::before, *::after {
+  box-sizing: border-box;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+html {
+  scroll-behavior: smooth;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background-color: var(--bg);
+  color: var(--espresso);
+  font-family: var(--font-sans);
+  font-weight: 300;
+  line-height: 1.6;
+  overflow-x: hidden;
+}
+
+/* ─── Typography Utilities ────────────────────────────────────────────────── */
+
+.font-serif {
+  font-family: var(--font-serif);
+}
+
+/* Editorial headline — the primary typographic voice */
+.editorial-headline {
+  font-family: var(--font-serif);
+  font-weight: 300;
+  letter-spacing: -0.025em;
+  line-height: 0.92;
+}
+
+/* Italic editorial accent */
+.editorial-italic {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-weight: 300;
+}
+
+/* Small label — uppercase tracked sans for section labels, categories */
+.editorial-label {
+  font-family: var(--font-sans);
+  font-weight: 500;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  font-size: 0.62rem;
+  line-height: 1;
+}
+
+/* Micro label — even smaller, for captions and secondary labels */
+.micro-label {
+  font-family: var(--font-sans);
+  font-weight: 500;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  font-size: 0.55rem;
+  line-height: 1;
+}
+
+/* ─── Decorative Rules ──────────────────────────────────────────────────── */
+
+.gold-rule {
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--gold), transparent);
+  opacity: 0.5;
+}
+
+.gold-rule-left {
+  height: 1px;
+  background: linear-gradient(90deg, var(--gold), transparent);
+}
+
+/* ─── Image Placeholders ────────────────────────────────────────────────── */
+
+.img-placeholder {
+  background: linear-gradient(
+    150deg,
+    var(--parchment) 0%,
+    var(--ivory) 40%,
+    var(--bone) 70%,
+    var(--cream) 100%
+  );
+  position: relative;
+  overflow: hidden;
+}
+
+.img-placeholder::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    135deg,
+    rgba(184, 150, 90, 0.06) 0%,
+    transparent 60%
+  );
+}
+
+/* ─── Link Hover Transitions ─────────────────────────────────────────────── */
+
+.link-gold {
+  transition: color 0.3s var(--ease-luxury), border-color 0.3s var(--ease-luxury);
+}
+.link-gold:hover {
+  color: var(--gold);
+  border-color: var(--gold);
+}
+
+/* ─── CTA Buttons ────────────────────────────────────────────────────────── */
+
+.btn-dark {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 1rem 2rem;
+  background-color: var(--espresso);
+  color: var(--cream);
+  font-family: var(--font-sans);
+  font-weight: 500;
+  font-size: 0.62rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  transition: background-color 0.4s var(--ease-luxury), color 0.4s var(--ease-luxury);
+  cursor: pointer;
+  border: 1px solid var(--espresso);
+}
+
+.btn-dark:hover {
+  background-color: var(--gold);
+  border-color: var(--gold);
+  color: var(--espresso);
+}
+
+.btn-outline {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 1rem 2rem;
+  background-color: transparent;
+  color: var(--espresso);
+  font-family: var(--font-sans);
+  font-weight: 500;
+  font-size: 0.62rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  border: 1px solid var(--espresso);
+  transition: background-color 0.4s var(--ease-luxury), color 0.4s var(--ease-luxury);
+  cursor: pointer;
+}
+
+.btn-outline:hover {
+  background-color: var(--espresso);
+  color: var(--cream);
+}
+
+.btn-outline-cream {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 1rem 2rem;
+  background-color: transparent;
+  color: var(--cream);
+  font-family: var(--font-sans);
+  font-weight: 500;
+  font-size: 0.62rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  border: 1px solid rgba(250, 248, 245, 0.4);
+  transition: border-color 0.4s var(--ease-luxury), background-color 0.4s var(--ease-luxury);
+  cursor: pointer;
+}
+
+.btn-outline-cream:hover {
+  border-color: var(--gold);
+  color: var(--gold);
+}
+
+/* ─── Text Link ────────────────────────────────────────────────────────── */
+
+.text-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.75rem;
+  font-family: var(--font-sans);
+  font-weight: 500;
+  font-size: 0.62rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  border-bottom: 1px solid currentColor;
+  padding-bottom: 2px;
+  transition: color 0.3s var(--ease-luxury), border-color 0.3s var(--ease-luxury);
+}
+
+/* ─── Scrollbar ───────────────────────────────────────────────────────────── */
+
+::-webkit-scrollbar { width: 3px; }
+::-webkit-scrollbar-track { background: var(--cream); }
+::-webkit-scrollbar-thumb { background: var(--gold-pale); border-radius: 2px; }
+
+/* ─── Selection ───────────────────────────────────────────────────────────── */
+
+::selection {
+  background-color: var(--gold-pale);
+  color: var(--espresso);
 }
