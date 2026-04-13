@@ -13,28 +13,28 @@ const areas = [
     title: "Gut Health",
     description:
       "The foundation of everything. A balanced gut shapes immunity, mood, and metabolic function. We address the root—not the symptom.",
-    href: "/shop?category=gut-health",
+    href: "/focus/gut-health",
   },
   {
     number: "02",
     title: "Hormonal Balance",
     description:
       "When hormones shift, everything shifts. Our approach supports the endocrine system with precision—informed by science, grounded in nature.",
-    href: "/shop?category=hormonal-balance",
+    href: "/focus/hormonal-balance",
   },
   {
     number: "03",
     title: "Womb Wellness",
     description:
       "The womb is not a problem to be managed. We offer support for the cycles, rhythms, and seasons of the feminine experience—with reverence.",
-    href: "/shop?category=womb-wellness",
+    href: "/focus/womb-wellness",
   },
   {
     number: "04",
     title: "Inflammation Support",
     description:
       "Chronic inflammation is a message. We work to quiet the signal thoughtfully—reducing burden on the body while rebuilding its natural resilience.",
-    href: "/shop?category=inflammation",
+    href: "/focus/inflammation-support",
   },
 ];
 

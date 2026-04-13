@@ -1,14 +1,10 @@
-import ComingSoon from "@/components/ui/ComingSoon";
+import ShopPage from "@/components/pages/ShopPage";
 
 export const metadata = {
   title: "Shop — Echoing Holistic Health",
+  description: "Herbal teas, seamoss blends, and ritual formulas designed to support gut health, hormonal balance, womb wellness, and inflammation support.",
 };
 
-export default function ShopPage() {
-  return (
-    <ComingSoon
-      title="Wellness, refined."
-      subtitle="The shop is being thoughtfully curated. Each product is created with purpose—designed to support the body while elevating your daily rituals."
-    />
-  );
+export default function Page() {
+  return <ShopPage />;
 }

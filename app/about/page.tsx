@@ -1,14 +1,10 @@
-import ComingSoon from "@/components/ui/ComingSoon";
+import AboutPage from "@/components/pages/AboutPage";
 
 export const metadata = {
   title: "About — Echoing Holistic Health",
+  description: "The story behind Echoing Holistic Health — real healing, real life, real results.",
 };
 
-export default function AboutPage() {
-  return (
-    <ComingSoon
-      title="This work is personal."
-      subtitle="The story behind Echoing Holistic Health is being prepared with the same intention as every product we create."
-    />
-  );
+export default function Page() {
+  return <AboutPage />;
 }
