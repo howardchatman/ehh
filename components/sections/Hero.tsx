@@ -4,18 +4,13 @@ import { useRef } from "react";
 import Link from "next/link";
 import { motion, useScroll, useTransform } from "framer-motion";
 
-// ── Animation constants ────────────────────────────────────────────────────
 const EASE = [0.22, 1, 0.36, 1] as const;
 
-function fadeUp(delay = 0, duration = 1) {
-  return {
-    initial: { opacity: 0, y: 28 },
-    animate: { opacity: 1, y: 0 },
-    transition: { duration, ease: EASE, delay },
-  };
-}
-
-// ── Component ─────────────────────────────────────────────────────────────
+// ─────────────────────────────────────────────────────────────────────────────
+// HERO — Full-bleed magazine cover composition
+// Text lives ON the image, with a cinematic gradient overlay.
+// Think: Vogue cover meets luxury wellness campaign.
+// ─────────────────────────────────────────────────────────────────────────────
 export default function Hero() {
   const heroRef = useRef<HTMLElement>(null);
 
@@ -24,9 +19,10 @@ export default function Hero() {
     offset: ["start start", "end start"],
   });
 
-  // Subtle parallax — image drifts upward at ~20% speed relative to scroll
-  const imageY = useTransform(scrollYProgress, [0, 1], ["0%", "18%"]);
-  const textY   = useTransform(scrollYProgress, [0, 1], ["0%", "6%"]);
+  // Image parallax — drifts upward as user scrolls, creating depth
+  const imageY = useTransform(scrollYProgress, [0, 1], ["0%", "22%"]);
+  // Content fades slightly on scroll
+  const contentOpacity = useTransform(scrollYProgress, [0, 0.5], [1, 0]);
 
   return (
     <section
@@ -34,342 +30,377 @@ export default function Hero() {
       aria-label="Hero"
       style={{
         position: "relative",
-        minHeight: "100svh",
-        display: "flex",
-        flexDirection: "column",
-        backgroundColor: "var(--cream)",
+        height: "100svh",
+        minHeight: "640px",
         overflow: "hidden",
+        backgroundColor: "#1A1208",
       }}
     >
-      {/* ── Content: mobile stacked / desktop split ─────────────────────── */}
-      <div
+      {/* ── 1. FULL-BLEED EDITORIAL IMAGE ────────────────────────────────── */}
+      {/* This is where a luxury portrait photograph will live.                */}
+      {/* The warm taupe gradient simulates the tone of editorial photography. */}
+      <motion.div
+        className="img-placeholder-cover"
         style={{
+          position: "absolute",
+          inset: 0,
+          height: "120%",
+          top: "-10%",
+          width: "100%",
+          y: imageY,
+        }}
+        aria-hidden="true"
+      />
+
+      {/* ── 2. CINEMATIC GRADIENT OVERLAY ───────────────────────────────── */}
+      {/* Creates reading contrast for text — standard magazine technique.    */}
+      <div
+        aria-hidden="true"
+        style={{
+          position: "absolute",
+          inset: 0,
+          zIndex: 2,
+          background: `
+            linear-gradient(
+              to bottom,
+              rgba(26, 18, 8, 0.55) 0%,
+              rgba(26, 18, 8, 0.10) 22%,
+              rgba(26, 18, 8, 0.02) 45%,
+              rgba(26, 18, 8, 0.08) 60%,
+              rgba(26, 18, 8, 0.65) 82%,
+              rgba(26, 18, 8, 0.90) 100%
+            )
+          `,
+        }}
+      />
+
+      {/* ── 3. SUBTLE SIDE VIGNETTE ─────────────────────────────────────── */}
+      <div
+        aria-hidden="true"
+        style={{
+          position: "absolute",
+          inset: 0,
+          zIndex: 2,
+          background: `
+            radial-gradient(
+              ellipse 120% 100% at 50% 50%,
+              transparent 40%,
+              rgba(26, 18, 8, 0.35) 100%
+            )
+          `,
+        }}
+      />
+
+      {/* ── 4. CONTENT LAYER ────────────────────────────────────────────── */}
+      <motion.div
+        style={{
+          position: "absolute",
+          inset: 0,
+          zIndex: 10,
           display: "flex",
           flexDirection: "column",
-          flex: 1,
-          minHeight: "100svh",
+          padding:
+            "clamp(4.5rem, 7vw, 7rem) clamp(1.5rem, 5vw, 5rem) clamp(2.5rem, 5vw, 4.5rem)",
+          opacity: contentOpacity,
         }}
-        className="lg:flex-row"
       >
 
-        {/* ────────────────────────────────────────────────────────────────
-            LEFT — Typography column
-        ──────────────────────────────────────────────────────────────── */}
+        {/* ── TOP STRIP — like the Vol. / issue line on a magazine ── */}
         <motion.div
-          style={{ y: textY }}
-          className="flex flex-col justify-center relative z-10
-                     px-6 pt-32 pb-16
-                     md:px-12 md:pt-36 md:pb-20
-                     lg:w-[54%] lg:px-16 lg:pt-0 lg:pb-0 lg:py-0
-                     xl:px-20 xl:w-[52%]"
+          initial={{ opacity: 0, y: -12 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.9, ease: EASE, delay: 0.4 }}
+          style={{
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "space-between",
+            gap: "1.5rem",
+          }}
         >
-
-          {/* Issue label */}
-          <motion.div
-            {...fadeUp(0.25)}
-            style={{ display: "flex", alignItems: "center", gap: "1rem", marginBottom: "clamp(2rem, 4vw, 3.5rem)" }}
+          {/* Left: Issue tag */}
+          <span
+            className="micro-label"
+            style={{ color: "rgba(250,248,245,0.45)", flexShrink: 0 }}
           >
-            <div style={{ height: "1px", width: "28px", backgroundColor: "var(--gold)", flexShrink: 0 }} />
-            <span
-              className="micro-label"
-              style={{ color: "var(--gold)" }}
-            >
-              Vol. I &nbsp;&nbsp;·&nbsp;&nbsp; Holistic Wellness
-            </span>
-          </motion.div>
+            Vol. I
+          </span>
 
-          {/* ── HEADLINE — the dominant typographic moment ── */}
+          {/* Center rule */}
+          <div
+            style={{
+              flex: 1,
+              height: "1px",
+              background: "rgba(250,248,245,0.12)",
+            }}
+          />
+
+          {/* Right: Section tag */}
+          <span
+            className="micro-label"
+            style={{ color: "rgba(250,248,245,0.45)", flexShrink: 0 }}
+          >
+            Holistic Wellness
+          </span>
+        </motion.div>
+
+        {/* ── MIDDLE: Right-side cover lines (desktop) ── */}
+        {/* Like the smaller story callouts on a Vanity Fair cover */}
+        <div
+          style={{
+            flex: 1,
+            display: "flex",
+            alignItems: "flex-start",
+            justifyContent: "flex-end",
+            paddingTop: "clamp(2rem, 4vw, 4rem)",
+          }}
+        >
+          <motion.div
+            initial={{ opacity: 0, x: 12 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 1, ease: EASE, delay: 0.9 }}
+            style={{
+              display: "flex",
+              flexDirection: "column",
+              gap: "0.55rem",
+              textAlign: "right",
+            }}
+            className="hidden lg:flex"
+          >
+            {[
+              "Gut Health",
+              "Hormonal Balance",
+              "Womb Wellness",
+              "Inflammation Support",
+            ].map((item, i) => (
+              <span
+                key={i}
+                className="micro-label"
+                style={{
+                  color: "rgba(250,248,245,0.32)",
+                  fontSize: "0.5rem",
+                  display: "block",
+                  letterSpacing: "0.22em",
+                }}
+              >
+                {item}
+              </span>
+            ))}
+          </motion.div>
+        </div>
+
+        {/* ── BOTTOM — The dominant typographic moment ── */}
+        {/* Positioned at the bottom of the cover like a Vogue headline  */}
+        <div>
+
+          {/* Gold accent rule above headline */}
+          <motion.div
+            initial={{ scaleX: 0 }}
+            animate={{ scaleX: 1 }}
+            transition={{ duration: 0.9, ease: EASE, delay: 0.5 }}
+            style={{
+              height: "1px",
+              width: "50px",
+              backgroundColor: "var(--gold)",
+              transformOrigin: "left center",
+              marginBottom: "clamp(1rem, 2vw, 1.75rem)",
+              opacity: 0.85,
+            }}
+          />
+
+          {/* ── THE HEADLINE — This is the magazine cover masthead moment ── */}
           <h1
             aria-label="Healing is not a trend. It's a return to self."
             style={{
               fontFamily: "var(--font-serif)",
               fontWeight: 300,
-              lineHeight: 0.9,
+              lineHeight: 0.88,
               letterSpacing: "-0.03em",
-              color: "var(--espresso)",
-              marginBottom: "clamp(2rem, 3.5vw, 3rem)",
+              color: "var(--cream)",
+              marginBottom: "clamp(1.5rem, 3vw, 3rem)",
             }}
           >
-            {/* Line 1 */}
             <motion.span
-              initial={{ opacity: 0, y: 36 }}
+              initial={{ opacity: 0, y: 40 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 1.1, ease: EASE, delay: 0.35 }}
+              transition={{ duration: 1.15, ease: EASE, delay: 0.45 }}
               style={{
                 display: "block",
-                fontSize: "clamp(3.4rem, 7.5vw, 8.5rem)",
+                fontSize: "clamp(4.5rem, 11.5vw, 14.5rem)",
               }}
             >
               Healing
             </motion.span>
 
-            {/* Line 2 */}
             <motion.span
-              initial={{ opacity: 0, y: 36 }}
+              initial={{ opacity: 0, y: 40 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 1.1, ease: EASE, delay: 0.46 }}
+              transition={{ duration: 1.15, ease: EASE, delay: 0.56 }}
               style={{
                 display: "block",
-                fontSize: "clamp(3.4rem, 7.5vw, 8.5rem)",
+                fontSize: "clamp(4.5rem, 11.5vw, 14.5rem)",
               }}
             >
               is not
             </motion.span>
 
-            {/* Line 3 — italic gold accent */}
             <motion.span
-              initial={{ opacity: 0, y: 36 }}
+              initial={{ opacity: 0, y: 40 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 1.1, ease: EASE, delay: 0.57 }}
+              transition={{ duration: 1.15, ease: EASE, delay: 0.67 }}
               style={{
                 display: "block",
                 fontStyle: "italic",
                 color: "var(--gold)",
-                fontSize: "clamp(3.4rem, 7.5vw, 8.5rem)",
+                fontSize: "clamp(4.5rem, 11.5vw, 14.5rem)",
               }}
             >
               a trend.
             </motion.span>
 
-            {/* Thin space */}
+            {/* Second register — slightly smaller, same voice */}
             <motion.span
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ duration: 0.01, delay: 0.68 }}
-              style={{ display: "block", height: "0.18em" }}
-              aria-hidden="true"
-            />
-
-            {/* Line 4 */}
-            <motion.span
-              initial={{ opacity: 0, y: 36 }}
+              initial={{ opacity: 0, y: 40 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 1.1, ease: EASE, delay: 0.72 }}
+              transition={{ duration: 1.15, ease: EASE, delay: 0.78 }}
               style={{
                 display: "block",
-                fontSize: "clamp(2.2rem, 5vw, 5.8rem)",
-                opacity: 0.82,
+                fontSize: "clamp(2rem, 5.5vw, 7rem)",
+                marginTop: "0.12em",
+                opacity: 0.88,
               }}
             >
-              It&rsquo;s a return
-            </motion.span>
-
-            {/* Line 5 */}
-            <motion.span
-              initial={{ opacity: 0, y: 36 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 1.1, ease: EASE, delay: 0.82 }}
-              style={{
-                display: "block",
-                fontSize: "clamp(2.2rem, 5vw, 5.8rem)",
-                opacity: 0.82,
-              }}
-            >
-              to self.
+              It&rsquo;s a return to self.
             </motion.span>
           </h1>
 
-          {/* Gold extending rule */}
+          {/* ── Bottom bar: subhead left, CTAs right ── */}
           <motion.div
-            initial={{ scaleX: 0 }}
-            animate={{ scaleX: 1 }}
-            transition={{ duration: 0.9, ease: EASE, delay: 0.95 }}
-            style={{
-              height: "1px",
-              width: "90px",
-              backgroundColor: "var(--gold)",
-              transformOrigin: "left center",
-              marginBottom: "clamp(1.5rem, 3vw, 2.5rem)",
-            }}
-          />
-
-          {/* Subheadline */}
-          <motion.p
-            {...fadeUp(1.05)}
-            style={{
-              fontFamily: "var(--font-serif)",
-              fontSize: "clamp(1rem, 1.35vw, 1.2rem)",
-              fontWeight: 300,
-              fontStyle: "italic",
-              color: "var(--muted)",
-              lineHeight: 1.65,
-              maxWidth: "40ch",
-              marginBottom: "clamp(2.5rem, 4vw, 3.5rem)",
-            }}
-          >
-            A refined approach to gut, womb, and whole-body wellness
-            for women who expect more from their health.
-          </motion.p>
-
-          {/* CTA row */}
-          <motion.div
-            {...fadeUp(1.18)}
-            style={{ display: "flex", gap: "1rem", flexWrap: "wrap" }}
-          >
-            <Link href="/shop" className="btn-dark">
-              <span>Enter the Shop</span>
-              <span style={{ fontSize: "0.8rem", lineHeight: 1 }}>→</span>
-            </Link>
-            <Link href="/about" className="btn-outline">
-              Begin Your Healing
-            </Link>
-          </motion.div>
-
-          {/* Bottom category strip */}
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 0.42 }}
-            transition={{ duration: 1.2, delay: 1.45 }}
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 1, ease: EASE, delay: 0.95 }}
             style={{
               display: "flex",
-              gap: "clamp(1rem, 2vw, 1.75rem)",
-              marginTop: "clamp(2.5rem, 5vw, 5rem)",
-              flexWrap: "wrap",
+              flexDirection: "column",
+              gap: "1.5rem",
+              paddingTop: "clamp(1.25rem, 2.5vw, 2rem)",
+              borderTop: "1px solid rgba(250,248,245,0.12)",
             }}
+            className="sm:flex-row sm:items-center sm:justify-between"
           >
-            {["Gut Health", "Hormonal Balance", "Womb Wellness", "Inflammation Support"].map((cat, i) => (
-              <span key={i} className="micro-label" style={{ color: "var(--muted)" }}>
-                {cat}
-              </span>
-            ))}
-          </motion.div>
-        </motion.div>
-
-        {/* ────────────────────────────────────────────────────────────────
-            RIGHT — Editorial image panel
-        ──────────────────────────────────────────────────────────────── */}
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 1.6, ease: EASE, delay: 0.15 }}
-          style={{ position: "relative", overflow: "hidden" }}
-          className="
-            h-[65vw] min-h-[400px]
-            lg:h-auto lg:flex-1 lg:w-[46%] xl:w-[48%]
-          "
-        >
-          {/* Parallax image layer */}
-          <motion.div
-            className="img-placeholder"
-            style={{
-              position: "absolute",
-              inset: 0,
-              y: imageY,
-              height: "120%",
-              top: "-10%",
-              width: "100%",
-            }}
-            aria-label="Editorial portrait image"
-          >
-            {/* Inner frame */}
-            <div
+            {/* Subheadline */}
+            <p
               style={{
-                position: "absolute",
-                inset: "clamp(1.25rem, 3%, 2.5rem)",
-                border: "1px solid rgba(184,150,90,0.22)",
-                pointerEvents: "none",
-              }}
-            />
-
-            {/* Corner marks */}
-            {(
-              [
-                { top: "1.5rem", left: "1.5rem" },
-                { top: "1.5rem", right: "1.5rem" },
-                { bottom: "1.5rem", left: "1.5rem" },
-                { bottom: "1.5rem", right: "1.5rem" },
-              ] as React.CSSProperties[]
-            ).map((pos, i) => (
-              <div
-                key={i}
-                style={{
-                  position: "absolute",
-                  width: "18px",
-                  height: "18px",
-                  pointerEvents: "none",
-                  ...pos,
-                }}
-              >
-                <div style={{ width: "100%", height: "1px", backgroundColor: "var(--gold)", opacity: 0.55 }} />
-                <div style={{ width: "1px", height: "100%", backgroundColor: "var(--gold)", opacity: 0.55 }} />
-              </div>
-            ))}
-
-            {/* Large ghost number */}
-            <div
-              style={{
-                position: "absolute",
-                bottom: "clamp(1.5rem, 4%, 3rem)",
-                right: "clamp(1.5rem, 4%, 3rem)",
                 fontFamily: "var(--font-serif)",
-                fontSize: "clamp(5rem, 12vw, 14rem)",
+                fontStyle: "italic",
+                fontSize: "clamp(0.88rem, 1.15vw, 1.05rem)",
                 fontWeight: 300,
-                color: "rgba(184,150,90,0.08)",
-                letterSpacing: "-0.06em",
-                lineHeight: 1,
-                userSelect: "none",
-                pointerEvents: "none",
+                color: "rgba(250,248,245,0.48)",
+                lineHeight: 1.65,
+                maxWidth: "46ch",
               }}
-              aria-hidden="true"
             >
-              01
-            </div>
+              A refined approach to gut, womb, and whole-body wellness
+              for women who expect more from their health.
+            </p>
 
-            {/* Caption label */}
+            {/* CTAs */}
             <div
               style={{
-                position: "absolute",
-                bottom: "1.75rem",
-                left: 0,
-                right: 0,
                 display: "flex",
-                justifyContent: "center",
-                pointerEvents: "none",
+                gap: "1rem",
+                flexShrink: 0,
+                flexWrap: "wrap",
               }}
             >
-              <span
-                className="micro-label"
-                style={{ color: "rgba(184,150,90,0.4)" }}
+              <Link
+                href="/shop"
+                className="btn-outline-cream"
               >
-                Editorial Portrait
-              </span>
+                Enter the Shop
+                <span style={{ fontSize: "0.85rem" }}>→</span>
+              </Link>
+              <Link
+                href="/about"
+                className="btn-outline-cream"
+              >
+                Begin Your Healing
+              </Link>
             </div>
           </motion.div>
-        </motion.div>
-      </div>
+        </div>
+      </motion.div>
 
-      {/* ── Scroll indicator ────────────────────────────────────────────── */}
+      {/* ── 5. SCROLL INDICATOR ─────────────────────────────────────────── */}
       <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
-        transition={{ duration: 1, delay: 1.6 }}
+        transition={{ duration: 1.2, delay: 1.5 }}
         style={{
           position: "absolute",
           bottom: "2rem",
           left: "50%",
           transform: "translateX(-50%)",
+          zIndex: 20,
           display: "flex",
           flexDirection: "column",
           alignItems: "center",
           gap: "0.5rem",
-          zIndex: 10,
         }}
-        className="hidden lg:flex"
+        className="hidden md:flex"
       >
-        <span className="micro-label" style={{ color: "rgba(184,150,90,0.45)" }}>
-          Scroll
-        </span>
         <motion.div
-          animate={{ scaleY: [1, 0.4, 1] }}
-          transition={{ duration: 1.8, repeat: Infinity, ease: "easeInOut" }}
+          animate={{ scaleY: [1, 0.3, 1] }}
+          transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
           style={{
             width: "1px",
-            height: "40px",
-            background: "linear-gradient(to bottom, var(--gold), transparent)",
+            height: "44px",
+            background:
+              "linear-gradient(to bottom, rgba(250,248,245,0.5), transparent)",
             transformOrigin: "top center",
           }}
         />
+        <span
+          className="micro-label"
+          style={{ color: "rgba(250,248,245,0.28)", fontSize: "0.48rem" }}
+        >
+          Scroll
+        </span>
       </motion.div>
+
+      {/* ── 6. EDITORIAL CORNER DETAIL ───────────────────────────────────── */}
+      {/* Thin crop marks — homage to print production                        */}
+      {[
+        { top: "5rem", left: "var(--section-x)" },
+        { top: "5rem", right: "var(--section-x)" },
+      ].map((pos, i) => (
+        <div
+          key={i}
+          aria-hidden="true"
+          style={{
+            position: "absolute",
+            zIndex: 15,
+            width: "16px",
+            height: "16px",
+            opacity: 0.2,
+            ...pos,
+          }}
+        >
+          <div
+            style={{
+              width: "100%",
+              height: "1px",
+              backgroundColor: "var(--cream)",
+            }}
+          />
+          <div
+            style={{
+              width: "1px",
+              height: "100%",
+              backgroundColor: "var(--cream)",
+            }}
+          />
+        </div>
+      ))}
     </section>
   );
 }

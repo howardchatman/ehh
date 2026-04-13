@@ -140,6 +140,32 @@ body {
   );
 }
 
+/* Editorial full-bleed placeholder — richer, warmer, evokes luxury photography */
+.img-placeholder-cover {
+  background: linear-gradient(
+    160deg,
+    #C9B89A 0%,
+    #D8C8B0 20%,
+    #E8DDD0 45%,
+    #DDD0BC 65%,
+    #C8B8A0 85%,
+    #B8A888 100%
+  );
+  position: relative;
+  overflow: hidden;
+}
+
+.img-placeholder-cover::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(
+    ellipse 70% 80% at 50% 40%,
+    rgba(255, 248, 235, 0.35) 0%,
+    transparent 70%
+  );
+}
+
 /* ─── Link Hover Transitions ─────────────────────────────────────────────── */
 
 .link-gold {
