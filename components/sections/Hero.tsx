@@ -277,7 +277,7 @@ function CalloutLink({
         zIndex: 10,
         ...callout.position,
         textAlign: callout.align,
-        maxWidth: "220px",
+        maxWidth: "280px",
       }}
     >
       <Link
@@ -309,14 +309,16 @@ function CalloutLink({
           )}
           <span
             style={{
-              fontFamily: "var(--font-sans)",
+              fontFamily: "var(--font-serif)",
               fontWeight: 600,
-              fontSize: "0.58rem",
-              letterSpacing: "0.2em",
+              fontSize: "clamp(1.4rem, 2.2vw, 2.2rem)",
+              letterSpacing: "0.04em",
               textTransform: "uppercase",
-              color: hovered ? "var(--gold)" : "rgba(250,248,245,0.92)",
+              color: hovered ? "var(--gold)" : "rgba(250,248,245,0.95)",
               transition: "color 0.35s var(--ease-luxury)",
               display: "block",
+              lineHeight: 1,
+              textShadow: "0 2px 16px rgba(26,18,8,0.6)",
             }}
           >
             {callout.title}
