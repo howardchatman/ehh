@@ -1,59 +1,73 @@
 "use client";
 
-import { useRef } from "react";
+import Image from "next/image";
 import Link from "next/link";
-import { motion, useScroll, useTransform } from "framer-motion";
+import { motion } from "framer-motion";
+import { useState } from "react";
 
 const EASE = [0.22, 1, 0.36, 1] as const;
 
-// ─────────────────────────────────────────────────────────────────────────────
-// HERO — Full-bleed magazine cover composition
-// Text lives ON the image, with a cinematic gradient overlay.
-// Think: Vogue cover meets luxury wellness campaign.
-// ─────────────────────────────────────────────────────────────────────────────
+// ─── Category callouts — mirroring the layout of the brand photo ─────────────
+// Positioned absolutely over the image, each linking to its focus area page.
+const callouts = [
+  {
+    title: "Gut Healing",
+    subtitle: "Restore digestion from within",
+    href: "/focus/gut-health",
+    position: { top: "22%", left: "3%" },
+    align: "left" as const,
+    delay: 0.7,
+  },
+  {
+    title: "Inflammation",
+    subtitle: "Address the root cause,\nnot just the symptoms",
+    href: "/focus/inflammation-support",
+    position: { top: "18%", right: "3%" },
+    align: "right" as const,
+    delay: 0.8,
+  },
+  {
+    title: "Womb Health",
+    subtitle: "Harmonize your hormones",
+    href: "/focus/womb-wellness",
+    position: { top: "56%", left: "3%" },
+    align: "left" as const,
+    delay: 0.9,
+  },
+  {
+    title: "Lifestyle Healing",
+    subtitle: "Live in connection\nwith your body",
+    href: "/focus/hormonal-balance",
+    position: { top: "56%", right: "3%" },
+    align: "right" as const,
+    delay: 1.0,
+  },
+];
+
 export default function Hero() {
-  const heroRef = useRef<HTMLElement>(null);
-
-  const { scrollYProgress } = useScroll({
-    target: heroRef,
-    offset: ["start start", "end start"],
-  });
-
-  // Image parallax — drifts upward as user scrolls, creating depth
-  const imageY = useTransform(scrollYProgress, [0, 1], ["0%", "22%"]);
-  // Content fades slightly on scroll
-  const contentOpacity = useTransform(scrollYProgress, [0, 0.5], [1, 0]);
-
   return (
     <section
-      ref={heroRef}
       aria-label="Hero"
       style={{
         position: "relative",
         height: "100svh",
-        minHeight: "640px",
+        minHeight: "620px",
         overflow: "hidden",
-        backgroundColor: "#1A1208",
+        backgroundColor: "#2A1F10",
       }}
     >
-      {/* ── 1. FULL-BLEED EDITORIAL IMAGE ────────────────────────────────── */}
-      {/* This is where a luxury portrait photograph will live.                */}
-      {/* The warm taupe gradient simulates the tone of editorial photography. */}
-      <motion.div
-        className="img-placeholder-cover"
-        style={{
-          position: "absolute",
-          inset: 0,
-          height: "120%",
-          top: "-10%",
-          width: "100%",
-          y: imageY,
-        }}
-        aria-hidden="true"
+      {/* ── 1. HERO IMAGE ─────────────────────────────────────────────────── */}
+      <Image
+        src="/hero.jpg"
+        alt="Echoing Holistic Health — Ecko holding the Gut Support formula"
+        fill
+        priority
+        style={{ objectFit: "cover", objectPosition: "center top" }}
+        sizes="100vw"
       />
 
-      {/* ── 2. CINEMATIC GRADIENT OVERLAY ───────────────────────────────── */}
-      {/* Creates reading contrast for text — standard magazine technique.    */}
+      {/* ── 2. EDGE GRADIENTS — preserve legibility without killing the photo ── */}
+      {/* Top: darkens behind the callouts */}
       <div
         aria-hidden="true"
         style={{
@@ -63,18 +77,17 @@ export default function Hero() {
           background: `
             linear-gradient(
               to bottom,
-              rgba(26, 18, 8, 0.55) 0%,
-              rgba(26, 18, 8, 0.10) 22%,
-              rgba(26, 18, 8, 0.02) 45%,
-              rgba(26, 18, 8, 0.08) 60%,
-              rgba(26, 18, 8, 0.65) 82%,
-              rgba(26, 18, 8, 0.90) 100%
+              rgba(26,18,8,0.45) 0%,
+              rgba(26,18,8,0.08) 18%,
+              transparent 35%,
+              transparent 60%,
+              rgba(26,18,8,0.55) 82%,
+              rgba(26,18,8,0.85) 100%
             )
           `,
         }}
       />
-
-      {/* ── 3. SUBTLE SIDE VIGNETTE ─────────────────────────────────────── */}
+      {/* Side vignette — softens the edges */}
       <div
         aria-hidden="true"
         style={{
@@ -83,268 +96,140 @@ export default function Hero() {
           zIndex: 2,
           background: `
             radial-gradient(
-              ellipse 120% 100% at 50% 50%,
-              transparent 40%,
-              rgba(26, 18, 8, 0.35) 100%
+              ellipse 110% 100% at 50% 50%,
+              transparent 45%,
+              rgba(26,18,8,0.28) 100%
             )
           `,
         }}
       />
 
-      {/* ── 4. CONTENT LAYER ────────────────────────────────────────────── */}
+      {/* ── 3. BRAND WORDMARK — top center ────────────────────────────────── */}
       <motion.div
+        initial={{ opacity: 0, y: -10 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.9, ease: EASE, delay: 0.3 }}
         style={{
           position: "absolute",
-          inset: 0,
+          top: "clamp(5rem, 8vw, 6.5rem)",
+          left: 0,
+          right: 0,
           zIndex: 10,
           display: "flex",
           flexDirection: "column",
-          padding:
-            "clamp(4.5rem, 7vw, 7rem) clamp(1.5rem, 5vw, 5rem) clamp(2.5rem, 5vw, 4.5rem)",
-          opacity: contentOpacity,
+          alignItems: "center",
+          gap: "0.2rem",
+          textAlign: "center",
         }}
       >
-
-        {/* ── TOP STRIP — like the Vol. / issue line on a magazine ── */}
-        <motion.div
-          initial={{ opacity: 0, y: -12 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.9, ease: EASE, delay: 0.4 }}
+        <span
           style={{
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "space-between",
-            gap: "1.5rem",
+            fontFamily: "var(--font-serif)",
+            fontSize: "clamp(0.48rem, 0.65vw, 0.6rem)",
+            fontWeight: 300,
+            letterSpacing: "0.42em",
+            textTransform: "uppercase",
+            color: "rgba(250,248,245,0.7)",
+            display: "block",
           }}
         >
-          {/* Left: Issue tag */}
-          <span
-            className="micro-label"
-            style={{ color: "rgba(250,248,245,0.45)", flexShrink: 0 }}
-          >
-            Vol. I
-          </span>
+          Echoing
+        </span>
+        <span
+          style={{
+            fontFamily: "var(--font-serif)",
+            fontSize: "clamp(0.75rem, 1.1vw, 1rem)",
+            fontWeight: 500,
+            letterSpacing: "0.3em",
+            textTransform: "uppercase",
+            color: "rgba(250,248,245,0.92)",
+            display: "block",
+          }}
+        >
+          Holistic Health
+        </span>
+      </motion.div>
 
-          {/* Center rule */}
-          <div
-            style={{
-              flex: 1,
-              height: "1px",
-              background: "rgba(250,248,245,0.12)",
-            }}
-          />
+      {/* ── 4. CATEGORY CALLOUTS — positioned links (desktop) ─────────────── */}
+      {callouts.map((callout, i) => (
+        <CalloutLink key={callout.href} callout={callout} index={i} />
+      ))}
 
-          {/* Right: Section tag */}
-          <span
-            className="micro-label"
-            style={{ color: "rgba(250,248,245,0.45)", flexShrink: 0 }}
-          >
-            Holistic Wellness
-          </span>
-        </motion.div>
+      {/* ── 5. BOTTOM QUOTE + CTA ─────────────────────────────────────────── */}
+      <motion.div
+        initial={{ opacity: 0, y: 24 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 1, ease: EASE, delay: 1.1 }}
+        style={{
+          position: "absolute",
+          bottom: "clamp(2.5rem, 5vw, 4rem)",
+          left: 0,
+          right: 0,
+          zIndex: 10,
+          display: "flex",
+          flexDirection: "column",
+          alignItems: "center",
+          gap: "clamp(1rem, 2vw, 1.75rem)",
+          padding: "0 var(--section-x)",
+          textAlign: "center",
+        }}
+      >
+        {/* Quote */}
+        <p
+          style={{
+            fontFamily: "var(--font-serif)",
+            fontStyle: "italic",
+            fontSize: "clamp(1rem, 2vw, 1.5rem)",
+            fontWeight: 300,
+            color: "rgba(250,248,245,0.9)",
+            lineHeight: 1.35,
+            letterSpacing: "-0.01em",
+          }}
+        >
+          &ldquo;Healing is not a trend. It&rsquo;s a return to self.&rdquo;
+        </p>
+        <span
+          className="micro-label"
+          style={{ color: "var(--gold)", letterSpacing: "0.3em" }}
+        >
+          — Ecko
+        </span>
 
-        {/* ── MIDDLE: Right-side cover lines (desktop) ── */}
-        {/* Like the smaller story callouts on a Vanity Fair cover */}
+        {/* Thin gold rule */}
         <div
           style={{
-            flex: 1,
-            display: "flex",
-            alignItems: "flex-start",
-            justifyContent: "flex-end",
-            paddingTop: "clamp(2rem, 4vw, 4rem)",
+            height: "1px",
+            width: "40px",
+            backgroundColor: "var(--gold)",
+            opacity: 0.5,
           }}
-        >
-          <motion.div
-            initial={{ opacity: 0, x: 12 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 1, ease: EASE, delay: 0.9 }}
-            style={{
-              display: "flex",
-              flexDirection: "column",
-              gap: "0.55rem",
-              textAlign: "right",
-            }}
-            className="hidden lg:flex"
-          >
-            {[
-              "Gut Health",
-              "Hormonal Balance",
-              "Womb Wellness",
-              "Inflammation Support",
-            ].map((item, i) => (
-              <span
-                key={i}
-                className="micro-label"
-                style={{
-                  color: "rgba(250,248,245,0.32)",
-                  fontSize: "0.5rem",
-                  display: "block",
-                  letterSpacing: "0.22em",
-                }}
-              >
-                {item}
-              </span>
-            ))}
-          </motion.div>
-        </div>
+        />
 
-        {/* ── BOTTOM — The dominant typographic moment ── */}
-        {/* Positioned at the bottom of the cover like a Vogue headline  */}
-        <div>
-
-          {/* Gold accent rule above headline */}
-          <motion.div
-            initial={{ scaleX: 0 }}
-            animate={{ scaleX: 1 }}
-            transition={{ duration: 0.9, ease: EASE, delay: 0.5 }}
-            style={{
-              height: "1px",
-              width: "50px",
-              backgroundColor: "var(--gold)",
-              transformOrigin: "left center",
-              marginBottom: "clamp(1rem, 2vw, 1.75rem)",
-              opacity: 0.85,
-            }}
-          />
-
-          {/* ── THE HEADLINE — This is the magazine cover masthead moment ── */}
-          <h1
-            aria-label="Healing is not a trend. It's a return to self."
-            style={{
-              fontFamily: "var(--font-serif)",
-              fontWeight: 300,
-              lineHeight: 0.88,
-              letterSpacing: "-0.03em",
-              color: "var(--cream)",
-              marginBottom: "clamp(1.5rem, 3vw, 3rem)",
-            }}
-          >
-            <motion.span
-              initial={{ opacity: 0, y: 40 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 1.15, ease: EASE, delay: 0.45 }}
-              style={{
-                display: "block",
-                fontSize: "clamp(4.5rem, 11.5vw, 14.5rem)",
-              }}
-            >
-              Healing
-            </motion.span>
-
-            <motion.span
-              initial={{ opacity: 0, y: 40 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 1.15, ease: EASE, delay: 0.56 }}
-              style={{
-                display: "block",
-                fontSize: "clamp(4.5rem, 11.5vw, 14.5rem)",
-              }}
-            >
-              is not
-            </motion.span>
-
-            <motion.span
-              initial={{ opacity: 0, y: 40 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 1.15, ease: EASE, delay: 0.67 }}
-              style={{
-                display: "block",
-                fontStyle: "italic",
-                color: "var(--gold)",
-                fontSize: "clamp(4.5rem, 11.5vw, 14.5rem)",
-              }}
-            >
-              a trend.
-            </motion.span>
-
-            {/* Second register — slightly smaller, same voice */}
-            <motion.span
-              initial={{ opacity: 0, y: 40 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 1.15, ease: EASE, delay: 0.78 }}
-              style={{
-                display: "block",
-                fontSize: "clamp(2rem, 5.5vw, 7rem)",
-                marginTop: "0.12em",
-                opacity: 0.88,
-              }}
-            >
-              It&rsquo;s a return to self.
-            </motion.span>
-          </h1>
-
-          {/* ── Bottom bar: subhead left, CTAs right ── */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 1, ease: EASE, delay: 0.95 }}
-            style={{
-              display: "flex",
-              flexDirection: "column",
-              gap: "1.5rem",
-              paddingTop: "clamp(1.25rem, 2.5vw, 2rem)",
-              borderTop: "1px solid rgba(250,248,245,0.12)",
-            }}
-            className="sm:flex-row sm:items-center sm:justify-between"
-          >
-            {/* Subheadline */}
-            <p
-              style={{
-                fontFamily: "var(--font-serif)",
-                fontStyle: "italic",
-                fontSize: "clamp(0.88rem, 1.15vw, 1.05rem)",
-                fontWeight: 300,
-                color: "rgba(250,248,245,0.48)",
-                lineHeight: 1.65,
-                maxWidth: "46ch",
-              }}
-            >
-              A refined approach to gut, womb, and whole-body wellness
-              for women who expect more from their health.
-            </p>
-
-            {/* CTAs */}
-            <div
-              style={{
-                display: "flex",
-                gap: "1rem",
-                flexShrink: 0,
-                flexWrap: "wrap",
-              }}
-            >
-              <Link
-                href="/shop"
-                className="btn-outline-cream"
-              >
-                Enter the Shop
-                <span style={{ fontSize: "0.85rem" }}>→</span>
-              </Link>
-              <Link
-                href="/about"
-                className="btn-outline-cream"
-              >
-                Begin Your Healing
-              </Link>
-            </div>
-          </motion.div>
+        {/* CTAs */}
+        <div style={{ display: "flex", gap: "0.75rem", flexWrap: "wrap", justifyContent: "center" }}>
+          <Link href="/shop" className="btn-outline-cream">
+            Shop the Collection →
+          </Link>
+          <Link href="/about" className="btn-outline-cream">
+            Our Story
+          </Link>
         </div>
       </motion.div>
 
-      {/* ── 5. SCROLL INDICATOR ─────────────────────────────────────────── */}
+      {/* ── 6. SCROLL INDICATOR ──────────────────────────────────────────── */}
       <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
-        transition={{ duration: 1.2, delay: 1.5 }}
+        transition={{ duration: 1.2, delay: 1.8 }}
         style={{
           position: "absolute",
-          bottom: "2rem",
-          left: "50%",
-          transform: "translateX(-50%)",
+          bottom: "1.25rem",
+          right: "var(--section-x)",
           zIndex: 20,
           display: "flex",
           flexDirection: "column",
           alignItems: "center",
-          gap: "0.5rem",
+          gap: "0.4rem",
         }}
         className="hidden md:flex"
       >
@@ -353,54 +238,130 @@ export default function Hero() {
           transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
           style={{
             width: "1px",
-            height: "44px",
-            background:
-              "linear-gradient(to bottom, rgba(250,248,245,0.5), transparent)",
+            height: "36px",
+            background: "linear-gradient(to bottom, rgba(250,248,245,0.45), transparent)",
             transformOrigin: "top center",
           }}
         />
         <span
           className="micro-label"
-          style={{ color: "rgba(250,248,245,0.28)", fontSize: "0.48rem" }}
+          style={{ color: "rgba(250,248,245,0.22)", fontSize: "0.44rem" }}
         >
           Scroll
         </span>
       </motion.div>
+    </section>
+  );
+}
 
-      {/* ── 6. EDITORIAL CORNER DETAIL ───────────────────────────────────── */}
-      {/* Thin crop marks — homage to print production                        */}
-      {[
-        { top: "5rem", left: "var(--section-x)" },
-        { top: "5rem", right: "var(--section-x)" },
-      ].map((pos, i) => (
+// ── Callout link component ─────────────────────────────────────────────────────
+function CalloutLink({
+  callout,
+}: {
+  callout: (typeof callouts)[number];
+  index: number;
+}) {
+  const [hovered, setHovered] = useState(false);
+
+  return (
+    <motion.div
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      transition={{ duration: 0.9, ease: EASE, delay: callout.delay }}
+      className="hidden lg:block"
+      style={{
+        position: "absolute",
+        zIndex: 10,
+        ...callout.position,
+        textAlign: callout.align,
+        maxWidth: "180px",
+      }}
+    >
+      <Link
+        href={callout.href}
+        style={{ display: "block", textDecoration: "none" }}
+        onMouseEnter={() => setHovered(true)}
+        onMouseLeave={() => setHovered(false)}
+      >
+        {/* Horizontal rule accent */}
         <div
-          key={i}
-          aria-hidden="true"
           style={{
-            position: "absolute",
-            zIndex: 15,
-            width: "16px",
-            height: "16px",
-            opacity: 0.2,
-            ...pos,
+            display: "flex",
+            alignItems: "center",
+            gap: "0.5rem",
+            marginBottom: "0.3rem",
+            justifyContent: callout.align === "right" ? "flex-end" : "flex-start",
           }}
         >
-          <div
+          {callout.align === "right" && (
+            <div
+              style={{
+                height: "1px",
+                width: hovered ? "28px" : "16px",
+                backgroundColor: "var(--gold)",
+                transition: "width 0.35s var(--ease-luxury)",
+                opacity: 0.8,
+              }}
+            />
+          )}
+          <span
             style={{
-              width: "100%",
-              height: "1px",
-              backgroundColor: "var(--cream)",
+              fontFamily: "var(--font-sans)",
+              fontWeight: 600,
+              fontSize: "0.58rem",
+              letterSpacing: "0.2em",
+              textTransform: "uppercase",
+              color: hovered ? "var(--gold)" : "rgba(250,248,245,0.92)",
+              transition: "color 0.35s var(--ease-luxury)",
+              display: "block",
             }}
-          />
-          <div
-            style={{
-              width: "1px",
-              height: "100%",
-              backgroundColor: "var(--cream)",
-            }}
-          />
+          >
+            {callout.title}
+          </span>
+          {callout.align === "left" && (
+            <div
+              style={{
+                height: "1px",
+                width: hovered ? "28px" : "16px",
+                backgroundColor: "var(--gold)",
+                transition: "width 0.35s var(--ease-luxury)",
+                opacity: 0.8,
+              }}
+            />
+          )}
         </div>
-      ))}
-    </section>
+
+        {/* Subtitle */}
+        <p
+          style={{
+            fontFamily: "var(--font-serif)",
+            fontStyle: "italic",
+            fontSize: "0.72rem",
+            fontWeight: 300,
+            color: "rgba(250,248,245,0.55)",
+            lineHeight: 1.45,
+            whiteSpace: "pre-line",
+            transition: "color 0.35s var(--ease-luxury)",
+          }}
+        >
+          {callout.subtitle}
+        </p>
+
+        {/* Hover arrow */}
+        <motion.span
+          animate={{ opacity: hovered ? 1 : 0, x: hovered ? 0 : (callout.align === "right" ? 4 : -4) }}
+          transition={{ duration: 0.25, ease: EASE }}
+          style={{
+            display: "block",
+            fontFamily: "var(--font-sans)",
+            fontSize: "0.6rem",
+            color: "var(--gold)",
+            marginTop: "0.3rem",
+          }}
+        >
+          {callout.align === "right" ? "← Explore" : "Explore →"}
+        </motion.span>
+      </Link>
+    </motion.div>
   );
 }
