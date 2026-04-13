@@ -104,53 +104,7 @@ export default function Hero() {
         }}
       />
 
-      {/* ── 3. BRAND WORDMARK — top center ────────────────────────────────── */}
-      <motion.div
-        initial={{ opacity: 0, y: -10 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.9, ease: EASE, delay: 0.3 }}
-        style={{
-          position: "absolute",
-          top: "clamp(5rem, 8vw, 6.5rem)",
-          left: 0,
-          right: 0,
-          zIndex: 10,
-          display: "flex",
-          flexDirection: "column",
-          alignItems: "center",
-          gap: "0.2rem",
-          textAlign: "center",
-        }}
-      >
-        <span
-          style={{
-            fontFamily: "var(--font-serif)",
-            fontSize: "clamp(0.48rem, 0.65vw, 0.6rem)",
-            fontWeight: 300,
-            letterSpacing: "0.42em",
-            textTransform: "uppercase",
-            color: "rgba(250,248,245,0.7)",
-            display: "block",
-          }}
-        >
-          Echoing
-        </span>
-        <span
-          style={{
-            fontFamily: "var(--font-serif)",
-            fontSize: "clamp(0.75rem, 1.1vw, 1rem)",
-            fontWeight: 500,
-            letterSpacing: "0.3em",
-            textTransform: "uppercase",
-            color: "rgba(250,248,245,0.92)",
-            display: "block",
-          }}
-        >
-          Holistic Health
-        </span>
-      </motion.div>
-
-      {/* ── 4. CATEGORY CALLOUTS — positioned links (desktop) ─────────────── */}
+      {/* ── 3. CATEGORY CALLOUTS — positioned links (desktop) ─────────────── */}
       {callouts.map((callout, i) => (
         <CalloutLink key={callout.href} callout={callout} index={i} />
       ))}
