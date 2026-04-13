@@ -231,7 +231,7 @@ function CalloutLink({
         zIndex: 10,
         ...callout.position,
         textAlign: callout.align,
-        maxWidth: "280px",
+        maxWidth: "380px",
       }}
     >
       <Link
@@ -265,7 +265,7 @@ function CalloutLink({
             style={{
               fontFamily: "var(--font-serif)",
               fontWeight: 600,
-              fontSize: "clamp(1.4rem, 2.2vw, 2.2rem)",
+              fontSize: "clamp(2.8rem, 4.4vw, 4.4rem)",
               letterSpacing: "0.04em",
               textTransform: "uppercase",
               color: hovered ? "var(--gold)" : "rgba(250,248,245,0.95)",
