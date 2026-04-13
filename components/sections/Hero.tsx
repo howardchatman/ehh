@@ -179,18 +179,21 @@ export default function Hero() {
           style={{
             fontFamily: "var(--font-serif)",
             fontStyle: "italic",
-            fontSize: "clamp(1rem, 2vw, 1.5rem)",
+            fontSize: "clamp(1.4rem, 3vw, 2.4rem)",
             fontWeight: 300,
-            color: "rgba(250,248,245,0.9)",
-            lineHeight: 1.35,
-            letterSpacing: "-0.01em",
+            color: "rgba(250,248,245,0.95)",
+            lineHeight: 1.25,
+            letterSpacing: "-0.02em",
+            textShadow: "0 2px 24px rgba(26,18,8,0.5)",
           }}
         >
-          &ldquo;Healing is not a trend. It&rsquo;s a return to self.&rdquo;
+          &ldquo;Healing is not a trend.
+          <br />
+          It&rsquo;s a return to self.&rdquo;
         </p>
         <span
           className="micro-label"
-          style={{ color: "var(--gold)", letterSpacing: "0.3em" }}
+          style={{ color: "var(--gold)", letterSpacing: "0.32em", fontSize: "0.6rem" }}
         >
           — Ecko
         </span>
@@ -274,7 +277,7 @@ function CalloutLink({
         zIndex: 10,
         ...callout.position,
         textAlign: callout.align,
-        maxWidth: "180px",
+        maxWidth: "220px",
       }}
     >
       <Link
@@ -336,10 +339,10 @@ function CalloutLink({
           style={{
             fontFamily: "var(--font-serif)",
             fontStyle: "italic",
-            fontSize: "0.72rem",
+            fontSize: "0.95rem",
             fontWeight: 300,
-            color: "rgba(250,248,245,0.55)",
-            lineHeight: 1.45,
+            color: "rgba(250,248,245,0.72)",
+            lineHeight: 1.5,
             whiteSpace: "pre-line",
             transition: "color 0.35s var(--ease-luxury)",
           }}
