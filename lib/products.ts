@@ -1,5 +1,5 @@
 // ─────────────────────────────────────────────────────────────────────────────
-// Product Catalog — Echoing Holistic Health
+// Product Catalog — Echoing Holistic Health™
 // ─────────────────────────────────────────────────────────────────────────────
 
 export type Product = {
@@ -14,22 +14,23 @@ export type Product = {
   benefits: string[];
   ritual: string;
   price: string;
-  focusAreas: string[];   // focus area slugs
+  focusAreas: string[];
   featured: boolean;
+  level: "entry" | "core" | "lifestyle" | "digital" | "premium";
 };
 
 export const products: Product[] = [
   {
     id: 1,
-    slug: "gut-restore-blend",
-    name: "Gut Restore Blend",
+    slug: "gut-flow",
+    name: "Gut Flow™",
     category: "herbal-tea",
     categoryLabel: "Herbal Tea",
     tagline: "Digestive harmony, restored.",
     description:
       "A carefully selected herbal blend to support digestion, reduce inflammation, and restore natural gut balance.",
     longDescription:
-      "Formulated to work with the body's natural restorative processes, Gut Restore Blend combines herbs with established roles in digestive support—addressing the gut lining, microbiome diversity, and inflammatory load simultaneously. This is not a quick-relief formula. It is a daily practice.",
+      "Formulated to work with the body's natural restorative processes, Gut Flow™ combines herbs with established roles in digestive support—addressing the gut lining, microbiome diversity, and inflammatory load simultaneously. This is not a quick-relief formula. It is a daily practice.",
     benefits: [
       "Supports digestive function and motility",
       "Helps reduce gut-based inflammation",
@@ -41,41 +42,19 @@ export const products: Product[] = [
     price: "$48",
     focusAreas: ["gut-health", "inflammation-support"],
     featured: true,
+    level: "core",
   },
   {
     id: 2,
-    slug: "hormone-harmony",
-    name: "Hormone Harmony",
-    category: "seamoss",
-    categoryLabel: "Seamoss Blend",
-    tagline: "Balance begins within.",
-    description:
-      "Wild-crafted seamoss formulated to support the endocrine system and encourage natural hormonal rhythm.",
-    longDescription:
-      "Seamoss is one of the most mineral-dense foods available—providing the trace elements the thyroid, adrenals, and reproductive system depend on for function. Hormone Harmony combines wild-crafted seamoss with carefully selected botanical support to create a daily foundation for endocrine health.",
-    benefits: [
-      "Supports thyroid function with natural iodine",
-      "Provides minerals essential for hormone production",
-      "Nourishes adrenal function and stress resilience",
-      "Supports estrogen metabolism pathways",
-    ],
-    ritual:
-      "One tablespoon blended into water, juice, or a smoothie daily. Best taken in the morning to support the body's natural cortisol rhythm. Consistency creates results.",
-    price: "$64",
-    focusAreas: ["hormonal-balance", "gut-health"],
-    featured: true,
-  },
-  {
-    id: 3,
-    slug: "womb-ritual-tea",
-    name: "Womb Ritual Tea",
+    slug: "womb-flow",
+    name: "Womb Flow™",
     category: "herbal-tea",
     categoryLabel: "Herbal Tea",
     tagline: "Honor your cycles.",
     description:
       "A restorative blend of traditional herbs designed to support womb health and the feminine cycle with intention.",
     longDescription:
-      "Womb Ritual Tea draws on a lineage of traditional feminine herbalism—plants that have been used across cultures for centuries to support the uterus, ease menstrual discomfort, and restore rhythm to the cycle. Each ingredient is chosen for its specific affinity with the female reproductive system.",
+      "Womb Flow™ draws on a lineage of traditional feminine herbalism—plants that have been used across cultures for centuries to support the uterus, ease menstrual discomfort, and restore rhythm to the cycle. Each ingredient is chosen for its specific affinity with the female reproductive system.",
     benefits: [
       "Supports uterine health and circulation",
       "Helps ease menstrual discomfort naturally",
@@ -87,18 +66,43 @@ export const products: Product[] = [
     price: "$52",
     focusAreas: ["womb-wellness", "hormonal-balance"],
     featured: true,
+    level: "core",
+  },
+  {
+    id: 3,
+    slug: "morning-vessel",
+    name: "Morning Vessel™",
+    category: "seamoss",
+    categoryLabel: "Seamoss Blend",
+    tagline: "Balance begins within.",
+    description:
+      "Wild-crafted seamoss formulated to support the endocrine system and encourage natural hormonal rhythm.",
+    longDescription:
+      "Seamoss is one of the most mineral-dense foods available—providing the trace elements the thyroid, adrenals, and reproductive system depend on for function. Morning Vessel™ combines wild-crafted seamoss with carefully selected botanical support to create a daily foundation for endocrine health.",
+    benefits: [
+      "Supports thyroid function with natural iodine",
+      "Provides minerals essential for hormone production",
+      "Nourishes adrenal function and stress resilience",
+      "Supports estrogen metabolism pathways",
+    ],
+    ritual:
+      "One tablespoon blended into water, juice, or a smoothie daily. Best taken in the morning to support the body's natural cortisol rhythm. Consistency creates results.",
+    price: "$64",
+    focusAreas: ["hormonal-balance", "gut-health"],
+    featured: true,
+    level: "core",
   },
   {
     id: 4,
-    slug: "inflammation-ease-blend",
-    name: "Inflammation Ease",
+    slug: "root-reset",
+    name: "Root Reset™",
     category: "herbal-tea",
     categoryLabel: "Herbal Tea",
     tagline: "Quiet the signal. Restore the system.",
     description:
       "A botanical formula combining herbs known for their anti-inflammatory and adaptogenic properties.",
     longDescription:
-      "Inflammation Ease is formulated for the woman who carries chronic inflammation in her body—whether expressed as fatigue, joint discomfort, skin reactivity, or the persistent low-level unease that comes from a body under sustained burden. This blend works systemically, not symptomatically.",
+      "Root Reset™ is formulated for the woman who carries chronic inflammation in her body—whether expressed as fatigue, joint discomfort, skin reactivity, or the persistent low-level unease that comes from a body under sustained burden. This blend works systemically, not symptomatically.",
     benefits: [
       "Modulates the inflammatory response naturally",
       "Supports liver detoxification pathways",
@@ -110,11 +114,12 @@ export const products: Product[] = [
     price: "$46",
     focusAreas: ["inflammation-support", "gut-health"],
     featured: false,
+    level: "core",
   },
   {
     id: 5,
-    slug: "daily-seamoss-gel",
-    name: "Daily Seamoss Gel",
+    slug: "sea-moss-gel",
+    name: "Sea Moss Gel",
     category: "seamoss",
     categoryLabel: "Seamoss",
     tagline: "92 minerals. One daily practice.",
@@ -133,11 +138,64 @@ export const products: Product[] = [
     price: "$38",
     focusAreas: ["gut-health", "hormonal-balance", "inflammation-support"],
     featured: false,
+    level: "core",
+  },
+  {
+    id: 6,
+    slug: "healing-waters",
+    name: "Healing Waters",
+    category: "ritual",
+    categoryLabel: "Ritual",
+    tagline: "Begin with water. Begin with intention.",
+    description:
+      "A mineral-infused herbal water ritual designed as the simplest entry point into daily healing practice.",
+    longDescription:
+      "Healing Waters is where most women begin. A gentle, mineral-rich herbal infusion that requires nothing more than water and willingness. It is the entry point into the E.H.H. system—designed to reduce baseline inflammation and introduce the body to consistent herbal support.",
+    benefits: [
+      "Gentle introduction to daily herbal support",
+      "Reduces baseline inflammatory load",
+      "Mineral-rich hydration support",
+      "Establishes a daily healing ritual",
+    ],
+    ritual:
+      "Add one sachet to 16oz of warm water each morning. No steeping required. Drink slowly before eating. This is your first act of care for the day.",
+    price: "$28",
+    focusAreas: ["gut-health", "inflammation-support"],
+    featured: false,
+    level: "entry",
+  },
+  {
+    id: 7,
+    slug: "root-reset-bundle",
+    name: "Root Reset Bundle",
+    category: "ritual",
+    categoryLabel: "Ritual Bundle",
+    tagline: "Everything you need to begin.",
+    description:
+      "The complete entry bundle: Gut Flow™, Womb Flow™, and Sea Moss Gel — formulated to work together across the E.H.H. Method™.",
+    longDescription:
+      "The Root Reset Bundle brings together three of our core formulas in a single, intentional package. Designed to address the gut, womb, and mineral foundation simultaneously — this is the recommended starting point for women entering the E.H.H. system for the first time.",
+    benefits: [
+      "Addresses gut, womb, and mineral needs together",
+      "Discounted bundle pricing",
+      "Includes the complete beginner protocol",
+      "Designed for the first 30 days of practice",
+    ],
+    ritual:
+      "Follow the included 30-day protocol guide. Morning: Sea Moss Gel. Daytime: Gut Flow™. Evening or cycle-phase specific: Womb Flow™.",
+    price: "$118",
+    focusAreas: ["gut-health", "womb-wellness", "hormonal-balance"],
+    featured: false,
+    level: "lifestyle",
   },
 ];
 
 export function getProductById(id: number): Product | undefined {
   return products.find((p) => p.id === id);
+}
+
+export function getProductBySlug(slug: string): Product | undefined {
+  return products.find((p) => p.slug === slug);
 }
 
 export function getProductsByFocusArea(slug: string): Product[] {
@@ -149,9 +207,13 @@ export function getProductsByCategory(cat: string): Product[] {
   return products.filter((p) => p.category === cat);
 }
 
+export function getProductsByLevel(level: Product["level"]): Product[] {
+  return products.filter((p) => p.level === level);
+}
+
 export const categoryLabels: Record<string, string> = {
-  all:        "All Products",
+  all:          "All Products",
   "herbal-tea": "Herbal Teas",
-  seamoss:    "Seamoss",
-  ritual:     "Ritual Essentials",
+  seamoss:      "Seamoss",
+  ritual:       "Ritual Essentials",
 };

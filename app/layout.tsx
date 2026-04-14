@@ -1,8 +1,16 @@
 import type { Metadata } from "next";
-import { Cormorant_Garamond, Inter } from "next/font/google";
+import { Bodoni_Moda, Cormorant_Garamond, Inter } from "next/font/google";
 import "./globals.css";
 import Navigation from "@/components/layout/Navigation";
 import Footer from "@/components/layout/Footer";
+
+const bodoni = Bodoni_Moda({
+  variable: "--font-bodoni",
+  subsets: ["latin"],
+  weight: ["400", "500", "600", "700"],
+  style: ["normal", "italic"],
+  display: "swap",
+});
 
 const cormorant = Cormorant_Garamond({
   variable: "--font-cormorant",
@@ -38,10 +46,10 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${cormorant.variable} ${inter.variable} h-full`}
+      className={`${bodoni.variable} ${cormorant.variable} ${inter.variable} h-full`}
       style={
         {
-          "--font-serif": "var(--font-cormorant), Georgia, serif",
+          "--font-serif": "var(--font-bodoni), var(--font-cormorant), Georgia, serif",
           "--font-sans": "var(--font-inter), system-ui, sans-serif",
         } as React.CSSProperties
       }

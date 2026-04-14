@@ -84,9 +84,9 @@ export default function Newsletter() {
               color: "var(--cream)",
             }}
           >
-            Stay in{" "}
+            Stay close to{" "}
             <em style={{ fontStyle: "italic", color: "var(--gold)" }}>
-              alignment
+              the work.
             </em>
           </h2>
         </motion.div>
@@ -124,8 +124,8 @@ export default function Newsletter() {
             marginBottom: "clamp(2.5rem, 4vw, 4.5rem)",
           }}
         >
-          Receive thoughtful guidance on gut health, hormones, and intentional
-          living—delivered with clarity, not noise.
+          Not a newsletter. An inner circle. New teachings, formulation notes,
+          rituals, and guidance — sent only when there is something worth saying.
         </motion.p>
 
         {/* Form */}

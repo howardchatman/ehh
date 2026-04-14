@@ -11,27 +11,27 @@ const articles = [
   {
     number: "01",
     category: "Gut Health",
-    title: "The Gut-Brain Connection: What Your Digestion Is Telling You",
+    title: "What Your Gut Is Trying to Tell You",
     excerpt:
-      "Understanding the bidirectional relationship between your gut and your mind is the first step toward meaningful, lasting healing.",
+      "The gut communicates constantly. Learning to listen — to patterns, discomfort, and response — is the beginning of real digestive healing.",
     readTime: "6 min",
     featured: true,
   },
   {
     number: "02",
-    category: "Hormones",
-    title: "Cycle Syncing: How to Work With Your Hormones, Not Against Them",
+    category: "Womb",
+    title: "The Four Phases of Your Cycle (and What They Mean)",
     excerpt:
-      "Your hormones fluctuate in a predictable rhythm. Learning to move with that rhythm changes everything.",
+      "Your cycle is not a problem to manage. It is a rhythm to understand. Each phase has its own language — and its own needs.",
     readTime: "8 min",
     featured: false,
   },
   {
     number: "03",
-    category: "Womb Wellness",
-    title: "Reclaiming Your Relationship With Your Womb",
+    category: "Lifestyle",
+    title: "Growing Your Own Medicine at Home",
     excerpt:
-      "For many women, the womb has been a source of pain. This is an invitation to approach it with compassion.",
+      "From windowsill herbs to hydroponic setups, growing your own medicine is one of the most powerful acts of self-sufficiency a woman can take.",
     readTime: "5 min",
     featured: false,
   },
@@ -88,7 +88,7 @@ export default function Journal() {
               >
                 <div style={{ height: "1px", width: "28px", backgroundColor: "var(--gold)", flexShrink: 0 }} />
                 <span className="micro-label" style={{ color: "var(--gold)" }}>
-                  The Journal
+                  Knowledge & Education
                 </span>
               </motion.div>
 
@@ -129,9 +129,9 @@ export default function Journal() {
                   marginBottom: "clamp(2rem, 3.5vw, 3.5rem)",
                 }}
               >
-                True wellness begins with understanding. Explore insights,
-                teachings, and guidance designed to help you move with
-                clarity and confidence.
+                Simple breakdowns of gut health, womb wellness, and natural
+                living — written for women who want to understand, not just
+                follow instructions.
               </motion.p>
 
               <motion.div
@@ -145,8 +145,7 @@ export default function Journal() {
                   className="text-link link-gold"
                   style={{ color: "var(--espresso)" }}
                 >
-                  Explore the Journal
-                  <span style={{ fontSize: "0.9rem" }}>→</span>
+                  Enter the journal →
                 </Link>
               </motion.div>
 
@@ -163,7 +162,7 @@ export default function Journal() {
                   marginTop: "clamp(2rem, 4vw, 4rem)",
                 }}
               >
-                {["Gut Health", "Hormones", "Womb", "Lifestyle"].map((cat) => (
+                {["Gut Health", "Womb", "Hormones", "Lifestyle", "Home"].map((cat) => (
                   <span
                     key={cat}
                     className="micro-label"
@@ -197,6 +196,48 @@ export default function Journal() {
 
             {/* Bottom border */}
             <div style={{ borderTop: "1px solid var(--border)" }} />
+
+            {/* Coming Soon guide series */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={VIEW}
+              transition={{ duration: 0.9, ease: EASE, delay: 0.3 }}
+              style={{
+                marginTop: "clamp(2.5rem, 4vw, 4rem)",
+                padding: "clamp(1.5rem, 2.5vw, 2rem)",
+                border: "1px solid var(--border)",
+                backgroundColor: "rgba(184,150,90,0.04)",
+              }}
+            >
+              <div style={{ display: "flex", alignItems: "flex-start", gap: "1rem", marginBottom: "0.85rem" }}>
+                <span className="micro-label" style={{ color: "var(--gold)", flexShrink: 0 }}>Coming Soon</span>
+              </div>
+              <p style={{
+                fontFamily: "var(--font-serif)",
+                fontSize: "clamp(0.95rem, 1.3vw, 1.1rem)",
+                fontWeight: 400,
+                letterSpacing: "-0.01em",
+                color: "var(--espresso)",
+                marginBottom: "0.65rem",
+                lineHeight: 1.3,
+              }}>
+                The EHH Signature Guide Series
+              </p>
+              <div style={{ display: "flex", flexWrap: "wrap", gap: "0.35rem 1.25rem" }}>
+                {["Gut Reset Guide", "Womb Healing Guide", "The Healing Home Manual"].map((guide) => (
+                  <span key={guide} style={{
+                    fontFamily: "var(--font-serif)",
+                    fontStyle: "italic",
+                    fontSize: "0.875rem",
+                    fontWeight: 300,
+                    color: "var(--muted)",
+                  }}>
+                    {guide}
+                  </span>
+                ))}
+              </div>
+            </motion.div>
           </div>
         </div>
       </div>

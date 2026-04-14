@@ -25,8 +25,12 @@
   --border-dark:  rgba(250, 248, 245, 0.1);
   --bg:           #FAF8F5;
 
+  /* ── Extended palette ── */
+  --sage:         #8A9E8A;
+  --sage-pale:    rgba(138, 158, 138, 0.12);
+
   /* ── Typography ── */
-  --font-serif:   'Cormorant Garamond', Georgia, 'Times New Roman', serif;
+  --font-serif:   'Bodoni Moda', 'Cormorant Garamond', Georgia, 'Times New Roman', serif;
   --font-sans:    'Inter', system-ui, -apple-system, sans-serif;
 
   /* ── Spacing scale ── */

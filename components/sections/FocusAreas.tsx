@@ -2,48 +2,52 @@
 
 import { useState } from "react";
 import Link from "next/link";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion } from "framer-motion";
 
 const EASE = [0.22, 1, 0.36, 1] as const;
 const VIEW = { once: true, margin: "-80px" } as const;
 
-const areas = [
+const steps = [
   {
     number: "01",
-    title: "Gut Health",
-    description:
-      "The foundation of everything. A balanced gut shapes immunity, mood, and metabolic function. We address the root—not the symptom.",
-    href: "/focus/gut-health",
+    title: "Cleanse",
+    body: "Reduce inflammation. Remove what is stressing the body. Create space for the body to respond.",
+    detail: "The first stage clears the path. Before the body can restore, it must be relieved of what is burdening it — inflammatory foods, environmental stressors, and the accumulated load that keeps the system in a reactive state.",
+    href: "/focus/inflammation-support",
+    accent: "Remove the burden.",
   },
   {
     number: "02",
-    title: "Hormonal Balance",
-    description:
-      "When hormones shift, everything shifts. Our approach supports the endocrine system with precision—informed by science, grounded in nature.",
-    href: "/focus/hormonal-balance",
+    title: "Restore",
+    body: "Rebuild the gut lining. Restore minerals. Support womb health and microbiome diversity.",
+    detail: "With the burden reduced, restoration becomes possible. This is the stage of rebuilding — nourishing the gut lining, replenishing mineral deficiencies, and supporting the organs that govern hormonal and reproductive health.",
+    href: "/focus/gut-health",
+    accent: "Rebuild the foundation.",
   },
   {
     number: "03",
-    title: "Womb Wellness",
-    description:
-      "The womb is not a problem to be managed. We offer support for the cycles, rhythms, and seasons of the feminine experience—with reverence.",
-    href: "/focus/womb-wellness",
+    title: "Activate",
+    body: "Support energy, circulation, and hormonal balance. Work with the body's natural rhythms.",
+    detail: "Once restored, the body can begin to activate. Energy returns. Hormonal rhythms stabilize. Circulation improves. This stage is about working with the body — not pushing it — and supporting the systems that govern daily vitality.",
+    href: "/focus/hormonal-balance",
+    accent: "Restore the rhythm.",
   },
   {
     number: "04",
-    title: "Inflammation Support",
-    description:
-      "Chronic inflammation is a message. We work to quiet the signal thoughtfully—reducing burden on the body while rebuilding its natural resilience.",
-    href: "/focus/inflammation-support",
+    title: "Elevate",
+    body: "Upgrade lifestyle, home environment, identity, and aesthetics. This is where healing becomes living.",
+    detail: "Healing does not end in the body. It extends into the home, the kitchen, the daily rituals, and the sense of identity that shapes how a woman moves through her life. Elevate is the stage where healing becomes a lifestyle — and a lifestyle becomes a legacy.",
+    href: "/focus/womb-wellness",
+    accent: "Healing becomes living.",
   },
 ];
 
-export default function FocusAreas() {
-  const [hovered, setHovered] = useState<number | null>(null);
+export default function EHHMethod() {
+  const [expanded, setExpanded] = useState<number | null>(null);
 
   return (
     <section
-      aria-label="Focus Areas"
+      aria-label="The E.H.H. Method"
       style={{
         position: "relative",
         backgroundColor: "var(--espresso)",
@@ -70,16 +74,15 @@ export default function FocusAreas() {
           padding: `var(--section-y) var(--section-x)`,
         }}
       >
-
         {/* ── Header ── */}
         <div
           style={{
-            display: "flex",
-            flexDirection: "column",
-            gap: "clamp(1.5rem, 2.5vw, 2rem)",
+            display: "grid",
+            gap: "clamp(2rem, 4vw, 5rem)",
             marginBottom: "clamp(4rem, 7vw, 8rem)",
+            alignItems: "end",
           }}
-          className="md:flex-row md:items-end md:justify-between"
+          className="grid-cols-1 lg:grid-cols-[1fr_1fr]"
         >
           <div>
             <motion.div
@@ -91,7 +94,7 @@ export default function FocusAreas() {
             >
               <div style={{ height: "1px", width: "28px", backgroundColor: "var(--gold)", flexShrink: 0 }} />
               <span className="micro-label" style={{ color: "var(--gold)" }}>
-                Areas of Focus
+                The E.H.H. Method™
               </span>
             </motion.div>
 
@@ -103,18 +106,18 @@ export default function FocusAreas() {
               style={{
                 fontFamily: "var(--font-serif)",
                 fontSize: "clamp(2.6rem, 5.5vw, 6rem)",
-                fontWeight: 300,
+                fontWeight: 400,
                 lineHeight: 0.92,
                 letterSpacing: "-0.025em",
                 color: "var(--cream)",
               }}
             >
-              Where your{" "}
-              <em style={{ fontStyle: "italic", color: "var(--gold)" }}>
-                healing
-              </em>
+              A system built
               <br />
-              begins
+              for{" "}
+              <em style={{ fontStyle: "italic", color: "var(--gold)" }}>
+                real healing.
+              </em>
             </motion.h2>
           </div>
 
@@ -130,129 +133,46 @@ export default function FocusAreas() {
               fontStyle: "italic",
               color: "rgba(250,248,245,0.5)",
               lineHeight: 1.75,
-              maxWidth: "36ch",
+              maxWidth: "42ch",
             }}
           >
-            Every product, every teaching, every experience is designed to
-            support the systems that sustain your life.
+            Not a protocol. A practice. Four stages, one direction —
+            built for women who are ready to work with their body instead of against it.
           </motion.p>
         </div>
 
-        {/* ── Editorial rows ── */}
-        <div>
-          {areas.map((area, i) => (
-            <motion.div
-              key={area.number}
-              initial={{ opacity: 0, y: 24 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={VIEW}
-              transition={{ duration: 0.9, ease: EASE, delay: i * 0.1 }}
-            >
-              <Link
-                href={area.href}
-                onMouseEnter={() => setHovered(i)}
-                onMouseLeave={() => setHovered(null)}
-                style={{ display: "block", textDecoration: "none" }}
-              >
-                <div
-                  style={{
-                    borderTop: "1px solid rgba(250,248,245,0.1)",
-                    padding: "clamp(1.5rem, 3vw, 2.5rem) 0",
-                    display: "grid",
-                    gridTemplateColumns: "3rem 1fr auto",
-                    gap: "clamp(1rem, 2vw, 2rem)",
-                    alignItems: "start",
-                    transition: "background-color 0.4s var(--ease-luxury)",
-                    marginLeft: "calc(var(--section-x) * -1)",
-                    marginRight: "calc(var(--section-x) * -1)",
-                    paddingLeft: "var(--section-x)",
-                    paddingRight: "var(--section-x)",
-                    backgroundColor: hovered === i
-                      ? "rgba(250,248,245,0.04)"
-                      : "transparent",
-                  }}
-                >
-                  {/* Number */}
-                  <span
-                    style={{
-                      fontFamily: "var(--font-serif)",
-                      fontSize: "0.7rem",
-                      fontWeight: 300,
-                      color: "var(--gold)",
-                      letterSpacing: "0.05em",
-                      paddingTop: "0.55rem",
-                    }}
-                  >
-                    {area.number}
-                  </span>
-
-                  {/* Title + description */}
-                  <div>
-                    <h3
-                      style={{
-                        fontFamily: "var(--font-serif)",
-                        fontSize: "clamp(2rem, 4.5vw, 5.5rem)",
-                        fontWeight: 300,
-                        lineHeight: 1,
-                        letterSpacing: "-0.02em",
-                        color: hovered === i ? "var(--gold)" : "var(--cream)",
-                        transition: "color 0.4s var(--ease-luxury)",
-                        marginBottom: "0.6rem",
-                      }}
-                    >
-                      {area.title}
-                    </h3>
-
-                    <AnimatePresence mode="wait">
-                      {hovered === i && (
-                        <motion.p
-                          key={area.number}
-                          initial={{ opacity: 0, y: 8 }}
-                          animate={{ opacity: 1, y: 0 }}
-                          exit={{ opacity: 0, y: 4 }}
-                          transition={{ duration: 0.35, ease: EASE }}
-                          style={{
-                            fontFamily: "var(--font-sans)",
-                            fontSize: "0.85rem",
-                            fontWeight: 300,
-                            color: "rgba(250,248,245,0.5)",
-                            lineHeight: 1.8,
-                            maxWidth: "55ch",
-                          }}
-                        >
-                          {area.description}
-                        </motion.p>
-                      )}
-                    </AnimatePresence>
-                  </div>
-
-                  {/* Arrow */}
-                  <motion.span
-                    animate={{
-                      x: hovered === i ? 0 : -8,
-                      opacity: hovered === i ? 1 : 0,
-                    }}
-                    transition={{ duration: 0.3, ease: EASE }}
-                    style={{
-                      color: "var(--gold)",
-                      fontSize: "1.25rem",
-                      alignSelf: "center",
-                      flexShrink: 0,
-                    }}
-                    aria-hidden="true"
-                  >
-                    →
-                  </motion.span>
-                </div>
-              </Link>
-            </motion.div>
+        {/* ── Four step cards ── */}
+        <div
+          style={{ display: "grid", gap: "clamp(1px, 0.15vw, 2px)" }}
+          className="grid-cols-1 lg:grid-cols-4"
+        >
+          {steps.map((step, i) => (
+            <MethodCard
+              key={step.number}
+              step={step}
+              index={i}
+              isExpanded={expanded === i}
+              onToggle={() => setExpanded(expanded === i ? null : i)}
+            />
           ))}
-
-          {/* Bottom border */}
-          <div
-            style={{ borderTop: "1px solid rgba(250,248,245,0.1)" }}
-          />
         </div>
+
+        {/* ── Bottom CTA ── */}
+        <motion.div
+          initial={{ opacity: 0, y: 16 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={VIEW}
+          transition={{ duration: 0.9, ease: EASE, delay: 0.3 }}
+          style={{
+            display: "flex",
+            justifyContent: "center",
+            marginTop: "clamp(3rem, 5vw, 5rem)",
+          }}
+        >
+          <Link href="/focus/gut-health" className="btn-outline-cream">
+            Begin with the method →
+          </Link>
+        </motion.div>
       </div>
 
       {/* Background texture */}
@@ -264,11 +184,152 @@ export default function FocusAreas() {
           right: 0,
           width: "50%",
           height: "100%",
-          background:
-            "radial-gradient(ellipse at 100% 0%, rgba(184,150,90,0.06) 0%, transparent 60%)",
+          background: "radial-gradient(ellipse at 100% 0%, rgba(184,150,90,0.05) 0%, transparent 65%)",
           pointerEvents: "none",
         }}
       />
     </section>
+  );
+}
+
+function MethodCard({
+  step,
+  index,
+  isExpanded,
+  onToggle,
+}: {
+  step: (typeof steps)[number];
+  index: number;
+  isExpanded: boolean;
+  onToggle: () => void;
+}) {
+  const [hovered, setHovered] = useState(false);
+
+  return (
+    <motion.div
+      initial={{ opacity: 0, y: 28 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={VIEW}
+      transition={{ duration: 0.9, ease: EASE, delay: index * 0.1 }}
+      onMouseEnter={() => setHovered(true)}
+      onMouseLeave={() => setHovered(false)}
+      onClick={onToggle}
+      style={{
+        padding: "clamp(2rem, 3.5vw, 3.5rem) clamp(1.5rem, 2.5vw, 2.5rem)",
+        border: "1px solid rgba(250,248,245,0.07)",
+        cursor: "pointer",
+        backgroundColor: isExpanded
+          ? "rgba(184,150,90,0.08)"
+          : hovered
+          ? "rgba(250,248,245,0.03)"
+          : "transparent",
+        transition: "background-color 0.4s var(--ease-luxury)",
+        display: "flex",
+        flexDirection: "column",
+        gap: "clamp(1.25rem, 2vw, 2rem)",
+        position: "relative",
+      }}
+    >
+      {/* Step number */}
+      <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between" }}>
+        <span
+          style={{
+            fontFamily: "var(--font-serif)",
+            fontSize: "0.7rem",
+            fontWeight: 300,
+            color: "var(--gold)",
+            letterSpacing: "0.06em",
+          }}
+        >
+          {step.number}
+        </span>
+        <motion.span
+          animate={{ opacity: isExpanded ? 1 : hovered ? 0.5 : 0.2 }}
+          style={{ color: "var(--gold)", fontSize: "0.7rem" }}
+        >
+          {isExpanded ? "−" : "+"}
+        </motion.span>
+      </div>
+
+      {/* Title */}
+      <h3
+        style={{
+          fontFamily: "var(--font-serif)",
+          fontSize: "clamp(2rem, 3vw, 3rem)",
+          fontWeight: 400,
+          letterSpacing: "-0.02em",
+          lineHeight: 1,
+          color: isExpanded ? "var(--gold)" : hovered ? "var(--gold-light)" : "var(--cream)",
+          transition: "color 0.4s var(--ease-luxury)",
+        }}
+      >
+        {step.title}
+      </h3>
+
+      {/* Accent */}
+      <p
+        style={{
+          fontFamily: "var(--font-sans)",
+          fontSize: "0.6rem",
+          fontWeight: 500,
+          letterSpacing: "0.18em",
+          textTransform: "uppercase",
+          color: "var(--gold)",
+          opacity: 0.7,
+        }}
+      >
+        {step.accent}
+      </p>
+
+      {/* Body */}
+      <p
+        style={{
+          fontFamily: "var(--font-sans)",
+          fontSize: "0.875rem",
+          fontWeight: 300,
+          color: "rgba(250,248,245,0.55)",
+          lineHeight: 1.8,
+        }}
+      >
+        {step.body}
+      </p>
+
+      {/* Expanded detail */}
+      <motion.div
+        initial={false}
+        animate={{ height: isExpanded ? "auto" : 0, opacity: isExpanded ? 1 : 0 }}
+        transition={{ duration: 0.45, ease: EASE }}
+        style={{ overflow: "hidden" }}
+      >
+        <div
+          style={{
+            paddingTop: "1rem",
+            borderTop: "1px solid rgba(250,248,245,0.1)",
+          }}
+        >
+          <p
+            style={{
+              fontFamily: "var(--font-serif)",
+              fontStyle: "italic",
+              fontSize: "0.9rem",
+              fontWeight: 300,
+              color: "rgba(250,248,245,0.5)",
+              lineHeight: 1.8,
+              marginBottom: "1.25rem",
+            }}
+          >
+            {step.detail}
+          </p>
+          <Link
+            href={step.href}
+            className="text-link"
+            style={{ color: "var(--gold)", fontSize: "0.55rem" }}
+            onClick={(e) => e.stopPropagation()}
+          >
+            Explore this stage →
+          </Link>
+        </div>
+      </motion.div>
+    </motion.div>
   );
 }

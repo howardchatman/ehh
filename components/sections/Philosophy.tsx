@@ -159,24 +159,8 @@ export default function Philosophy() {
               }}
             >
               Echoing Holistic Health was created for women who are done guessing.
-            </motion.p>
-
-            <motion.p
-              initial={{ opacity: 0, y: 24 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={VIEW}
-              transition={{ duration: 1, ease: EASE, delay: 0.38 }}
-              style={{
-                fontFamily: "var(--font-serif)",
-                fontSize: "clamp(1rem, 1.35vw, 1.2rem)",
-                fontWeight: 300,
-                fontStyle: "italic",
-                color: "var(--muted)",
-                lineHeight: 1.85,
-              }}
-            >
               Women who have felt the discomfort. The imbalance. The quiet
-              frustration of knowing something isn&rsquo;t right—and being
+              frustration of knowing something isn&rsquo;t right — and being
               told everything is fine.
             </motion.p>
 
@@ -185,7 +169,7 @@ export default function Philosophy() {
               initial={{ scaleX: 0 }}
               whileInView={{ scaleX: 1 }}
               viewport={VIEW}
-              transition={{ duration: 0.8, ease: EASE, delay: 0.5 }}
+              transition={{ duration: 0.8, ease: EASE, delay: 0.42 }}
               style={{
                 height: "1px",
                 width: "60px",
@@ -195,52 +179,64 @@ export default function Philosophy() {
               }}
             />
 
-            {/* Three intentional lines */}
             {[
-              "This is a space for restoration.",
-              "For understanding your body instead of fighting it.",
-              "For choosing intention over quick fixes.",
+              "This is a space for restoration. For understanding your body instead of fighting it. For choosing intention over quick fixes.",
+              "Your body is not broken. It needs support, understanding, and consistency. That is what we are here to provide.",
             ].map((line, i) => (
               <motion.p
                 key={i}
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={VIEW}
-                transition={{ duration: 0.9, ease: EASE, delay: 0.55 + i * 0.12 }}
+                transition={{ duration: 0.9, ease: EASE, delay: 0.52 + i * 0.12 }}
                 style={{
-                  fontFamily: "var(--font-serif)",
-                  fontSize: "clamp(1rem, 1.35vw, 1.2rem)",
+                  fontFamily: i === 0 ? "var(--font-serif)" : "var(--font-sans)",
+                  fontSize: i === 0 ? "clamp(1rem, 1.35vw, 1.2rem)" : "0.875rem",
                   fontWeight: 300,
-                  color: "var(--charcoal)",
-                  lineHeight: 1.7,
+                  fontStyle: i === 0 ? "italic" : "normal",
+                  color: i === 0 ? "var(--muted)" : "var(--muted)",
+                  lineHeight: 1.85,
                 }}
               >
                 {line}
               </motion.p>
             ))}
 
+            {/* Founder credential */}
+            <motion.p
+              initial={{ opacity: 0, y: 16 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={VIEW}
+              transition={{ duration: 0.9, ease: EASE, delay: 0.78 }}
+              style={{
+                fontFamily: "var(--font-sans)",
+                fontSize: "0.75rem",
+                fontWeight: 400,
+                color: "var(--gold)",
+                letterSpacing: "0.04em",
+                lineHeight: 1.7,
+                paddingTop: "0.75rem",
+                borderTop: "1px solid var(--border)",
+              }}
+            >
+              Founded on 14 years of lived experience — endometriosis, Crohn&rsquo;s disease,
+              and the hard-won knowledge that comes from healing yourself first.
+            </motion.p>
+
             {/* Vertical pull quote — mobile */}
             <motion.blockquote
               initial={{ opacity: 0 }}
               whileInView={{ opacity: 0.55 }}
               viewport={VIEW}
-              transition={{ duration: 1.2, ease: EASE, delay: 0.85 }}
+              transition={{ duration: 1.2, ease: EASE, delay: 0.9 }}
               className="lg:hidden"
               style={{
                 borderLeft: "1px solid var(--gold)",
                 paddingLeft: "1.5rem",
-                marginTop: "1rem",
+                marginTop: "0.5rem",
               }}
             >
-              <p
-                style={{
-                  fontFamily: "var(--font-serif)",
-                  fontSize: "1rem",
-                  fontStyle: "italic",
-                  color: "var(--muted)",
-                  lineHeight: 1.7,
-                }}
-              >
+              <p style={{ fontFamily: "var(--font-serif)", fontSize: "1rem", fontStyle: "italic", color: "var(--muted)", lineHeight: 1.7 }}>
                 The body is not broken. It is responding.
               </p>
             </motion.blockquote>

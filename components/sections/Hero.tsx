@@ -110,16 +110,13 @@ export default function Hero() {
         initial={{ opacity: 0, y: -10 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.9, ease: EASE, delay: 0.3 }}
-        className="lg:hidden"
+        className="flex flex-col items-center lg:hidden"
         style={{
           position: "absolute",
           top: "clamp(5rem, 10vw, 6.5rem)",
           left: 0, right: 0,
           zIndex: 10,
           textAlign: "center",
-          display: "flex",
-          flexDirection: "column",
-          alignItems: "center",
           gap: "0.15rem",
         }}
       >
@@ -148,15 +145,13 @@ export default function Hero() {
 
       {/* Mobile cover lines — left side, stacked vertically */}
       <div
-        className="lg:hidden"
+        className="flex flex-col lg:hidden"
         style={{
           position: "absolute",
           top: "50%",
           left: "1.25rem",
           transform: "translateY(-50%)",
           zIndex: 10,
-          display: "flex",
-          flexDirection: "column",
           gap: "1.5rem",
         }}
       >
