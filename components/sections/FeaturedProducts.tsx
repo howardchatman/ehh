@@ -181,18 +181,18 @@ function ProductCard({ product }: { product: (typeof products)[number] }) {
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
     >
-      <div style={{ overflow: "hidden", marginBottom: "1.5rem", position: "relative", aspectRatio: "3/4", backgroundColor: "#f5f0e8" }}>
+      <div style={{ overflow: "hidden", marginBottom: "1.5rem", position: "relative", backgroundColor: "#f5f0e8" }}>
         <motion.div
           animate={{ scale: hovered ? 1.04 : 1 }}
           transition={{ duration: 0.75, ease: EASE }}
-          style={{ position: "absolute", inset: 0 }}
         >
           <Image
             src={product.image}
             alt={product.name}
-            fill
+            width={600}
+            height={800}
             sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
-            style={{ objectFit: "contain", objectPosition: "center" }}
+            style={{ width: "100%", height: "auto", display: "block" }}
           />
         </motion.div>
         <div style={{

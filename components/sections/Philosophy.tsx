@@ -100,16 +100,15 @@ export default function Philosophy() {
               style={{
                 width: "100%",
                 maxWidth: "260px",
-                aspectRatio: "3/4",
-                position: "relative",
+                overflow: "hidden",
               }}
             >
               <Image
                 src="/ehh3.png"
                 alt="Woman in quiet contemplation with herbal tea"
-                fill
-                sizes="260px"
-                style={{ objectFit: "cover", objectPosition: "center top" }}
+                width={260}
+                height={347}
+                style={{ width: "100%", height: "auto", objectFit: "cover", objectPosition: "center top", display: "block" }}
               />
               {/* Small caption */}
               <p

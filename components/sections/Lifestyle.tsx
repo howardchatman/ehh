@@ -113,13 +113,14 @@ export default function Lifestyle() {
             viewport={VIEW}
             transition={{ duration: 1.1, ease: EASE }}
           >
-            <div style={{ position: "relative", width: "100%", aspectRatio: "4/5" }}>
+            <div style={{ overflow: "hidden", width: "100%" }}>
               <Image
                 src="/ehh2.png"
                 alt="Woman in morning ritual with tea"
-                fill
+                width={900}
+                height={1125}
                 sizes="(max-width: 1024px) 100vw, 55vw"
-                style={{ objectFit: "cover", objectPosition: "center top" }}
+                style={{ width: "100%", height: "auto", display: "block" }}
               />
             </div>
             <motion.p

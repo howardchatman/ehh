@@ -279,18 +279,18 @@ function ArticleRow({
         }}
       >
         {/* Image */}
-        <div style={{ overflow: "hidden", flexShrink: 0, position: "relative", aspectRatio: "3/4" }}>
+        <div style={{ overflow: "hidden", flexShrink: 0 }}>
           <motion.div
             animate={{ scale: hovered ? 1.06 : 1 }}
             transition={{ duration: 0.65, ease: EASE }}
-            style={{ position: "absolute", inset: 0 }}
           >
             <Image
               src={article.image}
               alt={article.imageAlt}
-              fill
+              width={210}
+              height={280}
               sizes="140px"
-              style={{ objectFit: "cover", objectPosition: "center top" }}
+              style={{ width: "100%", height: "auto", display: "block", objectFit: "cover", objectPosition: "center top" }}
             />
           </motion.div>
         </div>
