@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import { motion } from "framer-motion";
 
 const EASE = [0.22, 1, 0.36, 1] as const;
@@ -103,10 +104,12 @@ export default function Philosophy() {
                 position: "relative",
               }}
             >
-              <div
-                className="img-placeholder"
-                style={{ width: "100%", height: "100%" }}
-                aria-hidden="true"
+              <Image
+                src="/ehh3.png"
+                alt="Woman in quiet contemplation with herbal tea"
+                fill
+                sizes="260px"
+                style={{ objectFit: "cover", objectPosition: "center top" }}
               />
               {/* Small caption */}
               <p

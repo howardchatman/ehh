@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { motion } from "framer-motion";
 
 const EASE = [0.22, 1, 0.36, 1] as const;
@@ -112,11 +113,15 @@ export default function Lifestyle() {
             viewport={VIEW}
             transition={{ duration: 1.1, ease: EASE }}
           >
-            <div
-              className="img-placeholder"
-              style={{ width: "100%", aspectRatio: "4/5" }}
-              aria-hidden="true"
-            />
+            <div style={{ position: "relative", width: "100%", aspectRatio: "4/5" }}>
+              <Image
+                src="/ehh2.png"
+                alt="Woman in morning ritual with tea"
+                fill
+                sizes="(max-width: 1024px) 100vw, 55vw"
+                style={{ objectFit: "cover", objectPosition: "center top" }}
+              />
+            </div>
             <motion.p
               initial={{ opacity: 0, y: 12 }}
               whileInView={{ opacity: 1, y: 0 }}

@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { motion } from "framer-motion";
 import { products } from "@/lib/products";
 
@@ -180,14 +181,20 @@ function ProductCard({ product }: { product: (typeof products)[number] }) {
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
     >
-      <div style={{ overflow: "hidden", marginBottom: "1.5rem", position: "relative" }}>
+      <div style={{ overflow: "hidden", marginBottom: "1.5rem", position: "relative", aspectRatio: "3/4", backgroundColor: "#f5f0e8" }}>
         <motion.div
-          className="img-placeholder"
           animate={{ scale: hovered ? 1.04 : 1 }}
           transition={{ duration: 0.75, ease: EASE }}
-          style={{ aspectRatio: "3/4", width: "100%" }}
-          aria-hidden="true"
-        />
+          style={{ position: "absolute", inset: 0 }}
+        >
+          <Image
+            src={product.image}
+            alt={product.name}
+            fill
+            sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+            style={{ objectFit: "contain", objectPosition: "center" }}
+          />
+        </motion.div>
         <div style={{
           position: "absolute", top: "1rem", left: "1rem",
           padding: "0.3rem 0.65rem",

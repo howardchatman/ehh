@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { motion } from "framer-motion";
 
 const EASE = [0.22, 1, 0.36, 1] as const;
@@ -16,6 +17,8 @@ const articles = [
       "The gut communicates constantly. Learning to listen — to patterns, discomfort, and response — is the beginning of real digestive healing.",
     readTime: "6 min",
     featured: true,
+    image: "/ehh1.png",
+    imageAlt: "Woman with hands on abdomen, gut healing",
   },
   {
     number: "02",
@@ -25,6 +28,8 @@ const articles = [
       "Your cycle is not a problem to manage. It is a rhythm to understand. Each phase has its own language — and its own needs.",
     readTime: "8 min",
     featured: false,
+    image: "/ehh3.png",
+    imageAlt: "Woman in quiet ritual with herbal tea",
   },
   {
     number: "03",
@@ -34,6 +39,8 @@ const articles = [
       "From windowsill herbs to hydroponic setups, growing your own medicine is one of the most powerful acts of self-sufficiency a woman can take.",
     readTime: "5 min",
     featured: false,
+    image: "/ehh4.png",
+    imageAlt: "Woman smiling with morning tea, cozy home setting",
   },
 ];
 
@@ -249,7 +256,7 @@ function ArticleRow({
   article,
   index,
 }: {
-  article: (typeof articles)[0];
+  article: (typeof articles)[number];
   index: number;
 }) {
   const [hovered, setHovered] = useState(false);
@@ -272,14 +279,20 @@ function ArticleRow({
         }}
       >
         {/* Image */}
-        <div style={{ overflow: "hidden", flexShrink: 0 }}>
+        <div style={{ overflow: "hidden", flexShrink: 0, position: "relative", aspectRatio: "3/4" }}>
           <motion.div
-            className="img-placeholder"
             animate={{ scale: hovered ? 1.06 : 1 }}
             transition={{ duration: 0.65, ease: EASE }}
-            style={{ aspectRatio: "3/4", width: "100%" }}
-            aria-hidden="true"
-          />
+            style={{ position: "absolute", inset: 0 }}
+          >
+            <Image
+              src={article.image}
+              alt={article.imageAlt}
+              fill
+              sizes="140px"
+              style={{ objectFit: "cover", objectPosition: "center top" }}
+            />
+          </motion.div>
         </div>
 
         {/* Content */}
