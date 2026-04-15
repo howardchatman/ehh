@@ -104,8 +104,8 @@ export default function Philosophy() {
               }}
             >
               <Image
-                src="/ehh3.png"
-                alt="Woman in quiet contemplation with herbal tea"
+                src="/ehh1.png"
+                alt="Woman with hands on abdomen, intentional living"
                 width={260}
                 height={347}
                 style={{ width: "100%", height: "auto", objectFit: "cover", objectPosition: "center top", display: "block" }}
