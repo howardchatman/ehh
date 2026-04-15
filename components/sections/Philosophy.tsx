@@ -105,21 +105,11 @@ export default function Philosophy() {
             >
               <Image
                 src="/ehh1.png"
-                alt="Woman with hands on abdomen, intentional living"
+                alt=""
                 width={260}
                 height={347}
                 style={{ width: "100%", height: "auto", objectFit: "cover", objectPosition: "center top", display: "block" }}
               />
-              {/* Small caption */}
-              <p
-                className="micro-label"
-                style={{
-                  marginTop: "0.75rem",
-                  color: "var(--muted-light)",
-                }}
-              >
-                Intentional living
-              </p>
             </motion.div>
           </div>
 
