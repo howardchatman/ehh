@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import Image from "next/image";
 import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
 import { products, categoryLabels, type Product } from "@/lib/products";
@@ -256,14 +257,20 @@ function ProductCard({ product }: { product: Product }) {
       onMouseLeave={() => setHovered(false)}
     >
       {/* Image */}
-      <div style={{ overflow: "hidden", marginBottom: "1.5rem", position: "relative" }}>
+      <div style={{ overflow: "hidden", marginBottom: "1.5rem", position: "relative", backgroundColor: "#f5f0e8" }}>
         <motion.div
-          className="img-placeholder"
           animate={{ scale: hovered ? 1.04 : 1 }}
           transition={{ duration: 0.75, ease: EASE }}
-          style={{ aspectRatio: "3/4", width: "100%" }}
-          aria-hidden="true"
-        />
+        >
+          <Image
+            src={product.image}
+            alt={product.name}
+            width={600}
+            height={800}
+            sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+            style={{ width: "100%", height: "auto", display: "block" }}
+          />
+        </motion.div>
         {/* Category badge */}
         <div
           style={{

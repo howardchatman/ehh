@@ -44,7 +44,7 @@ export const products: Product[] = [
     focusAreas: ["gut-health", "inflammation-support"],
     featured: true,
     level: "core",
-    image: "/gut_flow_image_set.png",
+    image: "/gut_flow.png",
   },
   {
     id: 2,
@@ -69,7 +69,7 @@ export const products: Product[] = [
     focusAreas: ["womb-wellness", "hormonal-balance"],
     featured: true,
     level: "core",
-    image: "/womb_flow_image_set.png",
+    image: "/womb_flow.png",
   },
   {
     id: 3,
@@ -94,7 +94,7 @@ export const products: Product[] = [
     focusAreas: ["hormonal-balance", "gut-health"],
     featured: true,
     level: "core",
-    image: "/morning_vessel_image_set.png",
+    image: "/morning_vessel.png",
   },
   {
     id: 4,
@@ -119,7 +119,7 @@ export const products: Product[] = [
     focusAreas: ["inflammation-support", "gut-health"],
     featured: false,
     level: "core",
-    image: "/root_reset_image_set.png",
+    image: "/root_reset.png",
   },
   {
     id: 5,
@@ -194,7 +194,7 @@ export const products: Product[] = [
     focusAreas: ["gut-health", "womb-wellness", "hormonal-balance"],
     featured: false,
     level: "lifestyle",
-    image: "/root_reset_image_set.png",
+    image: "/root_reset_set_with_cups_white.png",
   },
 ];
 
