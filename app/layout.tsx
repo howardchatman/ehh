@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import { Bodoni_Moda, Cormorant_Garamond, Inter } from "next/font/google";
 import "./globals.css";
-import SiteShell from "@/components/layout/SiteShell";
 
 const bodoni = Bodoni_Moda({
   variable: "--font-bodoni",
@@ -54,7 +53,7 @@ export default function RootLayout({
       }
     >
       <body className="min-h-full flex flex-col antialiased">
-        <SiteShell>{children}</SiteShell>
+        {children}
       </body>
     </html>
   );
