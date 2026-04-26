@@ -106,6 +106,29 @@ export default function Footer() {
               It&rsquo;s a return to self.
             </p>
 
+            {/* Contact */}
+            <a
+              href="tel:8329335972"
+              className="micro-label"
+              style={{
+                display: "block",
+                color: "rgba(250,248,245,0.45)",
+                textDecoration: "none",
+                fontSize: "0.65rem",
+                letterSpacing: "0.12em",
+                marginBottom: "clamp(1.25rem, 2vw, 1.75rem)",
+                transition: "color 0.3s var(--ease-luxury)",
+              }}
+              onMouseEnter={(e) => {
+                (e.currentTarget as HTMLAnchorElement).style.color = "var(--gold)";
+              }}
+              onMouseLeave={(e) => {
+                (e.currentTarget as HTMLAnchorElement).style.color = "rgba(250,248,245,0.45)";
+              }}
+            >
+              832-933-5972
+            </a>
+
             {/* Social */}
             <div style={{ display: "flex", gap: "1.5rem" }}>
               {["Instagram", "Pinterest", "TikTok"].map((s) => (
