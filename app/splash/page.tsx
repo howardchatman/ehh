@@ -1,4 +1,5 @@
 import SplashPage from "@/components/ui/SplashPage";
+import { unlockSite } from "./actions";
 
 export const metadata = {
   title: "Echoing Holistic Health — Coming Soon",
@@ -11,5 +12,5 @@ export default async function Page({
   searchParams: Promise<{ error?: string }>;
 }) {
   const { error } = await searchParams;
-  return <SplashPage hasError={error === "1"} />;
+  return <SplashPage hasError={error === "1"} action={unlockSite} />;
 }

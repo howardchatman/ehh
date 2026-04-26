@@ -4,8 +4,8 @@ import type { NextRequest } from "next/server";
 export function proxy(request: NextRequest) {
   const { pathname } = request.nextUrl;
 
-  // Always allow the splash page and unlock API through
-  if (pathname.startsWith("/splash") || pathname.startsWith("/api/unlock")) {
+  // Always allow the splash page through
+  if (pathname.startsWith("/splash")) {
     return NextResponse.next();
   }
 
