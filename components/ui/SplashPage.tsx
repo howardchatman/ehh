@@ -10,7 +10,7 @@ export default function SplashPage({
   action,
 }: {
   hasError: boolean;
-  action: (formData: FormData) => Promise<never>;
+  action: (formData: FormData) => Promise<void>;
 }) {
   const [focused, setFocused] = useState(false);
 
