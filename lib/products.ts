@@ -18,6 +18,7 @@ export type Product = {
   featured: boolean;
   level: "entry" | "core" | "lifestyle" | "digital" | "premium";
   image: string;
+  images: string[];
 };
 
 export const products: Product[] = [
@@ -45,6 +46,12 @@ export const products: Product[] = [
     featured: true,
     level: "core",
     image: "/gut_flow.png",
+    images: [
+      "/gut_flow.png",
+      "/gut_flow_2.png",
+      "/gut_flow_3.png",
+      "/gut_flow_4.png",
+    ],
   },
   {
     id: 2,
@@ -70,6 +77,13 @@ export const products: Product[] = [
     featured: true,
     level: "core",
     image: "/womb_flow.png",
+    images: [
+      "/womb_flow.png",
+      "/womb_flow_2.png",
+      "/womb_flow_3.png",
+      "/womb_flow_4.png",
+      "/womb_flow_5.png",
+    ],
   },
   {
     id: 3,
@@ -95,6 +109,12 @@ export const products: Product[] = [
     featured: true,
     level: "core",
     image: "/morning_vessel.png",
+    images: [
+      "/morning_vessel.png",
+      "/morning_vessel_2.png",
+      "/morning_vessel_3.png",
+      "/morning_vessel_4.png",
+    ],
   },
   {
     id: 4,
@@ -120,6 +140,15 @@ export const products: Product[] = [
     featured: false,
     level: "core",
     image: "/root_reset.png",
+    images: [
+      "/root_reset.png",
+      "/root_reset_2.png",
+      "/root_reset_3.png",
+      "/root_reset_4.png",
+      "/root_reset_5.png",
+      "/root_reset_6.png",
+      "/root_reset_woman_picture.png",
+    ],
   },
   {
     id: 5,
@@ -145,6 +174,11 @@ export const products: Product[] = [
     featured: false,
     level: "core",
     image: "/ehh2.png",
+    images: [
+      "/ehh2.png",
+      "/ehh4.png",
+      "/ehh5.png",
+    ],
   },
   {
     id: 6,
@@ -170,6 +204,10 @@ export const products: Product[] = [
     featured: false,
     level: "entry",
     image: "/ehh3.png",
+    images: [
+      "/ehh3.png",
+      "/ehh1.png",
+    ],
   },
   {
     id: 7,
@@ -194,7 +232,12 @@ export const products: Product[] = [
     focusAreas: ["gut-health", "womb-wellness", "hormonal-balance"],
     featured: false,
     level: "lifestyle",
-    image: "/root_reset_set_with_cups_white.png",
+    image: "/root_reset.png",
+    images: [
+      "/root_reset.png",
+      "/root_reset_2.png",
+      "/root_reset_3.png",
+    ],
   },
 ];
 
