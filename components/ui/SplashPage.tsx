@@ -2,7 +2,6 @@
 
 import { useState } from "react";
 import { motion } from "framer-motion";
-import Image from "next/image";
 
 const EASE = [0.22, 1, 0.36, 1] as const;
 
@@ -70,12 +69,10 @@ export default function SplashPage({
           width: "100%",
         }}
       >
-        <Image
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img
           src="/image0.png"
           alt="Echoing Holistic Health — featured"
-          width={800}
-          height={800}
-          priority
           style={{ width: "100%", height: "auto", display: "block" }}
         />
       </motion.div>
