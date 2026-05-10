@@ -43,5 +43,5 @@ export async function joinWaitlist(formData: FormData) {
     redirect("/splash?waitlist=error");
   }
 
-  redirect("/splash?waitlist=success");
+  redirect("/thank-you");
 }

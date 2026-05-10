@@ -4,8 +4,8 @@ import type { NextRequest } from "next/server";
 export function middleware(request: NextRequest) {
   const { pathname } = request.nextUrl;
 
-  // Always allow the splash page through
-  if (pathname.startsWith("/splash")) {
+  // Always allow public pages through
+  if (pathname.startsWith("/splash") || pathname.startsWith("/thank-you")) {
     return NextResponse.next();
   }
 
