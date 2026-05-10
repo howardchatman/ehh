@@ -68,17 +68,15 @@ export default function SplashPage({
           boxShadow: "0 8px 48px rgba(0,0,0,0.45), 0 0 0 1px rgba(184,150,90,0.15)",
           maxWidth: "clamp(240px, 55vw, 380px)",
           width: "100%",
-          aspectRatio: "1 / 1",
-          position: "relative",
         }}
       >
         <Image
           src="/image0.png"
           alt="Echoing Holistic Health — featured"
-          fill
+          width={800}
+          height={800}
           priority
-          style={{ objectFit: "cover" }}
-          sizes="(max-width: 768px) 55vw, 380px"
+          style={{ width: "100%", height: "auto", display: "block" }}
         />
       </motion.div>
 
