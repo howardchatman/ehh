@@ -7,7 +7,7 @@ export async function adminLogin(formData: FormData) {
   const email    = (formData.get("email") as string)?.trim().toLowerCase();
   const password = formData.get("password") as string;
 
-  const adminEmail    = (process.env.ADMIN_EMAIL ?? "").toLowerCase();
+  const adminEmail    = (process.env.ADMIN_EMAIL ?? "contact@echoingholistichealth.com").toLowerCase();
   const adminPassword = process.env.ADMIN_PASSWORD ?? "august1207";
 
   if (email !== adminEmail || password !== adminPassword) {
