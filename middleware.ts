@@ -5,7 +5,11 @@ export function middleware(request: NextRequest) {
   const { pathname } = request.nextUrl;
 
   // Always allow public pages through
-  if (pathname.startsWith("/splash") || pathname.startsWith("/thank-you")) {
+  if (
+    pathname.startsWith("/splash") ||
+    pathname.startsWith("/thank-you") ||
+    pathname.startsWith("/dashboard")
+  ) {
     return NextResponse.next();
   }
 
