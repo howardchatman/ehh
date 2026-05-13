@@ -3,7 +3,7 @@
 import { useState, useEffect } from "react";
 import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
-import { Menu, X } from "lucide-react";
+import { Menu, X, User } from "lucide-react";
 
 const EASE = [0.22, 1, 0.36, 1] as const;
 
@@ -165,6 +165,21 @@ export default function Navigation() {
                 hoverColor={hoverColor}
               />
             ))}
+            {/* Account icon */}
+            <Link
+              href="/account"
+              aria-label="My Account"
+              style={{
+                color: textColor,
+                transition: "color 0.35s var(--ease-luxury)",
+                display: "flex",
+                alignItems: "center",
+              }}
+              onMouseEnter={(e) => ((e.currentTarget as HTMLAnchorElement).style.color = hoverColor)}
+              onMouseLeave={(e) => ((e.currentTarget as HTMLAnchorElement).style.color = textColor)}
+            >
+              <User size={16} strokeWidth={1.5} />
+            </Link>
           </nav>
 
           {/* ── Mobile toggle ── */}
@@ -282,7 +297,7 @@ export default function Navigation() {
             <nav
               style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: "2rem" }}
             >
-              {[{ href: "/", label: "Home" }, ...navLinks].map((link, i) => (
+              {[{ href: "/", label: "Home" }, ...navLinks, { href: "/account", label: "My Account" }].map((link, i) => (
                 <motion.div
                   key={link.href}
                   initial={{ opacity: 0, y: 14 }}

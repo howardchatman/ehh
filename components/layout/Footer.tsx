@@ -8,17 +8,19 @@ const EASE = [0.22, 1, 0.36, 1] as const;
 const VIEW = { once: true, margin: "-60px" } as const;
 
 const footerNav = [
-  { label: "About",   href: "/about"   },
-  { label: "Shop",    href: "/shop"    },
-  { label: "Journal", href: "/journal" },
-  { label: "Events",  href: "/events"  },
-  { label: "Contact", href: "/contact" },
+  { label: "About",      href: "/about"           },
+  { label: "Shop",       href: "/shop"            },
+  { label: "Journal",    href: "/journal"         },
+  { label: "Events",     href: "/events"          },
+  { label: "Contact",    href: "/contact"         },
+  { label: "My Account", href: "/account/signup"  },
 ];
 
 const legal = [
-  { label: "Privacy",  href: "/privacy"  },
-  { label: "Terms",    href: "/terms"    },
-  { label: "Shipping", href: "/shipping" },
+  { label: "Privacy",   href: "/privacy"    },
+  { label: "Terms",     href: "/terms"      },
+  { label: "Shipping",  href: "/shipping"   },
+  { label: "Dashboard", href: "/dashboard"  },
 ];
 
 export default function Footer() {
