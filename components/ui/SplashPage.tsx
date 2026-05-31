@@ -55,28 +55,6 @@ export default function SplashPage({
         }}
       />
 
-      {/* Featured image */}
-      <motion.div
-        initial={{ opacity: 0, scale: 0.96 }}
-        animate={{ opacity: 1, scale: 1 }}
-        transition={{ duration: 1, ease: EASE }}
-        style={{
-          marginBottom: "clamp(2rem, 4vw, 3.5rem)",
-          borderRadius: "4px",
-          overflow: "hidden",
-          boxShadow: "0 8px 48px rgba(0,0,0,0.45), 0 0 0 1px rgba(184,150,90,0.15)",
-          maxWidth: "clamp(240px, 55vw, 380px)",
-          width: "100%",
-        }}
-      >
-        {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img
-          src="/image0.png"
-          alt="Echoing Holistic Health — featured"
-          style={{ width: "100%", height: "auto", display: "block" }}
-        />
-      </motion.div>
-
       {/* Logo */}
       <motion.div
         initial={{ opacity: 0, y: -12 }}
