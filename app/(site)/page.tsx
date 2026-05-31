@@ -4,6 +4,7 @@ import FocusAreas from "@/components/sections/FocusAreas";
 import FeaturedProducts from "@/components/sections/FeaturedProducts";
 import Lifestyle from "@/components/sections/Lifestyle";
 import Journal from "@/components/sections/Journal";
+import CommunityJoin from "@/components/sections/CommunityJoin";
 import Newsletter from "@/components/sections/Newsletter";
 
 export default function Home() {
@@ -15,6 +16,7 @@ export default function Home() {
       <FeaturedProducts />
       <Lifestyle />
       <Journal />
+      <CommunityJoin />
       <Newsletter />
     </>
   );
