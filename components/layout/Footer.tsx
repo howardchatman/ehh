@@ -19,11 +19,12 @@ const footerNav = [
 ];
 
 const legal = [
-  { label: "Privacy Policy", href: "/privacy"   },
-  { label: "Terms",          href: "/terms"     },
-  { label: "Shipping",       href: "/shipping"  },
-  { label: "Delivery",       href: "/delivery"  },
-  { label: "Refund Policy",  href: "/refunds"   },
+  { label: "Privacy Policy", href: "/privacy"    },
+  { label: "Terms",          href: "/terms"      },
+  { label: "Disclaimer",     href: "/disclaimer" },
+  { label: "Shipping",       href: "/shipping"   },
+  { label: "Delivery",       href: "/delivery"   },
+  { label: "Refund Policy",  href: "/refunds"    },
 ];
 
 export default function Footer() {
