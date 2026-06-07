@@ -26,12 +26,22 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  title: "Echoing Holistic Health — Refined Women's Wellness",
+  title: "Echoing Holistic Health™ — Healing Water™ | Sea Moss Hydration Houston",
   description:
-    "A refined approach to gut, womb, and whole-body wellness for women who expect more from their health.",
+    "Sea moss-powered functional hydration crafted with alkaline water, fresh fruit, and real ingredients. Houston delivery available. Healing Water™ by Echoing Holistic Health™.",
+  keywords: [
+    "Sea Moss Water Houston",
+    "Sea Moss Drinks Houston",
+    "Functional Hydration",
+    "Hydration Drinks Houston",
+    "Sea Moss Beverage",
+    "Wellness Drinks Houston",
+    "Alkaline Hydration",
+    "Sea Moss Wellness",
+  ],
   openGraph: {
-    title: "Echoing Holistic Health",
-    description: "Healing is not a trend. It's a return to self.",
+    title: "Echoing Holistic Health™ — Healing Water™",
+    description: "Hydration. Wellness. Abundance. From the Source to the Body™.",
     type: "website",
   },
 };

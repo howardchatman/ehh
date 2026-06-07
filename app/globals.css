@@ -2,30 +2,45 @@
 
 /* ─────────────────────────────────────────────────────────────────────────────
    ECHOING HOLISTIC HEALTH — Design System
-   Editorial luxury wellness. Closer to Vogue than a supplement store.
+   Healing Water™ — Luxury Coastal Wellness
 ───────────────────────────────────────────────────────────────────────────── */
 
 :root {
-  /* ── Palette ── */
+  /* ── Ocean Palette (primary brand) ── */
+  --ocean:        #0A2540;
+  --ocean-mid:    #13446E;
+  --ocean-surf:   #1E6FA0;
+  --aqua:         #1CB8C8;
+  --aqua-light:   #6DCFDA;
+  --aqua-pale:    rgba(28, 184, 200, 0.12);
+  --sea-foam:     #E4F6F8;
+  --coastal:      #F2FAFB;
+
+  /* ── Gold Accents ── */
+  --gold:         #B8965A;
+  --gold-light:   #C9A96E;
+  --gold-pale:    #E8D9BE;
+  --gold-ghost:   rgba(184, 150, 90, 0.12);
+
+  /* ── Neutrals ── */
   --cream:        #FAF8F5;
   --ivory:        #F5F0E8;
   --warm-white:   #FDFCFA;
   --parchment:    #ECE7DD;
   --bone:         #E8E2D8;
-  --gold:         #B8965A;
-  --gold-light:   #C9A96E;
-  --gold-pale:    #E8D9BE;
-  --gold-ghost:   rgba(184, 150, 90, 0.12);
+  --charcoal:     #1A2A3A;
+  --muted:        #4A6B80;
+  --muted-light:  #7A9BB0;
+  --border:       #D0E8EC;
+  --border-dark:  rgba(10, 37, 64, 0.12);
+  --bg:           #F2FAFB;
+
+  /* ── Splash page (kept dark/espresso for coming-soon pages) ── */
   --espresso:     #1A1208;
   --espresso-mid: #2A1F10;
-  --charcoal:     #2C2C2C;
-  --muted:        #7A7268;
-  --muted-light:  #9A9188;
-  --border:       #E2DDD4;
-  --border-dark:  rgba(250, 248, 245, 0.1);
-  --bg:           #FAF8F5;
 
-  /* ── Extended palette ── */
+  /* ── Extended ── */
+  --sand:         #F5EDD9;
   --sage:         #8A9E8A;
   --sage-pale:    rgba(138, 158, 138, 0.12);
 
@@ -187,7 +202,7 @@ body {
   align-items: center;
   gap: 0.75rem;
   padding: 1rem 2rem;
-  background-color: var(--espresso);
+  background-color: var(--ocean);
   color: var(--cream);
   font-family: var(--font-sans);
   font-weight: 500;
@@ -196,13 +211,38 @@ body {
   text-transform: uppercase;
   transition: background-color 0.4s var(--ease-luxury), color 0.4s var(--ease-luxury);
   cursor: pointer;
-  border: 1px solid var(--espresso);
+  border: 1px solid var(--ocean);
+  text-decoration: none;
 }
 
 .btn-dark:hover {
   background-color: var(--gold);
   border-color: var(--gold);
-  color: var(--espresso);
+  color: var(--ocean);
+}
+
+.btn-ocean {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 1rem 2.5rem;
+  background-color: var(--aqua);
+  color: var(--ocean);
+  font-family: var(--font-sans);
+  font-weight: 600;
+  font-size: 0.62rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  border: 1px solid var(--aqua);
+  transition: background-color 0.4s var(--ease-luxury), border-color 0.4s var(--ease-luxury);
+  cursor: pointer;
+  text-decoration: none;
+}
+
+.btn-ocean:hover {
+  background-color: var(--gold);
+  border-color: var(--gold);
+  color: var(--ocean);
 }
 
 .btn-outline {
@@ -211,20 +251,44 @@ body {
   gap: 0.75rem;
   padding: 1rem 2rem;
   background-color: transparent;
-  color: var(--espresso);
+  color: var(--ocean);
   font-family: var(--font-sans);
   font-weight: 500;
   font-size: 0.62rem;
   letter-spacing: 0.2em;
   text-transform: uppercase;
-  border: 1px solid var(--espresso);
+  border: 1px solid var(--ocean);
   transition: background-color 0.4s var(--ease-luxury), color 0.4s var(--ease-luxury);
   cursor: pointer;
+  text-decoration: none;
 }
 
 .btn-outline:hover {
-  background-color: var(--espresso);
+  background-color: var(--ocean);
   color: var(--cream);
+}
+
+.btn-outline-ocean {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 1rem 2rem;
+  background-color: transparent;
+  color: var(--cream);
+  font-family: var(--font-sans);
+  font-weight: 500;
+  font-size: 0.62rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  border: 1px solid rgba(255,255,255,0.4);
+  transition: border-color 0.4s var(--ease-luxury), color 0.4s var(--ease-luxury);
+  cursor: pointer;
+  text-decoration: none;
+}
+
+.btn-outline-ocean:hover {
+  border-color: var(--gold);
+  color: var(--gold);
 }
 
 .btn-outline-cream {

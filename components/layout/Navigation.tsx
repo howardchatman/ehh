@@ -3,16 +3,18 @@
 import { useState, useEffect } from "react";
 import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
-import { Menu, X, User } from "lucide-react";
+import { Menu, X } from "lucide-react";
 
 const EASE = [0.22, 1, 0.36, 1] as const;
 
 const navLinks = [
-  { href: "/about",   label: "About"   },
-  { href: "/shop",    label: "Shop"    },
-  { href: "/journal", label: "Journal" },
-  { href: "/events",  label: "Events"  },
-  { href: "/contact", label: "Contact" },
+  { href: "/shop",            label: "Shop"             },
+  { href: "/recipes",         label: "Recipes"          },
+  { href: "/where-to-find-us",label: "Where To Find Us" },
+  { href: "/testimonials",    label: "Testimonials"     },
+  { href: "/about",           label: "About"            },
+  { href: "/faq",             label: "FAQ"              },
+  { href: "/contact",         label: "Contact"          },
 ];
 
 export default function Navigation() {
@@ -20,7 +22,7 @@ export default function Navigation() {
   const [menuOpen,  setMenuOpen]  = useState(false);
 
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 80);
+    const onScroll = () => setScrolled(window.scrollY > 60);
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
@@ -30,28 +32,25 @@ export default function Navigation() {
     return () => { document.body.style.overflow = ""; };
   }, [menuOpen]);
 
-  // Over the dark hero image: cream/white text
-  // After scrolling onto light sections: espresso text
-  const textColor    = scrolled ? "var(--muted)"   : "rgba(250,248,245,0.65)";
-  const hoverColor   = scrolled ? "var(--gold)"    : "rgba(250,248,245,1)";
-  const wordmarkColor = scrolled ? "var(--espresso)" : "rgba(250,248,245,0.92)";
-  const wordmarkSub   = scrolled ? "var(--espresso)" : "rgba(250,248,245,0.7)";
-  const iconColor     = scrolled ? "var(--espresso)" : "rgba(250,248,245,0.85)";
+  const textColor     = scrolled ? "var(--ocean-mid)"  : "rgba(255,255,255,0.75)";
+  const hoverColor    = scrolled ? "var(--aqua)"       : "rgba(255,255,255,1)";
+  const wordmarkColor = scrolled ? "var(--ocean)"      : "rgba(255,255,255,0.95)";
+  const wordmarkSub   = scrolled ? "var(--aqua)"       : "rgba(255,255,255,0.65)";
+  const iconColor     = scrolled ? "var(--ocean)"      : "rgba(255,255,255,0.85)";
 
   return (
     <>
-      {/* ── Main nav bar ── */}
       <motion.header
         initial={false}
         animate={{
           backgroundColor: scrolled
-            ? "rgba(250,248,245,0.96)"
+            ? "rgba(242,250,251,0.97)"
             : "transparent",
           borderBottomColor: scrolled
-            ? "rgba(226,221,212,0.6)"
+            ? "rgba(208,232,236,0.8)"
             : "transparent",
         }}
-        transition={{ duration: 0.55, ease: EASE }}
+        transition={{ duration: 0.5, ease: EASE }}
         style={{
           position: "fixed",
           top: 0,
@@ -69,54 +68,35 @@ export default function Navigation() {
             padding: "0 var(--section-x)",
             display: "flex",
             alignItems: "center",
-            height: scrolled ? "68px" : "78px",
+            height: scrolled ? "64px" : "72px",
             transition: "height 0.45s var(--ease-luxury)",
+            gap: "clamp(1rem, 2vw, 2rem)",
           }}
         >
-
           {/* ── Left nav (desktop) ── */}
           <nav
-            style={{
-              display: "none",
-              flex: 1,
-              gap: "clamp(1.5rem, 2.5vw, 2.5rem)",
-              alignItems: "center",
-            }}
-            className="md:flex"
+            style={{ display: "none", flex: 1, gap: "clamp(1rem, 1.8vw, 2rem)", alignItems: "center" }}
+            className="lg:flex"
             aria-label="Primary navigation left"
           >
-            {navLinks.slice(0, 2).map((link) => (
-              <NavLink
-                key={link.href}
-                href={link.href}
-                label={link.label}
-                textColor={textColor}
-                hoverColor={hoverColor}
-              />
+            {navLinks.slice(0, 3).map((link) => (
+              <NavLink key={link.href} href={link.href} label={link.label} textColor={textColor} hoverColor={hoverColor} />
             ))}
           </nav>
 
-          {/* ── Wordmark — centered ── */}
+          {/* ── Wordmark ── */}
           <Link
             href="/"
             aria-label="Echoing Holistic Health — Home"
-            style={{
-              flex: 1,
-              display: "flex",
-              flexDirection: "column",
-              alignItems: "center",
-              textDecoration: "none",
-              gap: "0.2rem",
-            }}
-            className="md:flex-none md:mx-auto"
+            style={{ flex: "none", display: "flex", flexDirection: "column", alignItems: "center", textDecoration: "none", gap: "0.18rem" }}
+            className="mx-auto lg:mx-0"
           >
-            {/* "Echoing" — smaller, tracked */}
             <motion.span
               animate={{ color: wordmarkSub }}
               transition={{ duration: 0.4 }}
               style={{
                 fontFamily: "var(--font-serif)",
-                fontSize: "clamp(0.5rem, 0.75vw, 0.65rem)",
+                fontSize: "clamp(0.45rem, 0.7vw, 0.6rem)",
                 fontWeight: 300,
                 letterSpacing: "0.38em",
                 textTransform: "uppercase",
@@ -126,13 +106,12 @@ export default function Navigation() {
             >
               Echoing
             </motion.span>
-            {/* "Holistic Health" — slightly larger, more prominent */}
             <motion.span
               animate={{ color: wordmarkColor }}
               transition={{ duration: 0.4 }}
               style={{
                 fontFamily: "var(--font-serif)",
-                fontSize: "clamp(0.72rem, 1.1vw, 0.92rem)",
+                fontSize: "clamp(0.65rem, 1vw, 0.88rem)",
                 fontWeight: 500,
                 letterSpacing: "0.22em",
                 textTransform: "uppercase",
@@ -142,49 +121,38 @@ export default function Navigation() {
             >
               Holistic Health
             </motion.span>
+            <motion.span
+              animate={{ color: wordmarkSub }}
+              transition={{ duration: 0.4 }}
+              style={{
+                fontFamily: "var(--font-sans)",
+                fontSize: "0.42rem",
+                fontWeight: 400,
+                letterSpacing: "0.3em",
+                textTransform: "uppercase",
+                display: "block",
+                lineHeight: 1,
+                marginTop: "0.1rem",
+              }}
+            >
+              Healing Water™
+            </motion.span>
           </Link>
 
           {/* ── Right nav (desktop) ── */}
           <nav
-            style={{
-              display: "none",
-              flex: 1,
-              gap: "clamp(1.5rem, 2.5vw, 2.5rem)",
-              alignItems: "center",
-              justifyContent: "flex-end",
-            }}
-            className="md:flex"
+            style={{ display: "none", flex: 1, gap: "clamp(1rem, 1.8vw, 2rem)", alignItems: "center", justifyContent: "flex-end" }}
+            className="lg:flex"
             aria-label="Primary navigation right"
           >
-            {navLinks.slice(2).map((link) => (
-              <NavLink
-                key={link.href}
-                href={link.href}
-                label={link.label}
-                textColor={textColor}
-                hoverColor={hoverColor}
-              />
+            {navLinks.slice(3).map((link) => (
+              <NavLink key={link.href} href={link.href} label={link.label} textColor={textColor} hoverColor={hoverColor} />
             ))}
-            {/* Account icon */}
-            <Link
-              href="/account"
-              aria-label="My Account"
-              style={{
-                color: textColor,
-                transition: "color 0.35s var(--ease-luxury)",
-                display: "flex",
-                alignItems: "center",
-              }}
-              onMouseEnter={(e) => ((e.currentTarget as HTMLAnchorElement).style.color = hoverColor)}
-              onMouseLeave={(e) => ((e.currentTarget as HTMLAnchorElement).style.color = textColor)}
-            >
-              <User size={16} strokeWidth={1.5} />
-            </Link>
           </nav>
 
           {/* ── Mobile toggle ── */}
           <button
-            className="md:hidden"
+            className="lg:hidden"
             style={{
               marginLeft: "auto",
               padding: "0.25rem",
@@ -199,25 +167,11 @@ export default function Navigation() {
           >
             <AnimatePresence mode="wait">
               {menuOpen ? (
-                <motion.span
-                  key="close"
-                  initial={{ opacity: 0, rotate: -90 }}
-                  animate={{ opacity: 1, rotate: 0 }}
-                  exit={{ opacity: 0, rotate: 90 }}
-                  transition={{ duration: 0.22, ease: EASE }}
-                  style={{ display: "block" }}
-                >
+                <motion.span key="close" initial={{ opacity: 0, rotate: -90 }} animate={{ opacity: 1, rotate: 0 }} exit={{ opacity: 0, rotate: 90 }} transition={{ duration: 0.22, ease: EASE }} style={{ display: "block" }}>
                   <X size={20} strokeWidth={1.25} />
                 </motion.span>
               ) : (
-                <motion.span
-                  key="open"
-                  initial={{ opacity: 0, rotate: 90 }}
-                  animate={{ opacity: 1, rotate: 0 }}
-                  exit={{ opacity: 0, rotate: -90 }}
-                  transition={{ duration: 0.22, ease: EASE }}
-                  style={{ display: "block" }}
-                >
+                <motion.span key="open" initial={{ opacity: 0, rotate: 90 }} animate={{ opacity: 1, rotate: 0 }} exit={{ opacity: 0, rotate: -90 }} transition={{ duration: 0.22, ease: EASE }} style={{ display: "block" }}>
                   <Menu size={20} strokeWidth={1.25} />
                 </motion.span>
               )}
@@ -239,7 +193,7 @@ export default function Navigation() {
               position: "fixed",
               inset: 0,
               zIndex: 40,
-              backgroundColor: "var(--espresso)",
+              background: "linear-gradient(160deg, var(--ocean) 0%, var(--ocean-mid) 100%)",
               display: "flex",
               flexDirection: "column",
               alignItems: "center",
@@ -247,83 +201,40 @@ export default function Navigation() {
               padding: "2rem",
             }}
           >
-            {/* Wordmark */}
-            <Link
-              href="/"
-              onClick={() => setMenuOpen(false)}
-              style={{ textDecoration: "none", marginBottom: "3rem", textAlign: "center" }}
-            >
-              <span
-                style={{
-                  display: "block",
-                  fontFamily: "var(--font-serif)",
-                  fontSize: "0.55rem",
-                  fontWeight: 300,
-                  letterSpacing: "0.35em",
-                  textTransform: "uppercase",
-                  color: "var(--gold)",
-                  marginBottom: "0.3rem",
-                }}
-              >
+            <Link href="/" onClick={() => setMenuOpen(false)} style={{ textDecoration: "none", marginBottom: "2.5rem", textAlign: "center" }}>
+              <span style={{ display: "block", fontFamily: "var(--font-serif)", fontSize: "0.5rem", fontWeight: 300, letterSpacing: "0.38em", textTransform: "uppercase", color: "var(--aqua)", marginBottom: "0.25rem" }}>
                 Echoing
               </span>
-              <span
-                style={{
-                  display: "block",
-                  fontFamily: "var(--font-serif)",
-                  fontSize: "0.8rem",
-                  fontWeight: 500,
-                  letterSpacing: "0.2em",
-                  textTransform: "uppercase",
-                  color: "rgba(250,248,245,0.85)",
-                }}
-              >
+              <span style={{ display: "block", fontFamily: "var(--font-serif)", fontSize: "0.8rem", fontWeight: 500, letterSpacing: "0.2em", textTransform: "uppercase", color: "rgba(255,255,255,0.9)" }}>
                 Holistic Health
+              </span>
+              <span style={{ display: "block", fontFamily: "var(--font-sans)", fontSize: "0.42rem", fontWeight: 400, letterSpacing: "0.28em", textTransform: "uppercase", color: "var(--aqua)", marginTop: "0.25rem" }}>
+                Healing Water™
               </span>
             </Link>
 
-            {/* Thin gold rule */}
-            <div
-              style={{
-                height: "1px",
-                width: "36px",
-                backgroundColor: "var(--gold)",
-                opacity: 0.4,
-                marginBottom: "3rem",
-              }}
-            />
+            <div style={{ height: "1px", width: "36px", background: "linear-gradient(90deg, transparent, var(--aqua), transparent)", opacity: 0.5, marginBottom: "2.5rem" }} />
 
-            {/* Links */}
-            <nav
-              style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: "2rem" }}
-            >
-              {[{ href: "/", label: "Home" }, ...navLinks, { href: "/account", label: "My Account" }].map((link, i) => (
+            <nav style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: "1.75rem" }}>
+              {[{ href: "/", label: "Home" }, ...navLinks].map((link, i) => (
                 <motion.div
                   key={link.href}
                   initial={{ opacity: 0, y: 14 }}
                   animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.5, ease: EASE, delay: i * 0.06 }}
+                  transition={{ duration: 0.5, ease: EASE, delay: i * 0.05 }}
                 >
                   <MobileNavLink href={link.href} label={link.label} onClose={() => setMenuOpen(false)} />
                 </motion.div>
               ))}
             </nav>
 
-            {/* Bottom signature */}
             <motion.p
               initial={{ opacity: 0 }}
-              animate={{ opacity: 0.25 }}
+              animate={{ opacity: 0.2 }}
               transition={{ duration: 0.9, delay: 0.5 }}
-              style={{
-                position: "absolute",
-                bottom: "2.5rem",
-                fontFamily: "var(--font-serif)",
-                fontStyle: "italic",
-                fontSize: "0.85rem",
-                color: "var(--cream)",
-              }}
+              style={{ position: "absolute", bottom: "2.5rem", fontFamily: "var(--font-sans)", fontSize: "0.5rem", letterSpacing: "0.2em", textTransform: "uppercase", color: "var(--aqua-light)" }}
             >
-              Healing is not a trend.
+              Hydration. Wellness. Abundance.
             </motion.p>
           </motion.div>
         )}
@@ -332,20 +243,8 @@ export default function Navigation() {
   );
 }
 
-// ── Nav link with animated underline ────────────────────────────────────────
-function NavLink({
-  href,
-  label,
-  textColor,
-  hoverColor,
-}: {
-  href: string;
-  label: string;
-  textColor: string;
-  hoverColor: string;
-}) {
+function NavLink({ href, label, textColor, hoverColor }: { href: string; label: string; textColor: string; hoverColor: string }) {
   const [hovered, setHovered] = useState(false);
-
   return (
     <Link
       href={href}
@@ -353,15 +252,16 @@ function NavLink({
       onMouseLeave={() => setHovered(false)}
       style={{
         fontFamily: "var(--font-sans)",
-        fontSize: "0.6rem",
+        fontSize: "0.55rem",
         fontWeight: 500,
-        letterSpacing: "0.18em",
+        letterSpacing: "0.16em",
         textTransform: "uppercase",
         color: hovered ? hoverColor : textColor,
         textDecoration: "none",
         transition: "color 0.35s var(--ease-luxury)",
         position: "relative",
         paddingBottom: "2px",
+        whiteSpace: "nowrap",
       }}
     >
       {label}
@@ -374,7 +274,7 @@ function NavLink({
           left: 0,
           right: 0,
           height: "1px",
-          backgroundColor: hovered ? hoverColor : "var(--gold)",
+          backgroundColor: "var(--aqua)",
           transformOrigin: "left center",
           display: "block",
         }}
@@ -383,16 +283,7 @@ function NavLink({
   );
 }
 
-// ── Mobile nav link ──────────────────────────────────────────────────────────
-function MobileNavLink({
-  href,
-  label,
-  onClose,
-}: {
-  href: string;
-  label: string;
-  onClose: () => void;
-}) {
+function MobileNavLink({ href, label, onClose }: { href: string; label: string; onClose: () => void }) {
   const [hovered, setHovered] = useState(false);
   return (
     <Link
@@ -402,10 +293,10 @@ function MobileNavLink({
       onMouseLeave={() => setHovered(false)}
       style={{
         fontFamily: "var(--font-serif)",
-        fontSize: "clamp(1.6rem, 5.5vw, 2.4rem)",
+        fontSize: "clamp(1.4rem, 5vw, 2.2rem)",
         fontWeight: 300,
         letterSpacing: "-0.01em",
-        color: hovered ? "var(--gold)" : "rgba(250,248,245,0.75)",
+        color: hovered ? "var(--aqua)" : "rgba(255,255,255,0.75)",
         textDecoration: "none",
         display: "block",
         textAlign: "center",
