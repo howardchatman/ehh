@@ -1,23 +1,23 @@
-import Hero from "@/components/sections/Hero";
-import Philosophy from "@/components/sections/Philosophy";
-import FocusAreas from "@/components/sections/FocusAreas";
-import FeaturedProducts from "@/components/sections/FeaturedProducts";
-import Lifestyle from "@/components/sections/Lifestyle";
-import Journal from "@/components/sections/Journal";
-import CommunityJoin from "@/components/sections/CommunityJoin";
-import Newsletter from "@/components/sections/Newsletter";
+import HealingWaterHero    from "@/components/sections/HealingWaterHero";
+import WhyCustomersLove   from "@/components/sections/WhyCustomersLove";
+import HealingWaterProducts from "@/components/sections/HealingWaterProducts";
+import PackOptions         from "@/components/sections/PackOptions";
+import WhySeaMoss          from "@/components/sections/WhySeaMoss";
+import HowToEnjoy          from "@/components/sections/HowToEnjoy";
+import EventsPreview       from "@/components/sections/EventsPreview";
+import CommunitySection    from "@/components/sections/CommunitySection";
 
 export default function Home() {
   return (
     <>
-      <Hero />
-      <Philosophy />
-      <FocusAreas />
-      <FeaturedProducts />
-      <Lifestyle />
-      <Journal />
-      <CommunityJoin />
-      <Newsletter />
+      <HealingWaterHero />
+      <WhyCustomersLove />
+      <HealingWaterProducts />
+      <PackOptions />
+      <WhySeaMoss />
+      <HowToEnjoy />
+      <EventsPreview />
+      <CommunitySection />
     </>
   );
 }
