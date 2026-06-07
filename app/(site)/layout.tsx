@@ -2,6 +2,7 @@ import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
 import Navigation from "@/components/layout/Navigation";
 import AnnouncementBar from "@/components/layout/AnnouncementBar";
+import NewsletterBar from "@/components/sections/NewsletterBar";
 import Footer from "@/components/layout/Footer";
 
 export default async function SiteLayout({
@@ -21,6 +22,7 @@ export default async function SiteLayout({
       <AnnouncementBar />
       <Navigation />
       <main className="flex-1">{children}</main>
+      <NewsletterBar />
       <Footer />
     </>
   );
