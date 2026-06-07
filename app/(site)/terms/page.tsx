@@ -30,8 +30,13 @@ export default function TermsPage() {
         <li>Product availability is subject to change without notice</li>
       </ul>
 
-      <h2>Perishable Products — All Sales Final</h2>
-      <p>Due to the perishable nature of Healing Water™ products, <strong>all sales are final</strong> unless an error occurred with your order. We do not accept returns on perishable food and beverage items. If you believe an error was made with your order, please contact us within 24 hours of receiving your order at <a href="mailto:Contact@EchoingHolisticHealth.com">Contact@EchoingHolisticHealth.com</a>.</p>
+      <h2>Made to Order — No Cancellations, All Sales Final</h2>
+      <p>
+        Healing Water™ is crafted fresh and <strong>made to order</strong> upon receipt of payment. Preparation begins immediately after your order is confirmed. For this reason, <strong>all sales are final and no cancellations will be accepted for any reason once payment has been processed</strong>, regardless of the timing of the request.
+      </p>
+      <p>
+        By completing a purchase you confirm that you have reviewed your order, understand that it cannot be cancelled or modified after payment, and agree to these terms. We do not accept returns on perishable food and beverage items. If you believe an error was made with your order, please contact us within 24 hours of receiving it at <a href="mailto:Contact@EchoingHolisticHealth.com">Contact@EchoingHolisticHealth.com</a>.
+      </p>
 
       <h2>Delivery and Pickup</h2>
       <ul>

@@ -46,6 +46,15 @@ export default function DisclaimerPage() {
           </p>
         </div>
 
+        <div style={{ border: "1px solid var(--border)", borderLeft: "4px solid #8B2020", padding: "1.5rem 1.75rem", backgroundColor: "white" }}>
+          <p style={{ fontFamily: "var(--font-sans)", fontSize: "0.7rem", fontWeight: 700, letterSpacing: "0.18em", textTransform: "uppercase", color: "var(--ocean)", marginBottom: "0.6rem" }}>
+            No Cancellations — Made to Order
+          </p>
+          <p style={{ fontFamily: "var(--font-sans)", fontSize: "0.9rem", fontWeight: 300, color: "var(--charcoal)", lineHeight: 1.8, margin: 0 }}>
+            All Healing Water™ products are crafted fresh and made to order upon receipt of payment. Preparation begins immediately after your order is confirmed. All sales are final and no cancellations, modifications, or refunds will be accepted once payment has been processed — regardless of timing or circumstance. By completing your purchase, you acknowledge and agree to this policy in full.
+          </p>
+        </div>
+
       </div>
 
       {/* ── 1. No Medical Advice ── */}
