@@ -213,7 +213,7 @@ export default function RecipesPage({
             className="btn-ocean"
             style={{ position: "relative", zIndex: 1 }}
           >
-            Get Free Access →
+            Send Me the Recipes
           </motion.button>
         )}
       </section>
@@ -348,7 +348,7 @@ export default function RecipesPage({
                 className="btn-ocean"
                 style={{ width: "100%", justifyContent: "center", marginTop: "0.5rem" }}
               >
-                Unlock My Free Recipes
+                Send Me the Recipes
               </button>
               <p className="micro-label" style={{ color: "rgba(255,255,255,0.2)" }}>
                 No spam. Unsubscribe anytime.
