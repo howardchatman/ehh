@@ -8,18 +8,18 @@ import { Menu, X } from "lucide-react";
 const EASE = [0.22, 1, 0.36, 1] as const;
 
 const navLinks = [
-  { href: "/shop",            label: "Shop"             },
-  { href: "/recipes",         label: "Recipes"          },
-  { href: "/where-to-find-us",label: "Where To Find Us" },
-  { href: "/testimonials",    label: "Testimonials"     },
-  { href: "/about",           label: "About"            },
-  { href: "/faq",             label: "FAQ"              },
-  { href: "/contact",         label: "Contact"          },
+  { href: "/shop",             label: "Shop"             },
+  { href: "/recipes",          label: "Recipes"          },
+  { href: "/where-to-find-us", label: "Where To Find Us" },
+  { href: "/testimonials",     label: "Testimonials"     },
+  { href: "/about",            label: "About"            },
+  { href: "/faq",              label: "FAQ"              },
+  { href: "/contact",          label: "Contact"          },
 ];
 
 export default function Navigation() {
-  const [scrolled,  setScrolled]  = useState(false);
-  const [menuOpen,  setMenuOpen]  = useState(false);
+  const [scrolled, setScrolled] = useState(false);
+  const [menuOpen, setMenuOpen] = useState(false);
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 60);
@@ -32,23 +32,19 @@ export default function Navigation() {
     return () => { document.body.style.overflow = ""; };
   }, [menuOpen]);
 
-  const textColor     = scrolled ? "var(--ocean-mid)"  : "rgba(255,255,255,0.75)";
-  const hoverColor    = scrolled ? "var(--aqua)"       : "rgba(255,255,255,1)";
-  const wordmarkColor = scrolled ? "var(--ocean)"      : "rgba(255,255,255,0.95)";
-  const wordmarkSub   = scrolled ? "var(--aqua)"       : "rgba(255,255,255,0.65)";
-  const iconColor     = scrolled ? "var(--ocean)"      : "rgba(255,255,255,0.85)";
+  const textColor     = scrolled ? "var(--ocean-mid)"       : "rgba(255,255,255,0.78)";
+  const hoverColor    = scrolled ? "var(--aqua)"            : "rgba(255,255,255,1)";
+  const wordmarkColor = scrolled ? "var(--ocean)"           : "rgba(255,255,255,0.95)";
+  const wordmarkSub   = scrolled ? "var(--aqua)"            : "rgba(255,255,255,0.6)";
+  const iconColor     = scrolled ? "var(--ocean)"           : "rgba(255,255,255,0.85)";
 
   return (
     <>
       <motion.header
         initial={false}
         animate={{
-          backgroundColor: scrolled
-            ? "rgba(242,250,251,0.97)"
-            : "transparent",
-          borderBottomColor: scrolled
-            ? "rgba(208,232,236,0.8)"
-            : "transparent",
+          backgroundColor: scrolled ? "rgba(242,250,251,0.97)" : "transparent",
+          borderBottomColor: scrolled ? "rgba(208,232,236,0.8)" : "transparent",
         }}
         transition={{ duration: 0.5, ease: EASE }}
         style={{
@@ -68,39 +64,27 @@ export default function Navigation() {
             padding: "0 var(--section-x)",
             display: "flex",
             alignItems: "center",
+            justifyContent: "space-between",
             height: scrolled ? "64px" : "72px",
             transition: "height 0.45s var(--ease-luxury)",
-            gap: "clamp(1rem, 2vw, 2rem)",
+            gap: "2rem",
           }}
         >
-          {/* ── Left nav (desktop) ── */}
-          <nav
-            style={{ display: "none", flex: 1, gap: "clamp(1rem, 1.8vw, 2rem)", alignItems: "center" }}
-            className="lg:flex"
-            aria-label="Primary navigation left"
-          >
-            {navLinks.slice(0, 3).map((link) => (
-              <NavLink key={link.href} href={link.href} label={link.label} textColor={textColor} hoverColor={hoverColor} />
-            ))}
-          </nav>
-
-          {/* ── Wordmark ── */}
+          {/* ── Wordmark (left) ── */}
           <Link
             href="/"
             aria-label="Echoing Holistic Health — Home"
-            style={{ flex: "none", display: "flex", flexDirection: "column", alignItems: "center", textDecoration: "none", gap: "0.18rem" }}
-            className="mx-auto lg:mx-0"
+            style={{ display: "flex", flexDirection: "column", textDecoration: "none", gap: "0.15rem", flexShrink: 0 }}
           >
             <motion.span
               animate={{ color: wordmarkSub }}
               transition={{ duration: 0.4 }}
               style={{
                 fontFamily: "var(--font-serif)",
-                fontSize: "clamp(0.45rem, 0.7vw, 0.6rem)",
+                fontSize: "clamp(0.42rem, 0.65vw, 0.56rem)",
                 fontWeight: 300,
                 letterSpacing: "0.38em",
                 textTransform: "uppercase",
-                display: "block",
                 lineHeight: 1,
               }}
             >
@@ -111,11 +95,10 @@ export default function Navigation() {
               transition={{ duration: 0.4 }}
               style={{
                 fontFamily: "var(--font-serif)",
-                fontSize: "clamp(0.65rem, 1vw, 0.88rem)",
+                fontSize: "clamp(0.6rem, 0.95vw, 0.85rem)",
                 fontWeight: 500,
-                letterSpacing: "0.22em",
+                letterSpacing: "0.2em",
                 textTransform: "uppercase",
-                display: "block",
                 lineHeight: 1,
               }}
             >
@@ -126,27 +109,31 @@ export default function Navigation() {
               transition={{ duration: 0.4 }}
               style={{
                 fontFamily: "var(--font-sans)",
-                fontSize: "0.42rem",
+                fontSize: "0.38rem",
                 fontWeight: 400,
-                letterSpacing: "0.3em",
+                letterSpacing: "0.28em",
                 textTransform: "uppercase",
-                display: "block",
                 lineHeight: 1,
-                marginTop: "0.1rem",
               }}
             >
               Healing Water™
             </motion.span>
           </Link>
 
-          {/* ── Right nav (desktop) ── */}
+          {/* ── All links in a row (desktop) ── */}
           <nav
-            style={{ display: "none", flex: 1, gap: "clamp(1rem, 1.8vw, 2rem)", alignItems: "center", justifyContent: "flex-end" }}
+            aria-label="Primary navigation"
+            style={{ display: "none", alignItems: "center", gap: "clamp(1.25rem, 2vw, 2.25rem)" }}
             className="lg:flex"
-            aria-label="Primary navigation right"
           >
-            {navLinks.slice(3).map((link) => (
-              <NavLink key={link.href} href={link.href} label={link.label} textColor={textColor} hoverColor={hoverColor} />
+            {navLinks.map((link) => (
+              <NavLink
+                key={link.href}
+                href={link.href}
+                label={link.label}
+                textColor={textColor}
+                hoverColor={hoverColor}
+              />
             ))}
           </nav>
 
@@ -154,13 +141,13 @@ export default function Navigation() {
           <button
             className="lg:hidden"
             style={{
-              marginLeft: "auto",
               padding: "0.25rem",
               color: iconColor,
               background: "none",
               border: "none",
               cursor: "pointer",
               transition: "color 0.4s",
+              flexShrink: 0,
             }}
             onClick={() => setMenuOpen(!menuOpen)}
             aria-label={menuOpen ? "Close menu" : "Open menu"}
@@ -201,16 +188,11 @@ export default function Navigation() {
               padding: "2rem",
             }}
           >
+            {/* Wordmark */}
             <Link href="/" onClick={() => setMenuOpen(false)} style={{ textDecoration: "none", marginBottom: "2.5rem", textAlign: "center" }}>
-              <span style={{ display: "block", fontFamily: "var(--font-serif)", fontSize: "0.5rem", fontWeight: 300, letterSpacing: "0.38em", textTransform: "uppercase", color: "var(--aqua)", marginBottom: "0.25rem" }}>
-                Echoing
-              </span>
-              <span style={{ display: "block", fontFamily: "var(--font-serif)", fontSize: "0.8rem", fontWeight: 500, letterSpacing: "0.2em", textTransform: "uppercase", color: "rgba(255,255,255,0.9)" }}>
-                Holistic Health
-              </span>
-              <span style={{ display: "block", fontFamily: "var(--font-sans)", fontSize: "0.42rem", fontWeight: 400, letterSpacing: "0.28em", textTransform: "uppercase", color: "var(--aqua)", marginTop: "0.25rem" }}>
-                Healing Water™
-              </span>
+              <span style={{ display: "block", fontFamily: "var(--font-serif)", fontSize: "0.5rem", fontWeight: 300, letterSpacing: "0.38em", textTransform: "uppercase", color: "var(--aqua)", marginBottom: "0.25rem" }}>Echoing</span>
+              <span style={{ display: "block", fontFamily: "var(--font-serif)", fontSize: "0.8rem", fontWeight: 500, letterSpacing: "0.2em", textTransform: "uppercase", color: "rgba(255,255,255,0.9)" }}>Holistic Health</span>
+              <span style={{ display: "block", fontFamily: "var(--font-sans)", fontSize: "0.4rem", fontWeight: 400, letterSpacing: "0.28em", textTransform: "uppercase", color: "var(--aqua)", marginTop: "0.25rem" }}>Healing Water™</span>
             </Link>
 
             <div style={{ height: "1px", width: "36px", background: "linear-gradient(90deg, transparent, var(--aqua), transparent)", opacity: 0.5, marginBottom: "2.5rem" }} />
@@ -254,11 +236,11 @@ function NavLink({ href, label, textColor, hoverColor }: { href: string; label: 
         fontFamily: "var(--font-sans)",
         fontSize: "0.55rem",
         fontWeight: 500,
-        letterSpacing: "0.16em",
+        letterSpacing: "0.14em",
         textTransform: "uppercase",
         color: hovered ? hoverColor : textColor,
         textDecoration: "none",
-        transition: "color 0.35s var(--ease-luxury)",
+        transition: "color 0.3s var(--ease-luxury)",
         position: "relative",
         paddingBottom: "2px",
         whiteSpace: "nowrap",
