@@ -359,14 +359,23 @@ export default function RecipesPage({
       )}
 
       {hasAccess && (
-        <div style={{ textAlign: "center", padding: "clamp(2rem, 4vw, 4rem) var(--section-x)", borderTop: "1px solid var(--border)" }}>
-          <p className="micro-label" style={{ color: "var(--aqua)", marginBottom: "0.75rem" }}>
-            Enjoying these recipes?
+        <div style={{ backgroundColor: "var(--ocean)", padding: "clamp(3rem, 5vw, 5rem) var(--section-x)", textAlign: "center" }}>
+          <p className="micro-label" style={{ color: "var(--aqua)", marginBottom: "1rem" }}>Want More?</p>
+          <h3 style={{ fontFamily: "var(--font-serif)", fontSize: "clamp(1.8rem, 3.5vw, 3rem)", fontWeight: 300, lineHeight: 1, letterSpacing: "-0.025em", color: "var(--cream)", marginBottom: "0.75rem" }}>
+            Get the full 20-recipe guide.
+          </h3>
+          <p style={{ fontFamily: "var(--font-serif)", fontStyle: "italic", fontSize: "0.95rem", color: "rgba(255,255,255,0.4)", lineHeight: 1.75, maxWidth: "44ch", margin: "0 auto 2rem" }}>
+            20 sea moss herbal teas for gut, hormones, energy, immunity, and
+            nervous system — beautifully designed PDF, instant download.
           </p>
-          <p style={{ fontFamily: "var(--font-serif)", fontStyle: "italic", fontSize: "1rem", color: "var(--muted)", marginBottom: "1.5rem" }}>
-            Try Healing Water™ — the same sea moss goodness, ready to drink.
-          </p>
-          <a href="/shop" className="btn-dark">Shop Healing Water™</a>
+          <div style={{ display: "flex", gap: "1rem", justifyContent: "center", flexWrap: "wrap" }}>
+            <a href="/recipes/recipe-book" className="btn-ocean" style={{ fontSize: "0.62rem" }}>
+              Get the eBook — $9
+            </a>
+            <a href="/shop" className="btn-outline-ocean" style={{ fontSize: "0.62rem" }}>
+              Shop Healing Water™
+            </a>
+          </div>
         </div>
       )}
     </div>
