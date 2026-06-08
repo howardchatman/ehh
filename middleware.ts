@@ -8,7 +8,8 @@ export function middleware(request: NextRequest) {
   if (
     pathname.startsWith("/splash") ||
     pathname.startsWith("/thank-you") ||
-    pathname.startsWith("/dashboard")
+    pathname.startsWith("/dashboard") ||
+    pathname.startsWith("/download")
   ) {
     return NextResponse.next();
   }

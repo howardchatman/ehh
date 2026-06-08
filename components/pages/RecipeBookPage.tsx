@@ -6,13 +6,14 @@ import Link from "next/link";
 const EASE = [0.22, 1, 0.36, 1] as const;
 const VIEW = { once: true, margin: "-60px" } as const;
 
-// ── Swap this with Ecko's Gumroad product link ─────────────────────────────
+// ── Swap this with the Stripe Payment Link ────────────────────────────────
 // Steps:
-//  1. Sign up at gumroad.com
-//  2. Create a new product → set price to $9 → upload the PDF
-//  3. Copy the product link (e.g. https://echoingholistichealth.gumroad.com/l/recipes)
-//  4. Paste it below
-const GUMROAD_LINK = "https://gumroad.com/l/ehh-healing-recipes";
+//  1. Go to dashboard.stripe.com → Payment Links → Create
+//  2. Add product "20 Healing Tea Recipes" → $9
+//  3. Under "After payment" → set redirect URL to:
+//     https://echoingholistichealth.com/download?session_id={CHECKOUT_SESSION_ID}
+//  4. Copy the payment link and paste below
+const STRIPE_PAYMENT_LINK = "https://buy.stripe.com/PASTE_LINK_HERE";
 // ──────────────────────────────────────────────────────────────────────────
 
 const CATEGORIES = [
@@ -154,7 +155,7 @@ export default function RecipeBookPage() {
                 <span style={{ fontFamily: "var(--font-sans)", fontSize: "0.65rem", color: "rgba(255,255,255,0.4)", letterSpacing: "0.1em", display: "block", marginTop: "0.2rem" }}>One-time · Instant PDF download</span>
               </div>
               <a
-                href={GUMROAD_LINK}
+                href={STRIPE_PAYMENT_LINK}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="btn-ocean"
@@ -171,7 +172,7 @@ export default function RecipeBookPage() {
               className="micro-label"
               style={{ color: "rgba(255,255,255,0.2)", marginTop: "1rem" }}
             >
-              Secure checkout via Gumroad · Download immediately after purchase
+              Secure checkout via Stripe · Download immediately after purchase
             </motion.p>
           </div>
 
@@ -296,7 +297,7 @@ export default function RecipeBookPage() {
                 <span style={{ fontFamily: "var(--font-sans)", fontSize: "0.6rem", color: "rgba(255,255,255,0.35)", display: "block", marginTop: "0.2rem", letterSpacing: "0.1em" }}>One-time purchase</span>
               </div>
               <a
-                href={GUMROAD_LINK}
+                href={STRIPE_PAYMENT_LINK}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="btn-ocean"
@@ -340,11 +341,11 @@ export default function RecipeBookPage() {
             transition={{ duration: 0.9, ease: EASE, delay: 0.2 }}
             style={{ textAlign: "center", marginTop: "clamp(3rem, 5vw, 5rem)" }}
           >
-            <a href={GUMROAD_LINK} target="_blank" rel="noopener noreferrer" className="btn-dark" style={{ fontSize: "0.65rem", padding: "1rem 3rem" }}>
+            <a href={STRIPE_PAYMENT_LINK} target="_blank" rel="noopener noreferrer" className="btn-dark" style={{ fontSize: "0.65rem", padding: "1rem 3rem" }}>
               Get Your Copy — $9
             </a>
             <p className="micro-label" style={{ color: "var(--muted)", marginTop: "1rem" }}>
-              Secure checkout · Instant download · Powered by Gumroad
+              Secure checkout · Instant download · Powered by Stripe
             </p>
           </motion.div>
         </div>
