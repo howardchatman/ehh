@@ -11,7 +11,7 @@ const VIEW = { once: true, margin: "-60px" } as const;
 //   2. Copy the Calendar ID (e.g. abc123@group.calendar.google.com)
 //   3. Make sure the calendar is set to Public
 //   4. Paste it below replacing PASTE_CALENDAR_ID_HERE
-const GOOGLE_CALENDAR_ID = "PASTE_CALENDAR_ID_HERE";
+const GOOGLE_CALENDAR_ID = "44486f17d0c9fdaab77fb91c8639f7cb8fb1295b0e5d5adbd604542879616bdf@group.calendar.google.com";
 // ──────────────────────────────────────────────────────────────────────────
 
 const CALENDAR_EMBED_URL =
