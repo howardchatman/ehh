@@ -38,8 +38,6 @@ const EVENT_TYPES = [
 ];
 
 export default function WhereToFindUs() {
-  const calendarReady = GOOGLE_CALENDAR_ID !== "PASTE_CALENDAR_ID_HERE";
-
   return (
     <div style={{ backgroundColor: "var(--coastal)" }}>
 
@@ -161,65 +159,25 @@ export default function WhereToFindUs() {
           viewport={VIEW}
           transition={{ duration: 0.9, ease: EASE }}
         >
-          {calendarReady ? (
-            <div
+          <div
+            style={{
+              border: "1px solid var(--border)",
+              overflow: "hidden",
+              backgroundColor: "var(--ocean)",
+            }}
+          >
+            <iframe
+              src={CALENDAR_EMBED_URL}
               style={{
-                border: "1px solid var(--border)",
-                overflow: "hidden",
-                backgroundColor: "var(--ocean)",
+                width: "100%",
+                height: "clamp(500px, 70vh, 800px)",
+                border: "none",
+                display: "block",
               }}
-            >
-              <iframe
-                src={CALENDAR_EMBED_URL}
-                style={{
-                  width: "100%",
-                  height: "clamp(500px, 70vh, 800px)",
-                  border: "none",
-                  display: "block",
-                }}
-                title="Echoing Holistic Health Event Calendar"
-                loading="lazy"
-              />
-            </div>
-          ) : (
-            /* Placeholder shown until calendar ID is added */
-            <div
-              style={{
-                border: "2px dashed var(--border)",
-                padding: "clamp(3rem, 6vw, 6rem)",
-                textAlign: "center",
-                backgroundColor: "white",
-              }}
-            >
-              <div style={{ display: "flex", alignItems: "center", justifyContent: "center", gap: "1rem", marginBottom: "1.5rem" }}>
-                <div style={{ height: "1px", width: "28px", backgroundColor: "var(--aqua)", opacity: 0.5 }} />
-                <span className="micro-label" style={{ color: "var(--aqua)" }}>Calendar Setup Required</span>
-                <div style={{ height: "1px", width: "28px", backgroundColor: "var(--aqua)", opacity: 0.5 }} />
-              </div>
-              <p style={{ fontFamily: "var(--font-serif)", fontSize: "clamp(1.4rem, 2.5vw, 2rem)", fontWeight: 300, color: "var(--ocean)", marginBottom: "1rem", lineHeight: 1.3 }}>
-                Event calendar coming soon
-              </p>
-              <p style={{ fontFamily: "var(--font-sans)", fontSize: "0.875rem", fontWeight: 300, color: "var(--muted)", lineHeight: 1.75, maxWidth: "44ch", margin: "0 auto 2rem" }}>
-                To activate this calendar, share your Google Calendar ID with your web developer. Events you add to Google Calendar will appear here automatically.
-              </p>
-              <a
-                href="mailto:Contact@EchoingHolisticHealth.com"
-                style={{
-                  fontFamily: "var(--font-sans)",
-                  fontSize: "0.7rem",
-                  fontWeight: 500,
-                  letterSpacing: "0.15em",
-                  textTransform: "uppercase",
-                  color: "var(--aqua)",
-                  textDecoration: "none",
-                  borderBottom: "1px solid var(--aqua)",
-                  paddingBottom: "2px",
-                }}
-              >
-                Contact us about upcoming events →
-              </a>
-            </div>
-          )}
+              title="Echoing Holistic Health Event Calendar"
+              loading="lazy"
+            />
+          </div>
         </motion.div>
 
         {/* How events are listed */}
