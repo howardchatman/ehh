@@ -205,7 +205,7 @@ export function gutTeaCollectionEmail(firstName: string): string {
               <p style="font-family:Georgia,serif; font-style:italic; font-size:13px; color:rgba(250,248,245,0.3); margin:0 0 20px; line-height:1.75;">
                 Save your recipes as a PDF to keep them handy anytime.
               </p>
-              <a href="https://echoingholistichealth.com/free-guide" style="display:inline-block; font-family:Arial,sans-serif; font-size:9px; font-weight:700; letter-spacing:0.2em; text-transform:uppercase; color:#1A1208; background:#B8965A; border:1px solid #B8965A; padding:14px 32px; text-decoration:none; margin-bottom:16px;">
+              <a href="https://ccqzrwdxhwxlihvvlcfi.supabase.co/storage/v1/object/public/5%20gut%20friendly%20receipes/5%20gut%20friendly%20teas1.pdf" style="display:inline-block; font-family:Arial,sans-serif; font-size:9px; font-weight:700; letter-spacing:0.2em; text-transform:uppercase; color:#1A1208; background:#B8965A; border:1px solid #B8965A; padding:14px 32px; text-decoration:none; margin-bottom:16px;">
                 Download Your Free Recipes
               </a>
               <br/>

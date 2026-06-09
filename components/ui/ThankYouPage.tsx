@@ -149,7 +149,8 @@ export default function ThankYouPage() {
             Free Gut-Friendly Tea Collection · 5 Recipes
           </p>
           <a
-            href="/free-guide"
+            href="https://ccqzrwdxhwxlihvvlcfi.supabase.co/storage/v1/object/public/5%20gut%20friendly%20receipes/5%20gut%20friendly%20teas1.pdf"
+            download="5-Gut-Friendly-Tea-Recipes-EHH.pdf"
             target="_blank"
             rel="noopener noreferrer"
             style={{
@@ -185,7 +186,7 @@ export default function ThankYouPage() {
             Download Your Free Recipes
           </a>
           <p className="micro-label" style={{ color: "rgba(250,248,245,0.15)", marginTop: "0.6rem", display: "block" }}>
-            Opens print page — choose "Save as PDF" in your browser
+            PDF downloads directly to your device
           </p>
         </motion.div>
 

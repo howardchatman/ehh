@@ -4,6 +4,8 @@ import { motion } from "framer-motion";
 
 const EASE = [0.22, 1, 0.36, 1] as const;
 
+const PDF_URL = "https://ccqzrwdxhwxlihvvlcfi.supabase.co/storage/v1/object/public/5%20gut%20friendly%20receipes/5%20gut%20friendly%20teas1.pdf";
+
 const IMAGES = [
   { src: "/2C2D0E72-680D-4887-A886-613B091AC28F.png", alt: "Ginger Mint Tea" },
   { src: "/7DFBF948-0DC6-4DFB-910D-F057CA29C106.png", alt: "Fennel Comfort Tea" },
@@ -57,9 +59,10 @@ export default function FreeGuide() {
               <em style={{ fontStyle: "italic", color: "var(--gold)" }}>Heal Your Gut</em>
             </h1>
 
-            {/* Save as PDF button */}
-            <button
-              onClick={() => window.print()}
+            {/* Download PDF button */}
+            <a
+              href={PDF_URL}
+              download="5-Gut-Friendly-Tea-Recipes-EHH.pdf"
               style={{
                 display: "inline-flex",
                 alignItems: "center",
@@ -74,16 +77,17 @@ export default function FreeGuide() {
                 border: "1px solid var(--gold)",
                 padding: "0.9rem 2.5rem",
                 cursor: "pointer",
+                textDecoration: "none",
                 transition: "background-color 0.3s, color 0.3s",
                 marginBottom: "0.75rem",
               }}
               onMouseEnter={(e) => {
-                e.currentTarget.style.backgroundColor = "transparent";
-                e.currentTarget.style.color = "var(--gold)";
+                (e.currentTarget as HTMLAnchorElement).style.backgroundColor = "transparent";
+                (e.currentTarget as HTMLAnchorElement).style.color = "var(--gold)";
               }}
               onMouseLeave={(e) => {
-                e.currentTarget.style.backgroundColor = "var(--gold)";
-                e.currentTarget.style.color = "var(--espresso)";
+                (e.currentTarget as HTMLAnchorElement).style.backgroundColor = "var(--gold)";
+                (e.currentTarget as HTMLAnchorElement).style.color = "var(--espresso)";
               }}
             >
               <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
@@ -91,11 +95,11 @@ export default function FreeGuide() {
                 <polyline points="7 10 12 15 17 10" />
                 <line x1="12" y1="15" x2="12" y2="3" />
               </svg>
-              Save as PDF
-            </button>
+              Download Your Free Recipes
+            </a>
 
             <p className="micro-label" style={{ color: "rgba(250,248,245,0.2)", display: "block" }}>
-              Click "Save as PDF" in your browser print dialog
+              PDF downloads directly — no account needed
             </p>
           </motion.div>
         </div>
