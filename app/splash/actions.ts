@@ -3,6 +3,7 @@
 import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
 import { createSupabaseClient } from "@/lib/supabase";
+import { sendGutTeaCollection } from "@/lib/resend";
 
 export async function unlockSite(formData: FormData) {
   const password = formData.get("password");
@@ -41,6 +42,13 @@ export async function joinWaitlist(formData: FormData) {
       redirect("/splash?waitlist=duplicate");
     }
     redirect("/splash?waitlist=error");
+  }
+
+  // Send free gut tea collection — non-blocking, won't crash signup if email fails
+  try {
+    await sendGutTeaCollection(name, email);
+  } catch {
+    // Email failure should not block the user
   }
 
   redirect("/thank-you");

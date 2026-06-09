@@ -3,9 +3,18 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
 import Link from "next/link";
+import Image from "next/image";
 
 const EASE = [0.22, 1, 0.36, 1] as const;
 const VIEW = { once: true, margin: "-40px" } as const;
+
+const RECIPE_IMAGES = [
+  { src: "/2C2D0E72-680D-4887-A886-613B091AC28F.png", alt: "Ginger Mint Tea recipe card" },
+  { src: "/7DFBF948-0DC6-4DFB-910D-F057CA29C106.png", alt: "Fennel Comfort Tea recipe card" },
+  { src: "/5DCD7A37-D2CA-44E4-82D3-C04995DF93AE.png", alt: "Chamomile Belly Tea recipe card" },
+  { src: "/B00EE985-E6DB-4E2D-81B7-F18C6644065A.png", alt: "Cinnamon Digest Tea recipe card" },
+  { src: "/07B54CB7-5C07-4AC6-BF66-D6DB4ABA3AA6.png", alt: "Lemon Peel Tea recipe card" },
+];
 
 const RECIPES = [
   {
@@ -134,6 +143,37 @@ export default function ThankYouPage() {
         >
           Free Gut-Friendly Tea Collection · 5 Recipes
         </motion.p>
+
+        {/* Recipe image cards */}
+        <div
+          style={{ display: "grid", gridTemplateColumns: "repeat(2, 1fr)", gap: "clamp(0.75rem, 1.5vw, 1.25rem)", marginBottom: "clamp(2.5rem, 4vw, 4rem)" }}
+          className="sm:grid-cols-3"
+        >
+          {RECIPE_IMAGES.map((img, i) => (
+            <motion.div
+              key={img.src}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={VIEW}
+              transition={{ duration: 0.7, ease: EASE, delay: i * 0.08 }}
+              style={{ overflow: "hidden", border: "1px solid rgba(184,150,90,0.12)" }}
+            >
+              <Image
+                src={img.src}
+                alt={img.alt}
+                width={600}
+                height={800}
+                style={{ width: "100%", height: "auto", display: "block" }}
+              />
+            </motion.div>
+          ))}
+        </div>
+
+        <div style={{ height: "1px", background: "linear-gradient(90deg, transparent, rgba(184,150,90,0.15), transparent)", marginBottom: "clamp(2rem, 3.5vw, 3.5rem)" }} />
+
+        <p className="micro-label" style={{ color: "rgba(250,248,245,0.15)", textAlign: "center", marginBottom: "clamp(1.5rem, 2.5vw, 2.5rem)", letterSpacing: "0.2em" }}>
+          Full recipe details below
+        </p>
 
         <div style={{ display: "flex", flexDirection: "column", gap: "1px" }}>
           {RECIPES.map((recipe, i) => (

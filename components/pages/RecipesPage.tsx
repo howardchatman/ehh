@@ -2,9 +2,18 @@
 
 import { useRef, useState } from "react";
 import { motion } from "framer-motion";
+import Image from "next/image";
 
 const EASE = [0.22, 1, 0.36, 1] as const;
 const VIEW = { once: true, margin: "-60px" } as const;
+
+const RECIPE_IMAGES = [
+  { src: "/2C2D0E72-680D-4887-A886-613B091AC28F.png", alt: "Ginger Mint Tea" },
+  { src: "/7DFBF948-0DC6-4DFB-910D-F057CA29C106.png", alt: "Fennel Comfort Tea" },
+  { src: "/5DCD7A37-D2CA-44E4-82D3-C04995DF93AE.png", alt: "Chamomile Belly Tea" },
+  { src: "/B00EE985-E6DB-4E2D-81B7-F18C6644065A.png", alt: "Cinnamon Digest Tea" },
+  { src: "/07B54CB7-5C07-4AC6-BF66-D6DB4ABA3AA6.png", alt: "Lemon Peel Tea" },
+];
 
 const RECIPES = [
   {
@@ -227,10 +236,46 @@ export default function RecipesPage({
             whileInView={{ opacity: 1, y: 0 }}
             viewport={VIEW}
             transition={{ duration: 0.9, ease: EASE }}
-            style={{ textAlign: "center", marginBottom: "clamp(2.5rem, 4vw, 4rem)" }}
+            style={{ marginBottom: "clamp(2.5rem, 4vw, 4rem)" }}
           >
-            <p style={{ fontFamily: "var(--font-serif)", fontStyle: "italic", fontSize: "clamp(1rem, 1.4vw, 1.15rem)", fontWeight: 300, color: "var(--muted)", lineHeight: 1.8 }}>
+            <p style={{ fontFamily: "var(--font-serif)", fontStyle: "italic", fontSize: "clamp(1rem, 1.4vw, 1.15rem)", fontWeight: 300, color: "var(--muted)", lineHeight: 1.8, textAlign: "center", marginBottom: "clamp(2rem, 3vw, 3rem)" }}>
               Enter your name and email below to unlock all 5 recipes — completely free.
+            </p>
+            {/* Blurred image preview */}
+            <div style={{ display: "grid", gridTemplateColumns: "repeat(5, 1fr)", gap: "0.5rem", filter: "blur(6px)", userSelect: "none", pointerEvents: "none", opacity: 0.4 }}>
+              {RECIPE_IMAGES.map((img) => (
+                <div key={img.src} style={{ overflow: "hidden" }}>
+                  <Image src={img.src} alt="" width={300} height={400} style={{ width: "100%", height: "auto", display: "block" }} />
+                </div>
+              ))}
+            </div>
+          </motion.div>
+        )}
+
+        {hasAccess && (
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={VIEW}
+            transition={{ duration: 0.9, ease: EASE }}
+            style={{ marginBottom: "clamp(3rem, 5vw, 5rem)" }}
+          >
+            <div style={{ display: "grid", gridTemplateColumns: "repeat(2, 1fr)", gap: "clamp(0.75rem, 1.5vw, 1.25rem)", marginBottom: "clamp(1rem, 2vw, 1.5rem)" }} className="sm:grid-cols-3 lg:grid-cols-5">
+              {RECIPE_IMAGES.map((img, i) => (
+                <motion.div
+                  key={img.src}
+                  initial={{ opacity: 0, y: 16 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={VIEW}
+                  transition={{ duration: 0.7, ease: EASE, delay: i * 0.06 }}
+                  style={{ overflow: "hidden", border: "1px solid var(--border)" }}
+                >
+                  <Image src={img.src} alt={img.alt} width={400} height={533} style={{ width: "100%", height: "auto", display: "block" }} />
+                </motion.div>
+              ))}
+            </div>
+            <p style={{ fontFamily: "var(--font-serif)", fontStyle: "italic", fontSize: "0.85rem", color: "var(--muted)", textAlign: "center" }}>
+              Full recipe details below — including ingredients, instructions, and traditional uses.
             </p>
           </motion.div>
         )}
