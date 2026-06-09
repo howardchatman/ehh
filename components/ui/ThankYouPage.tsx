@@ -21,6 +21,7 @@ const RECIPES = [
     number: "01",
     name: "Ginger Mint Tea",
     tagline: "Warms and activates digestion.",
+    image: "/2C2D0E72-680D-4887-A886-613B091AC28F.png",
     ingredients: ["1 inch fresh ginger, sliced thin", "8–10 fresh mint leaves", "2 cups filtered water", "1 tsp raw honey", "Juice of ¼ lemon (optional)"],
     instructions: ["Bring water to a gentle simmer.", "Add ginger slices and steep 7 minutes.", "Remove from heat, add mint leaves, and steep 3 more minutes.", "Strain, sweeten with honey, and add lemon if desired.", "Drink warm before or after meals."],
     use: "Ginger stimulates digestive enzymes and reduces nausea. Mint relaxes the muscles of the digestive tract and eases cramping. A traditional remedy for sluggish digestion and bloating.",
@@ -29,6 +30,7 @@ const RECIPES = [
     number: "02",
     name: "Fennel Comfort Tea",
     tagline: "Soothes bloating and gas naturally.",
+    image: "/7DFBF948-0DC6-4DFB-910D-F057CA29C106.png",
     ingredients: ["1½ tsp fennel seeds, lightly crushed", "1 cup hot water", "½ tsp raw honey", "Pinch of sea salt (optional)"],
     instructions: ["Lightly crush fennel seeds with a spoon or mortar and pestle.", "Place in a tea strainer or directly in a cup.", "Pour hot water over seeds and steep 8–10 minutes.", "Strain and sweeten lightly with honey.", "Sip slowly after meals."],
     use: "Fennel has been used for centuries to ease bloating, gas, and stomach cramping. Its volatile oils relax the smooth muscles of the intestinal tract, helping trapped gas pass and reducing discomfort.",
@@ -37,6 +39,7 @@ const RECIPES = [
     number: "03",
     name: "Chamomile Belly Tea",
     tagline: "Calms the gut and reduces inflammation.",
+    image: "/5DCD7A37-D2CA-44E4-82D3-C04995DF93AE.png",
     ingredients: ["1 tbsp dried chamomile flowers (or 1 tea bag)", "2 cups hot water", "1 tsp raw honey", "2 slices fresh lemon"],
     instructions: ["Pour hot water over chamomile flowers in a strainer or infuser.", "Steep for 5–7 minutes — don't over-steep or it turns bitter.", "Remove chamomile and add honey and lemon.", "Sip warm, especially in the evening."],
     use: "Chamomile contains bisabolol and chamazulene — compounds that reduce gut inflammation and calm irritated stomach lining. Traditionally used for IBS, gastritis, and general digestive unease. Also supports sleep.",
@@ -45,6 +48,7 @@ const RECIPES = [
     number: "04",
     name: "Cinnamon Digest Tea",
     tagline: "Balances blood sugar and supports gut motility.",
+    image: "/B00EE985-E6DB-4E2D-81B7-F18C6644065A.png",
     ingredients: ["1 cinnamon stick (or ½ tsp cinnamon powder)", "2 cups filtered water", "¼ tsp fresh ginger, grated", "1 tsp raw honey"],
     instructions: ["Bring water to a low simmer and add cinnamon stick.", "Simmer gently for 10 minutes.", "Remove from heat and add grated ginger.", "Steep 5 more minutes, then strain.", "Sweeten with honey and drink warm."],
     use: "Cinnamon reduces blood sugar spikes after meals, which directly impacts gut health and energy levels. It also has antimicrobial properties that help balance gut bacteria. Ginger amplifies digestive support.",
@@ -53,6 +57,7 @@ const RECIPES = [
     number: "05",
     name: "Lemon Peel Tea",
     tagline: "Detoxes and stimulates the digestive system.",
+    image: "/07B54CB7-5C07-4AC6-BF66-D6DB4ABA3AA6.png",
     ingredients: ["Peel of 1 organic lemon (avoid wax-coated)", "2 cups water", "1 tsp raw honey", "1 sprig fresh rosemary (optional)"],
     instructions: ["Wash the lemon thoroughly and peel in long strips.", "Bring water to a boil, add lemon peel and rosemary if using.", "Reduce heat and simmer 8 minutes.", "Strain into a mug and sweeten with honey.", "Best enjoyed first thing in the morning on an empty stomach."],
     use: "Lemon peel is rich in d-limonene, a compound that supports liver detoxification and stimulates bile production — which is essential for proper fat digestion. The bitter compounds in the peel also activate digestive enzymes.",
@@ -222,7 +227,7 @@ function RecipeAccordion({
   isOpen,
   onToggle,
 }: {
-  recipe: typeof RECIPES[number];
+  recipe: (typeof RECIPES)[number];
   isOpen: boolean;
   onToggle: () => void;
 }) {
@@ -252,35 +257,53 @@ function RecipeAccordion({
       {/* Content */}
       {isOpen && (
         <div style={{ padding: "0 clamp(1.25rem, 2vw, 1.75rem) clamp(1.5rem, 2.5vw, 2rem)", borderTop: "1px solid rgba(184,150,90,0.1)" }}>
-          <div style={{ display: "grid", gridTemplateColumns: "1fr", gap: "1.75rem", marginTop: "1.5rem" }} className="md:grid-cols-2">
+          <div style={{ display: "grid", gridTemplateColumns: "1fr", gap: "1.75rem", marginTop: "1.5rem" }} className="md:grid-cols-[1fr_auto]">
+
+            {/* Left: text content */}
             <div>
-              <p className="micro-label" style={{ color: "var(--gold)", marginBottom: "1rem" }}>Ingredients</p>
-              <ul style={{ listStyle: "none", padding: 0, margin: 0, display: "flex", flexDirection: "column", gap: "0.55rem" }}>
-                {recipe.ingredients.map((ing) => (
-                  <li key={ing} style={{ display: "flex", alignItems: "flex-start", gap: "0.65rem" }}>
-                    <div style={{ width: "3px", height: "3px", borderRadius: "50%", backgroundColor: "var(--gold)", opacity: 0.5, marginTop: "0.45rem", flexShrink: 0 }} />
-                    <span style={{ fontFamily: "var(--font-sans)", fontSize: "0.82rem", fontWeight: 300, color: "rgba(250,248,245,0.6)", lineHeight: 1.6 }}>{ing}</span>
-                  </li>
-                ))}
-              </ul>
+              <div style={{ display: "grid", gridTemplateColumns: "1fr", gap: "1.5rem" }} className="sm:grid-cols-2">
+                <div>
+                  <p className="micro-label" style={{ color: "var(--gold)", marginBottom: "1rem" }}>Ingredients</p>
+                  <ul style={{ listStyle: "none", padding: 0, margin: 0, display: "flex", flexDirection: "column", gap: "0.55rem" }}>
+                    {recipe.ingredients.map((ing) => (
+                      <li key={ing} style={{ display: "flex", alignItems: "flex-start", gap: "0.65rem" }}>
+                        <div style={{ width: "3px", height: "3px", borderRadius: "50%", backgroundColor: "var(--gold)", opacity: 0.5, marginTop: "0.45rem", flexShrink: 0 }} />
+                        <span style={{ fontFamily: "var(--font-sans)", fontSize: "0.82rem", fontWeight: 300, color: "rgba(250,248,245,0.6)", lineHeight: 1.6 }}>{ing}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+                <div>
+                  <p className="micro-label" style={{ color: "rgba(184,150,90,0.6)", marginBottom: "1rem" }}>Preparation</p>
+                  <ol style={{ listStyle: "none", padding: 0, margin: 0, display: "flex", flexDirection: "column", gap: "0.65rem" }}>
+                    {recipe.instructions.map((step, i) => (
+                      <li key={i} style={{ display: "flex", gap: "0.65rem", alignItems: "flex-start" }}>
+                        <span style={{ fontFamily: "var(--font-serif)", fontSize: "0.7rem", color: "rgba(184,150,90,0.5)", flexShrink: 0, minWidth: "1rem" }}>{i + 1}.</span>
+                        <span style={{ fontFamily: "var(--font-sans)", fontSize: "0.82rem", fontWeight: 300, color: "rgba(250,248,245,0.6)", lineHeight: 1.65 }}>{step}</span>
+                      </li>
+                    ))}
+                  </ol>
+                </div>
+              </div>
+              <div style={{ marginTop: "1.5rem", padding: "1rem 1.25rem", borderLeft: "2px solid rgba(184,150,90,0.3)" }}>
+                <p style={{ fontFamily: "var(--font-serif)", fontStyle: "italic", fontSize: "0.82rem", color: "rgba(250,248,245,0.3)", lineHeight: 1.8, margin: 0 }}>
+                  <strong style={{ fontStyle: "normal", fontFamily: "var(--font-sans)", fontSize: "0.55rem", letterSpacing: "0.15em", textTransform: "uppercase", color: "rgba(184,150,90,0.5)", display: "block", marginBottom: "0.4rem" }}>Traditional Use</strong>
+                  {recipe.use}
+                </p>
+              </div>
             </div>
-            <div>
-              <p className="micro-label" style={{ color: "rgba(184,150,90,0.6)", marginBottom: "1rem" }}>Preparation</p>
-              <ol style={{ listStyle: "none", padding: 0, margin: 0, display: "flex", flexDirection: "column", gap: "0.65rem" }}>
-                {recipe.instructions.map((step, i) => (
-                  <li key={i} style={{ display: "flex", gap: "0.65rem", alignItems: "flex-start" }}>
-                    <span style={{ fontFamily: "var(--font-serif)", fontSize: "0.7rem", color: "rgba(184,150,90,0.5)", flexShrink: 0, minWidth: "1rem" }}>{i + 1}.</span>
-                    <span style={{ fontFamily: "var(--font-sans)", fontSize: "0.82rem", fontWeight: 300, color: "rgba(250,248,245,0.6)", lineHeight: 1.65 }}>{step}</span>
-                  </li>
-                ))}
-              </ol>
+
+            {/* Right: recipe image */}
+            <div className="hidden md:block" style={{ width: "200px", flexShrink: 0 }}>
+              <Image
+                src={recipe.image}
+                alt={recipe.name}
+                width={400}
+                height={533}
+                style={{ width: "100%", height: "auto", display: "block", border: "1px solid rgba(184,150,90,0.12)" }}
+              />
             </div>
-          </div>
-          <div style={{ marginTop: "1.5rem", padding: "1rem 1.25rem", borderLeft: "2px solid rgba(184,150,90,0.3)" }}>
-            <p style={{ fontFamily: "var(--font-serif)", fontStyle: "italic", fontSize: "0.82rem", color: "rgba(250,248,245,0.3)", lineHeight: 1.8, margin: 0 }}>
-              <strong style={{ fontStyle: "normal", fontFamily: "var(--font-sans)", fontSize: "0.55rem", letterSpacing: "0.15em", textTransform: "uppercase", color: "rgba(184,150,90,0.5)", display: "block", marginBottom: "0.4rem" }}>Traditional Use</strong>
-              {recipe.use}
-            </p>
+
           </div>
         </div>
       )}
