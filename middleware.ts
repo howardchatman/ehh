@@ -9,7 +9,8 @@ export function middleware(request: NextRequest) {
     pathname.startsWith("/splash") ||
     pathname.startsWith("/thank-you") ||
     pathname.startsWith("/dashboard") ||
-    pathname.startsWith("/download")
+    pathname.startsWith("/download") ||
+    pathname.startsWith("/free-guide")
   ) {
     return NextResponse.next();
   }

@@ -203,10 +203,14 @@ export function gutTeaCollectionEmail(firstName: string): string {
           <tr>
             <td align="center" style="padding:32px; background:#111111;">
               <p style="font-family:Georgia,serif; font-style:italic; font-size:13px; color:rgba(250,248,245,0.3); margin:0 0 20px; line-height:1.75;">
-                Be among the first to know when Healing Water™ officially launches.
+                Save your recipes as a PDF to keep them handy anytime.
               </p>
-              <a href="https://echoingholistichealth.com" style="display:inline-block; font-family:Arial,sans-serif; font-size:9px; font-weight:600; letter-spacing:0.2em; text-transform:uppercase; color:#B8965A; border:1px solid rgba(184,150,90,0.4); padding:12px 28px; text-decoration:none;">
-                Visit EchoingHolisticHealth.com
+              <a href="https://echoingholistichealth.com/free-guide" style="display:inline-block; font-family:Arial,sans-serif; font-size:9px; font-weight:700; letter-spacing:0.2em; text-transform:uppercase; color:#1A1208; background:#B8965A; border:1px solid #B8965A; padding:14px 32px; text-decoration:none; margin-bottom:16px;">
+                Download Your Free Recipes
+              </a>
+              <br/>
+              <a href="https://echoingholistichealth.com" style="display:inline-block; font-family:Arial,sans-serif; font-size:9px; font-weight:400; letter-spacing:0.16em; text-transform:uppercase; color:rgba(184,150,90,0.5); text-decoration:none; margin-top:12px;">
+                EchoingHolisticHealth.com
               </a>
             </td>
           </tr>

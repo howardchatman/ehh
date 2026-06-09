@@ -138,16 +138,56 @@ export default function ThankYouPage() {
 
       {/* ── RECIPES ── */}
       <div style={{ maxWidth: "720px", margin: "0 auto", padding: "clamp(3rem, 5vw, 5rem) var(--section-x)" }}>
-        <motion.p
+        <motion.div
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
           viewport={VIEW}
           transition={{ duration: 0.8, ease: EASE }}
-          className="micro-label"
-          style={{ color: "rgba(250,248,245,0.2)", textAlign: "center", marginBottom: "clamp(2rem, 3.5vw, 3.5rem)", letterSpacing: "0.2em" }}
+          style={{ textAlign: "center", marginBottom: "clamp(2rem, 3.5vw, 3.5rem)" }}
         >
-          Free Gut-Friendly Tea Collection · 5 Recipes
-        </motion.p>
+          <p className="micro-label" style={{ color: "rgba(250,248,245,0.2)", letterSpacing: "0.2em", marginBottom: "1.25rem" }}>
+            Free Gut-Friendly Tea Collection · 5 Recipes
+          </p>
+          <a
+            href="/free-guide"
+            target="_blank"
+            rel="noopener noreferrer"
+            style={{
+              display: "inline-flex",
+              alignItems: "center",
+              gap: "0.6rem",
+              fontFamily: "var(--font-sans)",
+              fontSize: "0.58rem",
+              fontWeight: 500,
+              letterSpacing: "0.18em",
+              textTransform: "uppercase",
+              color: "var(--espresso)",
+              backgroundColor: "var(--gold)",
+              border: "1px solid var(--gold)",
+              padding: "0.75rem 2rem",
+              textDecoration: "none",
+              transition: "background-color 0.3s, color 0.3s",
+            }}
+            onMouseEnter={(e) => {
+              (e.currentTarget as HTMLAnchorElement).style.backgroundColor = "transparent";
+              (e.currentTarget as HTMLAnchorElement).style.color = "var(--gold)";
+            }}
+            onMouseLeave={(e) => {
+              (e.currentTarget as HTMLAnchorElement).style.backgroundColor = "var(--gold)";
+              (e.currentTarget as HTMLAnchorElement).style.color = "var(--espresso)";
+            }}
+          >
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+              <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
+              <polyline points="7 10 12 15 17 10" />
+              <line x1="12" y1="15" x2="12" y2="3" />
+            </svg>
+            Download Your Free Recipes
+          </a>
+          <p className="micro-label" style={{ color: "rgba(250,248,245,0.15)", marginTop: "0.6rem", display: "block" }}>
+            Opens print page — choose "Save as PDF" in your browser
+          </p>
+        </motion.div>
 
         {/* Recipe image cards */}
         <div
