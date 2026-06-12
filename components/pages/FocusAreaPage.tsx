@@ -316,7 +316,7 @@ function FocusProductCard({ product }: { product: Product }) {
           style={{ aspectRatio: "4/5", width: "100%", position: "relative" }} aria-label={product.name}>
           <div style={{ position: "absolute", top: "1.25rem", right: "1.25rem" }}>
             <span className="micro-label" style={{ padding: "0.35rem 0.75rem", backgroundColor: "rgba(250,248,245,0.82)", color: "var(--muted)", backdropFilter: "blur(8px)" }}>
-              {product.categoryLabel}
+              {product.pouches} Pouches
             </span>
           </div>
         </motion.div>

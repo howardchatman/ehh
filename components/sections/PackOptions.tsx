@@ -7,11 +7,11 @@ const EASE = [0.22, 1, 0.36, 1] as const;
 const VIEW = { once: true, margin: "-60px" } as const;
 
 const PACKS = [
-  { name: "Starter Pack",               price: "$46",  pouches: 4,  label: null,          note: "Mix & Match" },
-  { name: "Weekly Hydration Pack",      price: "$88",  pouches: 8,  label: null,          note: null },
-  { name: "Wellness Pack",              price: "$132", pouches: 12, label: "Most Popular", note: null },
-  { name: "Monthly Hydration Supply",   price: "$252", pouches: 24, label: null,          note: null },
-  { name: "Family Pack",                price: "$324", pouches: 36, label: null,          note: null },
+  { name: "Functional Hydration Starter Pack", price: "$46",  pouches: 4,  label: null,          image: "/4 pack.png",   note: "Mix & Match" },
+  { name: "Weekly Hydration Pack",             price: "$88",  pouches: 8,  label: null,          image: "/8 pack.png",   note: null },
+  { name: "Wellness Pack",                     price: "$132", pouches: 12, label: "Most Popular", image: "/12 Pack.png",  note: null },
+  { name: "Monthly Hydration Supply",          price: "$252", pouches: 24, label: null,          image: "/24 150.png",   note: null },
+  { name: "Family Pack",                       price: "$324", pouches: 36, label: null,          image: "/36 pack.png",  note: null },
 ];
 
 export default function PackOptions() {
@@ -114,13 +114,12 @@ function PackCard({ pack }: { pack: typeof PACKS[number] }) {
   return (
     <div
       style={{
-        padding: "clamp(1.5rem, 2.5vw, 2rem)",
         border: `1px solid ${isPopular ? "var(--aqua)" : "rgba(255,255,255,0.12)"}`,
         backgroundColor: isPopular ? "rgba(28,184,200,0.12)" : "rgba(255,255,255,0.04)",
         display: "flex",
         flexDirection: "column",
-        gap: "1rem",
         position: "relative",
+        overflow: "hidden",
       }}
     >
       {isPopular && (
@@ -132,48 +131,59 @@ function PackCard({ pack }: { pack: typeof PACKS[number] }) {
             transform: "translate(-50%, -50%)",
             backgroundColor: "var(--aqua)",
             padding: "0.25rem 0.75rem",
+            zIndex: 2,
           }}
         >
           <span className="micro-label" style={{ color: "var(--ocean)", fontSize: "0.5rem" }}>Most Popular</span>
         </div>
       )}
 
-      <div>
-        <p
-          style={{
-            fontFamily: "var(--font-sans)",
-            fontSize: "0.7rem",
-            fontWeight: 500,
-            letterSpacing: "0.08em",
-            color: isPopular ? "var(--aqua)" : "rgba(255,255,255,0.5)",
-            marginBottom: "0.5rem",
-            textTransform: "uppercase",
-          }}
-        >
-          {pack.name}
-        </p>
-        <p
-          style={{
-            fontFamily: "var(--font-serif)",
-            fontSize: "clamp(2rem, 3vw, 2.5rem)",
-            fontWeight: 300,
-            color: "var(--cream)",
-            lineHeight: 1,
-          }}
-        >
-          {pack.price}
-        </p>
-      </div>
+      {/* Pack image */}
+      {/* eslint-disable-next-line @next/next/no-img-element */}
+      <img
+        src={pack.image}
+        alt={pack.name}
+        style={{ width: "100%", height: "auto", display: "block" }}
+      />
 
-      <div style={{ borderTop: "1px solid rgba(255,255,255,0.1)", paddingTop: "1rem" }}>
-        <p style={{ fontFamily: "var(--font-sans)", fontSize: "0.8rem", fontWeight: 300, color: "rgba(255,255,255,0.6)" }}>
-          <strong style={{ color: "var(--cream)", fontWeight: 500 }}>{pack.pouches}</strong> Pouches
-        </p>
-        {pack.note && (
-          <p style={{ fontFamily: "var(--font-serif)", fontStyle: "italic", fontSize: "0.75rem", color: "var(--aqua-light)", marginTop: "0.25rem" }}>
-            {pack.note}
+      <div style={{ padding: "clamp(1.25rem, 2vw, 1.75rem)", display: "flex", flexDirection: "column", gap: "0.75rem" }}>
+        <div>
+          <p
+            style={{
+              fontFamily: "var(--font-sans)",
+              fontSize: "0.62rem",
+              fontWeight: 500,
+              letterSpacing: "0.08em",
+              color: isPopular ? "var(--aqua)" : "rgba(255,255,255,0.5)",
+              marginBottom: "0.4rem",
+              textTransform: "uppercase",
+            }}
+          >
+            {pack.name}
           </p>
-        )}
+          <p
+            style={{
+              fontFamily: "var(--font-serif)",
+              fontSize: "clamp(1.75rem, 2.5vw, 2.25rem)",
+              fontWeight: 300,
+              color: "var(--cream)",
+              lineHeight: 1,
+            }}
+          >
+            {pack.price}
+          </p>
+        </div>
+
+        <div style={{ borderTop: "1px solid rgba(255,255,255,0.1)", paddingTop: "0.75rem" }}>
+          <p style={{ fontFamily: "var(--font-sans)", fontSize: "0.8rem", fontWeight: 300, color: "rgba(255,255,255,0.6)" }}>
+            <strong style={{ color: "var(--cream)", fontWeight: 500 }}>{pack.pouches}</strong> Pouches
+          </p>
+          {pack.note && (
+            <p style={{ fontFamily: "var(--font-serif)", fontStyle: "italic", fontSize: "0.75rem", color: "var(--aqua-light)", marginTop: "0.25rem" }}>
+              {pack.note}
+            </p>
+          )}
+        </div>
       </div>
     </div>
   );

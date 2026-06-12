@@ -20,7 +20,7 @@ export default function Page({ params }: { params: { slug: string } }) {
   if (!product) notFound();
 
   const related = products
-    .filter((p) => p.slug !== product.slug && p.focusAreas.some((f) => product.focusAreas.includes(f)))
+    .filter((p) => p.slug !== product.slug)
     .slice(0, 3);
 
   return <ProductPage product={product} related={related} />;

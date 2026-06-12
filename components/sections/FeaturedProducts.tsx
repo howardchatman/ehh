@@ -201,17 +201,8 @@ function ProductCard({ product }: { product: (typeof products)[number] }) {
           backgroundColor: "rgba(250,248,245,0.9)",
           backdropFilter: "blur(8px)",
         }}>
-          <span className="micro-label" style={{ color: "var(--muted)" }}>{product.categoryLabel}</span>
+          <span className="micro-label" style={{ color: "var(--muted)" }}>{product.pouches} Pouches</span>
         </div>
-        {product.level === "entry" && (
-          <div style={{
-            position: "absolute", top: "1rem", right: "1rem",
-            padding: "0.3rem 0.65rem",
-            backgroundColor: "var(--sage)",
-          }}>
-            <span className="micro-label" style={{ color: "rgba(250,248,245,0.9)" }}>Start here</span>
-          </div>
-        )}
       </div>
 
       <h3 style={{
