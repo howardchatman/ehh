@@ -7,11 +7,11 @@ const EASE = [0.22, 1, 0.36, 1] as const;
 const VIEW = { once: true, margin: "-60px" } as const;
 
 const PACKS = [
-  { name: "Functional Hydration Starter Pack", price: "$46",  pouches: 4,  label: null,          image: "/4 pack.png",   note: "Mix & Match" },
-  { name: "Weekly Hydration Pack",             price: "$88",  pouches: 8,  label: null,          image: "/8 pack.png",   note: null },
-  { name: "Wellness Pack",                     price: "$132", pouches: 12, label: "Most Popular", image: "/12 Pack.png",  note: null },
-  { name: "Monthly Hydration Supply",          price: "$252", pouches: 24, label: null,          image: "/24 150.png",   note: null },
-  { name: "Family Pack",                       price: "$324", pouches: 36, label: null,          image: "/36 pack.png",  note: null },
+  { name: "Functional Hydration Starter Pack", price: "$46",  pouches: 4,  label: null,          image: "/4-pack.png",  note: "Mix & Match" },
+  { name: "Weekly Hydration Pack",             price: "$88",  pouches: 8,  label: null,          image: "/8-pack.png",  note: null },
+  { name: "Wellness Pack",                     price: "$132", pouches: 12, label: "Most Popular", image: "/12-pack.png", note: null },
+  { name: "Monthly Hydration Supply",          price: "$252", pouches: 24, label: null,          image: "/24-pack.png", note: null },
+  { name: "Family Pack",                       price: "$324", pouches: 36, label: null,          image: "/36-pack.png", note: null },
 ];
 
 export default function PackOptions() {
