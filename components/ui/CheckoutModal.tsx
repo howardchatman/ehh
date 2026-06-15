@@ -18,6 +18,8 @@ interface Props {
 }
 
 export default function CheckoutModal({ priceId, productName, price, onClose }: Props) {
+  const [checkoutError, setCheckoutError] = useState<string | null>(null);
+
   const fetchClientSecret = useCallback(async () => {
     const res = await fetch("/api/checkout", {
       method: "POST",
@@ -25,6 +27,11 @@ export default function CheckoutModal({ priceId, productName, price, onClose }: 
       body: JSON.stringify({ priceId }),
     });
     const data = await res.json();
+    if (!res.ok || !data.clientSecret) {
+      const msg = data.error ?? "Checkout unavailable. Please try again.";
+      setCheckoutError(msg);
+      throw new Error(msg);
+    }
     return data.clientSecret as string;
   }, [priceId]);
 
@@ -111,9 +118,20 @@ export default function CheckoutModal({ priceId, productName, price, onClose }: 
 
           {/* Embedded checkout */}
           <div style={{ padding: "0.5rem" }}>
-            <EmbeddedCheckoutProvider stripe={stripePromise} options={{ fetchClientSecret }}>
-              <EmbeddedCheckout />
-            </EmbeddedCheckoutProvider>
+            {checkoutError ? (
+              <div style={{ padding: "2rem", textAlign: "center" }}>
+                <p style={{ fontFamily: "var(--font-sans)", fontSize: "0.8rem", color: "var(--ocean)", marginBottom: "0.5rem", fontWeight: 500 }}>
+                  Unable to load checkout
+                </p>
+                <p style={{ fontFamily: "var(--font-sans)", fontSize: "0.75rem", color: "var(--ocean-mid)", opacity: 0.7, lineHeight: 1.6 }}>
+                  {checkoutError}
+                </p>
+              </div>
+            ) : (
+              <EmbeddedCheckoutProvider stripe={stripePromise} options={{ fetchClientSecret }}>
+                <EmbeddedCheckout />
+              </EmbeddedCheckoutProvider>
+            )}
           </div>
         </motion.div>
       </motion.div>

@@ -15,13 +15,15 @@ export async function POST(req: Request) {
 
     const origin = req.headers.get("origin") ?? "https://echoingholistichealth.com";
 
-    const session = await stripe.checkout.sessions.create({
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      ui_mode: "embedded" as any,
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const sessionParams: any = {
+      ui_mode: "embedded",
       line_items: [{ price: priceId, quantity: 1 }],
       mode: "payment",
       return_url: `${origin}/order-confirmed?session_id={CHECKOUT_SESSION_ID}`,
-    } as Parameters<typeof stripe.checkout.sessions.create>[0]);
+    };
+
+    const session = await stripe.checkout.sessions.create(sessionParams);
 
     return NextResponse.json({ clientSecret: session.client_secret });
   } catch (err) {
