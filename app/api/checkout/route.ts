@@ -17,7 +17,7 @@ export async function POST(req: Request) {
 
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const sessionParams: any = {
-      ui_mode: "embedded",
+      ui_mode: "embedded_page",
       line_items: [{ price: priceId, quantity: 1 }],
       mode: "payment",
       return_url: `${origin}/order-confirmed?session_id={CHECKOUT_SESSION_ID}`,
