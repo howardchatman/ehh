@@ -1,6 +1,7 @@
 import { redirect } from "next/navigation";
 import Stripe from "stripe";
 import ConfirmationButtons from "@/components/ui/ConfirmationButtons";
+import { sendOrderConfirmation, sendMerchantNotification } from "@/lib/resend";
 
 export const metadata = {
   title: "Order Confirmed — Healing Water™",
@@ -11,7 +12,10 @@ async function getSession(sessionId: string) {
   const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!, {
     apiVersion: "2026-05-27.dahlia",
   });
-  return stripe.checkout.sessions.retrieve(sessionId);
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  return (stripe.checkout.sessions as any).retrieve(sessionId, {
+    expand: ["line_items"],
+  });
 }
 
 export default async function Page({
@@ -52,6 +56,19 @@ export default async function Page({
     { label: "Phone",   value: phone },
     { label: "Ship To", value: addressLine },
   ].filter((d) => d.value);
+
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const lineItem = (session as any).line_items?.data?.[0];
+  const productName = lineItem?.description ?? "Healing Water™";
+  const priceAmount = session.amount_total != null
+    ? `$${(session.amount_total / 100).toFixed(2)}`
+    : "";
+
+  // Send customer + merchant confirmation emails
+  if (email) {
+    try { await sendOrderConfirmation(name, email, productName, priceAmount, phone, addressLine); } catch {}
+  }
+  try { await sendMerchantNotification(name, email, productName, priceAmount, phone, addressLine); } catch {}
 
   return (
     <div style={{ minHeight: "100svh", background: "linear-gradient(160deg, var(--ocean) 0%, var(--ocean-mid) 60%, #0d3d5e 100%)", position: "relative", overflow: "hidden" }}>
