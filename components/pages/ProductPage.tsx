@@ -4,6 +4,7 @@ import { useState } from "react";
 import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
 import type { Product } from "@/lib/products";
+import { OrderButton } from "@/components/ui/CheckoutModal";
 
 const EASE = [0.22, 1, 0.36, 1] as const;
 const VIEW = { once: true, margin: "-60px" } as const;
@@ -28,7 +29,6 @@ export default function ProductPage({
 function ProductDetail({ product }: { product: Product }) {
   const [activeImg, setActiveImg] = useState(0);
   const images = [product.image];
-  const hasLink = !!product.paymentLink;
 
   return (
     <section style={{ backgroundColor: "var(--coastal)", paddingTop: "clamp(6rem, 10vw, 10rem)" }}>
@@ -193,20 +193,14 @@ function ProductDetail({ product }: { product: Product }) {
               <span style={{ fontFamily: "var(--font-serif)", fontSize: "clamp(1.8rem, 3vw, 2.5rem)", fontWeight: 300, color: "var(--ocean)", letterSpacing: "-0.02em" }}>
                 {product.price}
               </span>
-              {hasLink ? (
-                <a
-                  href={product.paymentLink}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="btn-ocean"
-                >
-                  Order Now
-                </a>
-              ) : (
-                <Link href="/contact" className="btn-ocean">
-                  Inquire to Order
-                </Link>
-              )}
+              <OrderButton
+                priceId={product.priceId}
+                productName={product.shortName}
+                price={product.price}
+                className="btn-ocean"
+              >
+                Order Now
+              </OrderButton>
             </motion.div>
 
             <p style={{ fontFamily: "var(--font-sans)", fontSize: "0.6rem", color: "var(--ocean-mid)", opacity: 0.4, marginTop: "1rem", lineHeight: 1.7 }}>

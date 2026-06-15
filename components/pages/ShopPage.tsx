@@ -4,6 +4,7 @@ import { useState } from "react";
 import Link from "next/link";
 import { motion } from "framer-motion";
 import { products, type Product } from "@/lib/products";
+import { OrderButton } from "@/components/ui/CheckoutModal";
 
 const EASE = [0.22, 1, 0.36, 1] as const;
 const VIEW = { once: true, margin: "-60px" } as const;
@@ -125,9 +126,8 @@ function ShopGrid() {
 
 function ProductCard({ product }: { product: Product }) {
   const [hovered, setHovered] = useState(false);
-  const hasLink = !!product.paymentLink;
 
-  const cardContent = (
+  return (
     <div
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
@@ -137,7 +137,8 @@ function ProductCard({ product }: { product: Product }) {
         position: "relative",
         transition: "box-shadow 0.35s",
         boxShadow: hovered ? "0 8px 32px rgba(10,37,64,0.12)" : "0 2px 8px rgba(10,37,64,0.05)",
-        cursor: hasLink ? "pointer" : "default",
+        display: "flex",
+        flexDirection: "column",
       }}
     >
       {product.label && (
@@ -148,77 +149,41 @@ function ProductCard({ product }: { product: Product }) {
 
       {/* Image */}
       <div style={{ overflow: "hidden", backgroundColor: "var(--sea-foam)" }}>
-        <motion.div
-          animate={{ scale: hovered ? 1.04 : 1 }}
-          transition={{ duration: 0.75, ease: EASE }}
-        >
+        <motion.div animate={{ scale: hovered ? 1.04 : 1 }} transition={{ duration: 0.75, ease: EASE }}>
           {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img
-            src={product.image}
-            alt={product.name}
-            style={{ width: "100%", height: "auto", display: "block" }}
-          />
+          <img src={product.image} alt={product.name} style={{ width: "100%", height: "auto", display: "block" }} />
         </motion.div>
       </div>
 
       {/* Info */}
-      <div style={{ padding: "clamp(1.25rem, 2vw, 1.75rem)" }}>
+      <div style={{ padding: "clamp(1.25rem, 2vw, 1.75rem)", display: "flex", flexDirection: "column", flex: 1 }}>
         <span className="micro-label" style={{ color: "var(--aqua)", display: "block", marginBottom: "0.6rem" }}>
           {product.pouches} Pouches
         </span>
-        <h3
-          style={{
-            fontFamily: "var(--font-serif)",
-            fontSize: "clamp(1.15rem, 1.6vw, 1.4rem)",
-            fontWeight: 400,
-            letterSpacing: "-0.01em",
-            color: hovered ? "var(--ocean)" : "var(--ocean)",
-            marginBottom: "0.3rem",
-            lineHeight: 1.2,
-          }}
-        >
+        <h3 style={{ fontFamily: "var(--font-serif)", fontSize: "clamp(1.15rem, 1.6vw, 1.4rem)", fontWeight: 400, letterSpacing: "-0.01em", color: "var(--ocean)", marginBottom: "0.3rem", lineHeight: 1.2 }}>
           {product.name}
         </h3>
-        <p style={{ fontFamily: "var(--font-serif)", fontStyle: "italic", fontSize: "0.85rem", color: "var(--ocean-mid)", opacity: 0.7, fontWeight: 300, marginBottom: "1.25rem", lineHeight: 1.5 }}>
+        <p style={{ fontFamily: "var(--font-serif)", fontStyle: "italic", fontSize: "0.85rem", color: "var(--ocean-mid)", opacity: 0.7, fontWeight: 300, marginBottom: "1.25rem", lineHeight: 1.5, flex: 1 }}>
           {product.tagline}
         </p>
 
-        <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", borderTop: "1px solid rgba(10,37,64,0.08)", paddingTop: "1rem" }}>
+        <div style={{ borderTop: "1px solid rgba(10,37,64,0.08)", paddingTop: "1rem", display: "flex", alignItems: "center", justifyContent: "space-between", gap: "1rem" }}>
           <span style={{ fontFamily: "var(--font-serif)", fontSize: "1.35rem", fontWeight: 300, color: "var(--ocean)", letterSpacing: "-0.02em" }}>
             {product.price}
           </span>
-          {hasLink ? (
-            <span
-              className="micro-label"
-              style={{
-                color: hovered ? "var(--aqua)" : "var(--ocean-mid)",
-                borderBottom: `1px solid ${hovered ? "var(--aqua)" : "transparent"}`,
-                paddingBottom: "1px",
-                transition: "all 0.3s",
-                opacity: hovered ? 1 : 0.6,
-              }}
-            >
-              Order Now →
-            </span>
-          ) : (
-            <span className="micro-label" style={{ color: "var(--ocean-mid)", opacity: 0.4 }}>
-              Coming Soon
-            </span>
-          )}
+          <OrderButton
+            priceId={product.priceId}
+            productName={product.shortName}
+            price={product.price}
+            className="btn-ocean"
+            style={{ fontSize: "0.52rem", padding: "0.65rem 1.25rem" }}
+          >
+            Order Now
+          </OrderButton>
         </div>
       </div>
     </div>
   );
-
-  if (hasLink) {
-    return (
-      <a href={product.paymentLink} target="_blank" rel="noopener noreferrer" style={{ display: "block", textDecoration: "none" }}>
-        {cardContent}
-      </a>
-    );
-  }
-
-  return <Link href={`/shop/${product.slug}`} style={{ display: "block", textDecoration: "none" }}>{cardContent}</Link>;
 }
 
 // ── NOTE ──────────────────────────────────────────────────────────────────────

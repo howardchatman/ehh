@@ -10,7 +10,8 @@ export function middleware(request: NextRequest) {
     pathname.startsWith("/thank-you") ||
     pathname.startsWith("/dashboard") ||
     pathname.startsWith("/download") ||
-    pathname.startsWith("/free-guide")
+    pathname.startsWith("/free-guide") ||
+    pathname.startsWith("/order-confirmed")
   ) {
     return NextResponse.next();
   }

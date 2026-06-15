@@ -11,8 +11,7 @@ export type Product = {
   price: string;
   priceUsd: number;
   stripeProductId: string;
-  // Set these once you create Payment Links in Stripe Dashboard:
-  // Products → click product → "Create payment link"
+  priceId: string;
   paymentLink: string;
   tagline: string;
   description: string;
@@ -32,6 +31,7 @@ export const products: Product[] = [
     price: "$46",
     priceUsd: 46,
     stripeProductId: "prod_Ufm7GK1ozRaCko",
+    priceId: "price_1TgQZgFqLkxbvGEmgOH5rqG1",
     paymentLink: "https://buy.stripe.com/cNidR8gWv6cp4wyeiD5wI04",
     tagline: "The perfect introduction.",
     description:
@@ -55,6 +55,7 @@ export const products: Product[] = [
     price: "$88",
     priceUsd: 88,
     stripeProductId: "prod_UfmGxiiQunDzSS",
+    priceId: "price_1TgQhYFqLkxbvGEmbAhVBGvl",
     paymentLink: "https://buy.stripe.com/dRm00i21BdERgfgcav5wI02",
     tagline: "Fuel your full week.",
     description:
@@ -78,6 +79,7 @@ export const products: Product[] = [
     price: "$132",
     priceUsd: 132,
     stripeProductId: "prod_UfmHcgP223FK2n",
+    priceId: "price_1TgQjCFqLkxbvGEmUqn0vMGx",
     paymentLink: "https://buy.stripe.com/cNi7sKfSr6cp0gi6Qb5wI00",
     tagline: "Most popular for a reason.",
     description:
@@ -101,6 +103,7 @@ export const products: Product[] = [
     price: "$252",
     priceUsd: 252,
     stripeProductId: "prod_UfmKIEJUevpDPi",
+    priceId: "price_1TgQmJFqLkxbvGEmEMLHuC6j",
     paymentLink: "https://buy.stripe.com/dRmfZgfSr6cp4wy3DZ5wI01",
     tagline: "Commit to the ritual.",
     description:
@@ -124,6 +127,7 @@ export const products: Product[] = [
     price: "$324",
     priceUsd: 324,
     stripeProductId: "prod_UfmOfjfXSaLP0y",
+    priceId: "price_1TgQpQFqLkxbvGEmhGxV9HkM",
     paymentLink: "https://buy.stripe.com/dRmeVcbCb1W90gifmH5wI03",
     tagline: "Hydrate the whole family.",
     description:
