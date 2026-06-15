@@ -31,16 +31,30 @@ export default async function Page({
 
   if (session.payment_status !== "paid") redirect("/shop");
 
-  const name = session.customer_details?.name ?? "Friend";
-  const email = session.customer_details?.email ?? "";
-  const phone = session.customer_details?.phone ?? "";
+  const name    = session.customer_details?.name  ?? "Friend";
+  const email   = session.customer_details?.email ?? "";
+  const phone   = session.customer_details?.phone ?? "";
   const firstName = name.split(" ")[0];
+
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  const shipping = (session as any).shipping_details?.address;
+  const addr = (session as any).shipping_details?.address as {
+    line1?: string; line2?: string; city?: string; state?: string; postal_code?: string;
+  } | null | undefined;
+
+  const addressLine = addr
+    ? [addr.line1, addr.line2, addr.city && addr.state ? `${addr.city}, ${addr.state} ${addr.postal_code ?? ""}`.trim() : ""]
+        .filter(Boolean).join(" · ")
+    : "";
+
+  const details = [
+    { label: "Name",    value: name },
+    { label: "Email",   value: email },
+    { label: "Phone",   value: phone },
+    { label: "Ship To", value: addressLine },
+  ].filter((d) => d.value);
 
   return (
     <div style={{ minHeight: "100svh", background: "linear-gradient(160deg, var(--ocean) 0%, var(--ocean-mid) 60%, #0d3d5e 100%)", position: "relative", overflow: "hidden" }}>
-      {/* Background glow */}
       <div aria-hidden="true" style={{ position: "absolute", inset: 0, background: "radial-gradient(ellipse 60% 50% at 50% 60%, rgba(28,184,200,0.12) 0%, transparent 65%)", pointerEvents: "none" }} />
 
       <div style={{ maxWidth: "640px", margin: "0 auto", padding: "clamp(6rem, 12vw, 10rem) var(--section-x) clamp(4rem, 8vw, 8rem)", position: "relative", zIndex: 1 }}>
@@ -72,21 +86,21 @@ export default async function Page({
           <div style={{ height: "1px", width: "32px", backgroundColor: "var(--aqua)", opacity: 0.3 }} />
         </div>
 
-        {/* Message card */}
-        <div style={{ background: "rgba(255,255,255,0.04)", border: "1px solid rgba(28,184,200,0.15)", padding: "clamp(1.75rem, 3vw, 2.5rem)", marginBottom: "2.5rem" }}>
+        {/* Message */}
+        <div style={{ background: "rgba(255,255,255,0.04)", border: "1px solid rgba(28,184,200,0.15)", padding: "clamp(1.75rem, 3vw, 2.5rem)", marginBottom: "1.5rem" }}>
           <p style={{ fontFamily: "var(--font-serif)", fontStyle: "italic", fontSize: "clamp(1rem, 1.4vw, 1.15rem)", fontWeight: 300, color: "rgba(255,255,255,0.65)", lineHeight: 1.85, textAlign: "center", marginBottom: "1.5rem" }}>
             Your order is being handcrafted fresh and will be on its way to you soon.
             We appreciate your trust in Healing Water™.
           </p>
 
-          <div style={{ display: "flex", flexDirection: "column", gap: "0.75rem" }}>
+          <div style={{ display: "flex", flexDirection: "column" }}>
             {[
-              { icon: "◆", text: "Made to order — crafted fresh just for you" },
-              { icon: "◆", text: "Houston delivery available" },
-              { icon: "◆", text: "Questions? Contact us anytime" },
+              { text: "Made to order — crafted fresh just for you" },
+              { text: "Houston delivery available" },
+              { text: "Questions? Contact us anytime" },
             ].map((item, i) => (
-              <div key={i} style={{ display: "flex", alignItems: "flex-start", gap: "0.75rem", paddingTop: "0.75rem", borderTop: "1px solid rgba(255,255,255,0.06)" }}>
-                <span style={{ color: "var(--aqua)", fontSize: "0.45rem", flexShrink: 0, paddingTop: "0.4rem", opacity: 0.7 }}>{item.icon}</span>
+              <div key={i} style={{ display: "flex", alignItems: "flex-start", gap: "0.75rem", padding: "0.75rem 0", borderTop: "1px solid rgba(255,255,255,0.06)" }}>
+                <span style={{ color: "var(--aqua)", fontSize: "0.45rem", flexShrink: 0, paddingTop: "0.4rem", opacity: 0.7 }}>◆</span>
                 <span style={{ fontFamily: "var(--font-sans)", fontSize: "0.8rem", fontWeight: 300, color: "rgba(255,255,255,0.5)", lineHeight: 1.6 }}>{item.text}</span>
               </div>
             ))}
@@ -94,83 +108,40 @@ export default async function Page({
           </div>
         </div>
 
-        {/* Order details */}
-        <div style={{ background: "rgba(255,255,255,0.03)", border: "1px solid rgba(255,255,255,0.07)", padding: "1.5rem", marginBottom: "2rem" }}>
-          <p style={{ fontFamily: "var(--font-sans)", fontSize: "0.55rem", fontWeight: 600, letterSpacing: "0.2em", textTransform: "uppercase", color: "rgba(255,255,255,0.25)", marginBottom: "1rem" }}>
-            Your Details
-          </p>
-          <div style={{ display: "flex", flexDirection: "column", gap: "0.6rem" }}>
-            {[
-              { label: "Name", value: name },
-              { label: "Email", value: email },
-              { label: "Phone", value: phone },
-              shipping && {
-                label: "Ship To",
-                value: [
-                  shipping.line1,
-                  shipping.line2,
-                  shipping.city && shipping.state
-                    ? `${shipping.city}, ${shipping.state} ${shipping.postal_code ?? ""}`
-                    : shipping.city ?? shipping.state ?? "",
-                ].filter(Boolean).join(" · "),
-              },
-            ]
-              .filter(Boolean)
-              .filter((item) => item && (item as { value: string }).value)
-              .map((item, i) => (
+        {/* Customer details */}
+        {details.length > 0 && (
+          <div style={{ background: "rgba(255,255,255,0.03)", border: "1px solid rgba(255,255,255,0.07)", padding: "1.5rem", marginBottom: "2rem" }}>
+            <p style={{ fontFamily: "var(--font-sans)", fontSize: "0.55rem", fontWeight: 600, letterSpacing: "0.2em", textTransform: "uppercase", color: "rgba(255,255,255,0.25)", marginBottom: "1rem" }}>
+              Your Details
+            </p>
+            <div style={{ display: "flex", flexDirection: "column", gap: "0.6rem" }}>
+              {details.map((d, i) => (
                 <div key={i} style={{ display: "flex", gap: "1rem", alignItems: "baseline" }}>
-                  <span style={{ fontFamily: "var(--font-sans)", fontSize: "0.58rem", fontWeight: 600, letterSpacing: "0.12em", textTransform: "uppercase", color: "rgba(255,255,255,0.2)", flexShrink: 0, width: "52px" }}>
-                    {(item as { label: string }).label}
+                  <span style={{ fontFamily: "var(--font-sans)", fontSize: "0.55rem", fontWeight: 600, letterSpacing: "0.12em", textTransform: "uppercase", color: "rgba(255,255,255,0.2)", flexShrink: 0, width: "52px" }}>
+                    {d.label}
                   </span>
                   <span style={{ fontFamily: "var(--font-sans)", fontSize: "0.78rem", fontWeight: 300, color: "rgba(255,255,255,0.55)", lineHeight: 1.5 }}>
-                    {(item as { value: string }).value}
+                    {d.value}
                   </span>
                 </div>
               ))}
+            </div>
           </div>
-        </div>
+        )}
 
         {/* CTAs */}
         <div style={{ display: "flex", gap: "1rem", justifyContent: "center", flexWrap: "wrap" }}>
-          <Link
-            href="/shop"
-            className="btn-ocean"
-            style={{ borderColor: "rgba(28,184,200,0.4)", color: "var(--aqua)" }}
-          >
+          <Link href="/shop" className="btn-ocean" style={{ borderColor: "rgba(28,184,200,0.4)", color: "var(--aqua)" }}>
             Order More
           </Link>
-          <Link
-            href="/contact"
-            style={{
-              fontFamily: "var(--font-sans)",
-              fontWeight: 500,
-              fontSize: "0.58rem",
-              letterSpacing: "0.2em",
-              textTransform: "uppercase",
-              color: "rgba(255,255,255,0.4)",
-              textDecoration: "none",
-              padding: "1rem 2rem",
-              border: "1px solid rgba(255,255,255,0.12)",
-              transition: "color 0.3s, border-color 0.3s",
-            }}
-            onMouseEnter={(e) => {
-              const el = e.currentTarget as HTMLAnchorElement;
-              el.style.color = "rgba(255,255,255,0.8)";
-              el.style.borderColor = "rgba(255,255,255,0.3)";
-            }}
-            onMouseLeave={(e) => {
-              const el = e.currentTarget as HTMLAnchorElement;
-              el.style.color = "rgba(255,255,255,0.4)";
-              el.style.borderColor = "rgba(255,255,255,0.12)";
-            }}
-          >
+          <Link href="/contact" className="btn-ocean" style={{ borderColor: "rgba(255,255,255,0.12)", color: "rgba(255,255,255,0.5)" }}>
             Contact Us
           </Link>
         </div>
 
-        {/* Footer note */}
-        <p style={{ fontFamily: "var(--font-sans)", fontSize: "0.55rem", color: "rgba(255,255,255,0.12)", textAlign: "center", marginTop: "3rem", lineHeight: 1.8, letterSpacing: "0.04em" }}>
-          Echoing Holistic Health™ · Houston, Texas · EchoingHolisticHealth.com<br />
+        {/* Footer */}
+        <p style={{ fontFamily: "var(--font-sans)", fontSize: "0.55rem", color: "rgba(255,255,255,0.12)", textAlign: "center", marginTop: "3rem", lineHeight: 1.8 }}>
+          Echoing Holistic Health™ · Houston, Texas<br />
           All orders are made to order. No cancellations once production begins.
         </p>
       </div>
