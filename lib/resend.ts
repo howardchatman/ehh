@@ -15,7 +15,7 @@ export async function sendOrderConfirmation(
   const { orderConfirmationEmail } = await import("./emails/order-confirmation");
   const firstName = name.split(" ")[0];
   await getResend().emails.send({
-    from: "Echoing Holistic Health™ <hello@echoingholistichealth.com>",
+    from: "Echoing Holistic Health™ <contact@echoingholistichealth.com>",
     to: email,
     subject: "Your Healing Water™ Order is Confirmed 💧",
     html: orderConfirmationEmail(firstName, productName, price, email, phone, address),
@@ -33,7 +33,7 @@ export async function sendMerchantNotification(
   const to = process.env.MERCHANT_NOTIFY_EMAIL;
   if (!to) return;
   await getResend().emails.send({
-    from: "Echoing Holistic Health™ <hello@echoingholistichealth.com>",
+    from: "Echoing Holistic Health™ <contact@echoingholistichealth.com>",
     to,
     subject: `New Order: ${productName} — ${price}`,
     html: `
@@ -57,7 +57,7 @@ export async function sendGutTeaCollection(name: string, email: string) {
   const firstName = name.split(" ")[0];
 
   await getResend().emails.send({
-    from: "Echoing Holistic Health™ <hello@echoingholistichealth.com>",
+    from: "Echoing Holistic Health™ <contact@echoingholistichealth.com>",
     to: email,
     subject: "Your Free Gut-Friendly Tea Collection 🍵",
     html: gutTeaCollectionEmail(firstName),
