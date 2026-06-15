@@ -17,94 +17,130 @@ async function getSession(sessionId: string) {
 export default async function Page({
   searchParams,
 }: {
-  searchParams: { session_id?: string };
+  searchParams: Promise<{ session_id?: string }>;
 }) {
-  const sessionId = searchParams.session_id;
+  const { session_id: sessionId } = await searchParams;
   if (!sessionId) redirect("/shop");
 
-  const session = await getSession(sessionId);
+  let session;
+  try {
+    session = await getSession(sessionId);
+  } catch {
+    redirect("/shop");
+  }
+
   if (session.payment_status !== "paid") redirect("/shop");
 
-  const name = session.customer_details?.name ?? "there";
+  const name = session.customer_details?.name ?? "Friend";
   const email = session.customer_details?.email ?? "";
   const firstName = name.split(" ")[0];
 
   return (
-    <div
-      style={{
-        minHeight: "100svh",
-        background: "linear-gradient(160deg, var(--ocean) 0%, var(--ocean-mid) 100%)",
-        display: "flex",
-        alignItems: "center",
-        justifyContent: "center",
-        padding: "clamp(4rem, 8vw, 8rem) var(--section-x)",
-      }}
-    >
-      <div style={{ textAlign: "center", maxWidth: "52ch" }}>
-        {/* Icon */}
-        <div style={{ marginBottom: "2rem" }}>
-          <div style={{
-            width: "64px",
-            height: "64px",
-            borderRadius: "50%",
-            border: "1.5px solid var(--aqua)",
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
-            margin: "0 auto",
-          }}>
-            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="var(--aqua)" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+    <div style={{ minHeight: "100svh", background: "linear-gradient(160deg, var(--ocean) 0%, var(--ocean-mid) 60%, #0d3d5e 100%)", position: "relative", overflow: "hidden" }}>
+      {/* Background glow */}
+      <div aria-hidden="true" style={{ position: "absolute", inset: 0, background: "radial-gradient(ellipse 60% 50% at 50% 60%, rgba(28,184,200,0.12) 0%, transparent 65%)", pointerEvents: "none" }} />
+
+      <div style={{ maxWidth: "640px", margin: "0 auto", padding: "clamp(6rem, 12vw, 10rem) var(--section-x) clamp(4rem, 8vw, 8rem)", position: "relative", zIndex: 1 }}>
+
+        {/* Check circle */}
+        <div style={{ display: "flex", justifyContent: "center", marginBottom: "2.5rem" }}>
+          <div style={{ width: "72px", height: "72px", borderRadius: "50%", border: "1.5px solid rgba(28,184,200,0.5)", background: "rgba(28,184,200,0.08)", display: "flex", alignItems: "center", justifyContent: "center" }}>
+            <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="var(--aqua)" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
               <polyline points="20 6 9 17 4 12" />
             </svg>
           </div>
         </div>
 
         {/* Label */}
-        <p style={{ fontFamily: "var(--font-sans)", fontSize: "0.58rem", fontWeight: 600, letterSpacing: "0.22em", textTransform: "uppercase", color: "var(--aqua)", marginBottom: "1rem" }}>
+        <p style={{ fontFamily: "var(--font-sans)", fontSize: "0.58rem", fontWeight: 600, letterSpacing: "0.22em", textTransform: "uppercase", color: "var(--aqua)", textAlign: "center", marginBottom: "1.25rem" }}>
           Order Confirmed
         </p>
 
         {/* Headline */}
-        <h1 style={{
-          fontFamily: "var(--font-serif)",
-          fontSize: "clamp(2.8rem, 6vw, 5rem)",
-          fontWeight: 300,
-          lineHeight: 1,
-          letterSpacing: "-0.025em",
-          color: "var(--cream)",
-          marginBottom: "1.5rem",
-        }}>
+        <h1 style={{ fontFamily: "var(--font-serif)", fontSize: "clamp(3rem, 7vw, 5.5rem)", fontWeight: 300, lineHeight: 0.95, letterSpacing: "-0.025em", color: "var(--cream)", textAlign: "center", marginBottom: "1.75rem" }}>
           Thank you,<br />
           <em style={{ fontStyle: "italic", color: "var(--aqua)" }}>{firstName}.</em>
         </h1>
 
-        <p style={{
-          fontFamily: "var(--font-serif)",
-          fontStyle: "italic",
-          fontSize: "clamp(0.95rem, 1.3vw, 1.1rem)",
-          fontWeight: 300,
-          color: "rgba(255,255,255,0.5)",
-          lineHeight: 1.8,
-          marginBottom: "0.75rem",
-        }}>
-          Your Healing Water™ order is being prepared fresh for you.
-          We&apos;ll be in touch with delivery details soon.
-        </p>
+        {/* Divider */}
+        <div style={{ display: "flex", alignItems: "center", justifyContent: "center", gap: "1rem", marginBottom: "2rem" }}>
+          <div style={{ height: "1px", width: "32px", backgroundColor: "var(--aqua)", opacity: 0.3 }} />
+          <span style={{ fontFamily: "var(--font-serif)", fontStyle: "italic", fontSize: "0.75rem", color: "rgba(255,255,255,0.3)", letterSpacing: "0.08em" }}>Healing Water™</span>
+          <div style={{ height: "1px", width: "32px", backgroundColor: "var(--aqua)", opacity: 0.3 }} />
+        </div>
 
+        {/* Message card */}
+        <div style={{ background: "rgba(255,255,255,0.04)", border: "1px solid rgba(28,184,200,0.15)", padding: "clamp(1.75rem, 3vw, 2.5rem)", marginBottom: "2.5rem" }}>
+          <p style={{ fontFamily: "var(--font-serif)", fontStyle: "italic", fontSize: "clamp(1rem, 1.4vw, 1.15rem)", fontWeight: 300, color: "rgba(255,255,255,0.65)", lineHeight: 1.85, textAlign: "center", marginBottom: "1.5rem" }}>
+            Your order is being handcrafted fresh and will be on its way to you soon.
+            We appreciate your trust in Healing Water™.
+          </p>
+
+          <div style={{ display: "flex", flexDirection: "column", gap: "0.75rem" }}>
+            {[
+              { icon: "◆", text: "Made to order — crafted fresh just for you" },
+              { icon: "◆", text: "Houston delivery available" },
+              { icon: "◆", text: "Questions? Contact us anytime" },
+            ].map((item, i) => (
+              <div key={i} style={{ display: "flex", alignItems: "flex-start", gap: "0.75rem", paddingTop: "0.75rem", borderTop: "1px solid rgba(255,255,255,0.06)" }}>
+                <span style={{ color: "var(--aqua)", fontSize: "0.45rem", flexShrink: 0, paddingTop: "0.4rem", opacity: 0.7 }}>{item.icon}</span>
+                <span style={{ fontFamily: "var(--font-sans)", fontSize: "0.8rem", fontWeight: 300, color: "rgba(255,255,255,0.5)", lineHeight: 1.6 }}>{item.text}</span>
+              </div>
+            ))}
+            <div style={{ borderTop: "1px solid rgba(255,255,255,0.06)" }} />
+          </div>
+        </div>
+
+        {/* Email confirmation */}
         {email && (
-          <p style={{ fontFamily: "var(--font-sans)", fontSize: "0.65rem", color: "rgba(255,255,255,0.25)", marginBottom: "3rem" }}>
+          <p style={{ fontFamily: "var(--font-sans)", fontSize: "0.62rem", color: "rgba(255,255,255,0.2)", textAlign: "center", letterSpacing: "0.04em", marginBottom: "2.5rem" }}>
             Confirmation sent to {email}
           </p>
         )}
 
+        {/* CTAs */}
         <div style={{ display: "flex", gap: "1rem", justifyContent: "center", flexWrap: "wrap" }}>
-          <Link href="/shop" className="btn-ocean" style={{ borderColor: "rgba(255,255,255,0.25)", color: "rgba(255,255,255,0.8)" }}>
-            Continue Shopping
+          <Link
+            href="/shop"
+            className="btn-ocean"
+            style={{ borderColor: "rgba(28,184,200,0.4)", color: "var(--aqua)" }}
+          >
+            Order More
           </Link>
-          <Link href="/" className="btn-ocean">
-            Back to Home
+          <Link
+            href="/contact"
+            style={{
+              fontFamily: "var(--font-sans)",
+              fontWeight: 500,
+              fontSize: "0.58rem",
+              letterSpacing: "0.2em",
+              textTransform: "uppercase",
+              color: "rgba(255,255,255,0.4)",
+              textDecoration: "none",
+              padding: "1rem 2rem",
+              border: "1px solid rgba(255,255,255,0.12)",
+              transition: "color 0.3s, border-color 0.3s",
+            }}
+            onMouseEnter={(e) => {
+              const el = e.currentTarget as HTMLAnchorElement;
+              el.style.color = "rgba(255,255,255,0.8)";
+              el.style.borderColor = "rgba(255,255,255,0.3)";
+            }}
+            onMouseLeave={(e) => {
+              const el = e.currentTarget as HTMLAnchorElement;
+              el.style.color = "rgba(255,255,255,0.4)";
+              el.style.borderColor = "rgba(255,255,255,0.12)";
+            }}
+          >
+            Contact Us
           </Link>
         </div>
+
+        {/* Footer note */}
+        <p style={{ fontFamily: "var(--font-sans)", fontSize: "0.55rem", color: "rgba(255,255,255,0.12)", textAlign: "center", marginTop: "3rem", lineHeight: 1.8, letterSpacing: "0.04em" }}>
+          Echoing Holistic Health™ · Houston, Texas · EchoingHolisticHealth.com<br />
+          All orders are made to order. No cancellations once production begins.
+        </p>
       </div>
     </div>
   );
