@@ -1,6 +1,6 @@
 import { redirect } from "next/navigation";
 import Stripe from "stripe";
-import Link from "next/link";
+import ConfirmationButtons from "@/components/ui/ConfirmationButtons";
 
 export const metadata = {
   title: "Order Confirmed — Healing Water™",
@@ -130,14 +130,7 @@ export default async function Page({
         )}
 
         {/* CTAs */}
-        <div style={{ display: "flex", gap: "1rem", justifyContent: "center", flexWrap: "wrap" }}>
-          <Link href="/shop" className="btn-ocean" style={{ borderColor: "rgba(28,184,200,0.4)", color: "var(--aqua)" }}>
-            Order More
-          </Link>
-          <Link href="/contact" className="btn-ocean" style={{ borderColor: "rgba(255,255,255,0.12)", color: "rgba(255,255,255,0.5)" }}>
-            Contact Us
-          </Link>
-        </div>
+        <ConfirmationButtons />
 
         {/* Footer */}
         <p style={{ fontFamily: "var(--font-sans)", fontSize: "0.55rem", color: "rgba(255,255,255,0.12)", textAlign: "center", marginTop: "3rem", lineHeight: 1.8 }}>
