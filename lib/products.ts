@@ -32,7 +32,7 @@ export const products: Product[] = [
     price: "$46",
     priceUsd: 46,
     stripeProductId: "prod_Ufm7GK1ozRaCko",
-    paymentLink: "", // paste https://buy.stripe.com/... from Stripe Dashboard
+    paymentLink: "https://buy.stripe.com/cNidR8gWv6cp4wyeiD5wI04",
     tagline: "The perfect introduction.",
     description:
       "Four pouches of Healing Water™ — sea moss-powered functional hydration to experience the difference.",
@@ -55,7 +55,7 @@ export const products: Product[] = [
     price: "$88",
     priceUsd: 88,
     stripeProductId: "prod_UfmGxiiQunDzSS",
-    paymentLink: "",
+    paymentLink: "https://buy.stripe.com/dRm00i21BdERgfgcav5wI02",
     tagline: "Fuel your full week.",
     description:
       "Eight pouches to carry you through the week with consistent, mineral-rich hydration.",
@@ -78,7 +78,7 @@ export const products: Product[] = [
     price: "$132",
     priceUsd: 132,
     stripeProductId: "prod_UfmHcgP223FK2n",
-    paymentLink: "",
+    paymentLink: "https://buy.stripe.com/cNi7sKfSr6cp0gi6Qb5wI00",
     tagline: "Most popular for a reason.",
     description:
       "Twelve pouches — the most popular pack for customers building a consistent hydration ritual.",
@@ -101,7 +101,7 @@ export const products: Product[] = [
     price: "$252",
     priceUsd: 252,
     stripeProductId: "prod_UfmKIEJUevpDPi",
-    paymentLink: "",
+    paymentLink: "https://buy.stripe.com/dRmfZgfSr6cp4wy3DZ5wI01",
     tagline: "Commit to the ritual.",
     description:
       "Twenty-four pouches — a full month of Healing Water™ for those committed to daily functional hydration.",
@@ -124,7 +124,7 @@ export const products: Product[] = [
     price: "$324",
     priceUsd: 324,
     stripeProductId: "prod_UfmOfjfXSaLP0y",
-    paymentLink: "",
+    paymentLink: "https://buy.stripe.com/dRmeVcbCb1W90gifmH5wI03",
     tagline: "Hydrate the whole family.",
     description:
       "Thirty-six pouches — the family-size pack so everyone in your home can experience the power of sea moss hydration.",
