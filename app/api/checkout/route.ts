@@ -21,6 +21,13 @@ export async function POST(req: Request) {
       line_items: [{ price: priceId, quantity: 1 }],
       mode: "payment",
       return_url: `${origin}/order-confirmed?session_id={CHECKOUT_SESSION_ID}`,
+      billing_address_collection: "required",
+      shipping_address_collection: {
+        allowed_countries: ["US"],
+      },
+      phone_number_collection: {
+        enabled: true,
+      },
     };
 
     const session = await stripe.checkout.sessions.create(sessionParams);

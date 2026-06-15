@@ -33,7 +33,10 @@ export default async function Page({
 
   const name = session.customer_details?.name ?? "Friend";
   const email = session.customer_details?.email ?? "";
+  const phone = session.customer_details?.phone ?? "";
   const firstName = name.split(" ")[0];
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const shipping = (session as any).shipping_details?.address;
 
   return (
     <div style={{ minHeight: "100svh", background: "linear-gradient(160deg, var(--ocean) 0%, var(--ocean-mid) 60%, #0d3d5e 100%)", position: "relative", overflow: "hidden" }}>
@@ -91,12 +94,41 @@ export default async function Page({
           </div>
         </div>
 
-        {/* Email confirmation */}
-        {email && (
-          <p style={{ fontFamily: "var(--font-sans)", fontSize: "0.62rem", color: "rgba(255,255,255,0.2)", textAlign: "center", letterSpacing: "0.04em", marginBottom: "2.5rem" }}>
-            Confirmation sent to {email}
+        {/* Order details */}
+        <div style={{ background: "rgba(255,255,255,0.03)", border: "1px solid rgba(255,255,255,0.07)", padding: "1.5rem", marginBottom: "2rem" }}>
+          <p style={{ fontFamily: "var(--font-sans)", fontSize: "0.55rem", fontWeight: 600, letterSpacing: "0.2em", textTransform: "uppercase", color: "rgba(255,255,255,0.25)", marginBottom: "1rem" }}>
+            Your Details
           </p>
-        )}
+          <div style={{ display: "flex", flexDirection: "column", gap: "0.6rem" }}>
+            {[
+              { label: "Name", value: name },
+              { label: "Email", value: email },
+              { label: "Phone", value: phone },
+              shipping && {
+                label: "Ship To",
+                value: [
+                  shipping.line1,
+                  shipping.line2,
+                  shipping.city && shipping.state
+                    ? `${shipping.city}, ${shipping.state} ${shipping.postal_code ?? ""}`
+                    : shipping.city ?? shipping.state ?? "",
+                ].filter(Boolean).join(" · "),
+              },
+            ]
+              .filter(Boolean)
+              .filter((item) => item && (item as { value: string }).value)
+              .map((item, i) => (
+                <div key={i} style={{ display: "flex", gap: "1rem", alignItems: "baseline" }}>
+                  <span style={{ fontFamily: "var(--font-sans)", fontSize: "0.58rem", fontWeight: 600, letterSpacing: "0.12em", textTransform: "uppercase", color: "rgba(255,255,255,0.2)", flexShrink: 0, width: "52px" }}>
+                    {(item as { label: string }).label}
+                  </span>
+                  <span style={{ fontFamily: "var(--font-sans)", fontSize: "0.78rem", fontWeight: 300, color: "rgba(255,255,255,0.55)", lineHeight: 1.5 }}>
+                    {(item as { value: string }).value}
+                  </span>
+                </div>
+              ))}
+          </div>
+        </div>
 
         {/* CTAs */}
         <div style={{ display: "flex", gap: "1rem", justifyContent: "center", flexWrap: "wrap" }}>
