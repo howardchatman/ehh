@@ -8,7 +8,7 @@ export default function AmbientSound() {
   const [ready, setReady] = useState(false);
 
   useEffect(() => {
-    const audio = new Audio("/ocean-waves.mp3");
+    const audio = new Audio("/ocean-waves.wav");
     audio.loop = true;
     audio.volume = 0.35;
     audio.addEventListener("canplaythrough", () => setReady(true));
