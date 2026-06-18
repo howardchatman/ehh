@@ -157,7 +157,7 @@ function FlavorCard({ flavor }: { flavor: typeof FLAVORS[number] }) {
           src={flavor.image}
           alt={flavor.name}
           fill
-          style={{ objectFit: "contain", padding: "1.5rem" }}
+          style={{ objectFit: "contain", padding: "1.5rem", mixBlendMode: "multiply" }}
           sizes="(max-width: 768px) 100vw, 50vw"
         />
       </div>
