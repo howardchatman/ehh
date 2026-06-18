@@ -121,7 +121,7 @@ export default function HealingWaterProducts() {
             Available in packs of 4, 8, 12, 24 & 36 pouches.
           </p>
           <Link href="/shop" className="btn-ocean" style={{ display: "inline-flex" }}>
-            Shop Packs
+            Shop
           </Link>
         </motion.div>
       </div>
