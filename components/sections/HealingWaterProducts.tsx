@@ -89,12 +89,8 @@ export default function HealingWaterProducts() {
 
         {/* 2×2 grid */}
         <div
-          style={{
-            display: "grid",
-            gridTemplateColumns: "1fr",
-            gap: "clamp(1.25rem, 2vw, 2rem)",
-          }}
-          className="md:grid-cols-2"
+          style={{ display: "grid", gap: "clamp(1.25rem, 2vw, 2rem)" }}
+          className="grid-cols-1 md:grid-cols-2"
         >
           {FLAVORS.map((flavor, i) => (
             <motion.div
