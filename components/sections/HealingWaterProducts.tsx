@@ -4,6 +4,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { motion } from "framer-motion";
 import WaveDivider from "@/components/ui/WaveDivider";
+import BotanicalAccent from "@/components/ui/BotanicalAccent";
 
 const EASE = [0.22, 1, 0.36, 1] as const;
 const VIEW = { once: true, margin: "-60px" } as const;
@@ -41,7 +42,7 @@ const FLAVORS = [
 
 export default function HealingWaterProducts() {
   return (
-    <section aria-label="Our Products" style={{ backgroundColor: "white", position: "relative", overflow: "hidden" }}>
+    <section aria-label="Our Products" style={{ backgroundColor: "var(--ivory)", position: "relative", overflow: "hidden" }}>
       <div
         style={{
           maxWidth: "var(--container)",
@@ -84,6 +85,11 @@ export default function HealingWaterProducts() {
           </Link>
         </motion.div>
 
+        {/* Botanical ornament */}
+        <div style={{ display: "flex", justifyContent: "center", marginBottom: "clamp(2rem, 3vw, 3rem)" }}>
+          <BotanicalAccent color="var(--sage)" width={100} opacity={0.5} />
+        </div>
+
         {/* 2×2 grid */}
         <div
           style={{ display: "grid", gap: "clamp(1.25rem, 2vw, 2rem)" }}
@@ -104,7 +110,7 @@ export default function HealingWaterProducts() {
 
         {/* Wave to PackOptions (dark ocean) */}
         <div style={{ position: "absolute", bottom: 0, left: 0, right: 0 }}>
-          <WaveDivider fill="#0A2540" />
+          <WaveDivider fill="#0A2540" height={90} />
         </div>
 
         {/* Bottom CTA */}
@@ -140,7 +146,8 @@ function FlavorCard({ flavor }: { flavor: typeof FLAVORS[number] }) {
           display: "flex",
           flexDirection: "column",
           cursor: "pointer",
-          boxShadow: "0 4px 20px rgba(10,37,64,0.07)",
+          backgroundColor: "var(--warm-white)",
+          boxShadow: "0 4px 24px rgba(90,60,20,0.08), 0 1px 4px rgba(90,60,20,0.04)",
           transition: "box-shadow 0.3s, transform 0.3s",
         }}
         onMouseEnter={(e) => {

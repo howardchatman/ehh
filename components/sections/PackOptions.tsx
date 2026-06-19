@@ -28,7 +28,7 @@ export default function PackOptions() {
       <div aria-hidden="true" style={{ position: "absolute", inset: 0, background: "radial-gradient(ellipse 70% 50% at 50% 80%, rgba(28,184,200,0.08) 0%, transparent 65%)", pointerEvents: "none" }} />
       {/* Wave from white section above */}
       <div style={{ position: "absolute", top: 0, left: 0, right: 0, transform: "scaleY(-1)" }}>
-        <WaveDivider fill="white" />
+        <WaveDivider fill="#F5F0E8" height={90} />
       </div>
 
       <div

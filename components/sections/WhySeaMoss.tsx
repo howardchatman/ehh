@@ -14,11 +14,11 @@ export default function WhySeaMoss() {
     >
       {/* Wave from dark PackOptions above */}
       <div style={{ position: "absolute", top: 0, left: 0, right: 0, transform: "scaleY(-1)" }}>
-        <WaveDivider fill="#0A2540" />
+        <WaveDivider fill="#0A2540" height={90} />
       </div>
       {/* Wave to HowToEnjoy (white) below */}
       <div style={{ position: "absolute", bottom: 0, left: 0, right: 0 }}>
-        <WaveDivider fill="white" />
+        <WaveDivider fill="#F5F0E8" height={90} />
       </div>
       <div
         style={{

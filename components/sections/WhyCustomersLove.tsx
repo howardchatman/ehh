@@ -235,7 +235,7 @@ export default function WhyCustomersLove() {
 
       {/* Wave to next section (white) */}
       <div style={{ position: "absolute", bottom: 0, left: 0, right: 0 }}>
-        <WaveDivider fill="white" />
+        <WaveDivider fill="#F5F0E8" height={90} />
       </div>
 
       {/* Controls */}

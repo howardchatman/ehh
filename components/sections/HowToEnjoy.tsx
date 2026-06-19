@@ -2,6 +2,7 @@
 
 import { motion } from "framer-motion";
 import WaveDivider from "@/components/ui/WaveDivider";
+import BotanicalAccent from "@/components/ui/BotanicalAccent";
 
 const EASE = [0.22, 1, 0.36, 1] as const;
 const VIEW = { once: true, margin: "-60px" } as const;
@@ -17,7 +18,7 @@ export default function HowToEnjoy() {
   return (
     <section
       aria-label="How to Enjoy"
-      style={{ backgroundColor: "white" }}
+      style={{ backgroundColor: "var(--ivory)", position: "relative", overflow: "hidden" }}
     >
       <div
         style={{
@@ -50,6 +51,11 @@ export default function HowToEnjoy() {
           </h2>
         </motion.div>
 
+        {/* Botanical ornament */}
+        <div style={{ display: "flex", justifyContent: "center", marginTop: "-1rem", marginBottom: "clamp(2rem, 3vw, 3rem)" }}>
+          <BotanicalAccent color="#B8965A" width={90} opacity={0.45} />
+        </div>
+
         {/* Methods */}
         <div
           style={{ display: "grid", gridTemplateColumns: "1fr", gap: "clamp(1.5rem, 2.5vw, 2rem)" }}
@@ -65,7 +71,8 @@ export default function HowToEnjoy() {
               style={{
                 padding: "clamp(1.75rem, 2.5vw, 2.5rem)",
                 borderRadius: "20px",
-                background: "linear-gradient(145deg, #f0f7fa 0%, #e8f4f8 100%)",
+                background: "linear-gradient(145deg, var(--warm-white) 0%, var(--parchment) 100%)",
+                boxShadow: "0 4px 24px rgba(90,60,20,0.07)",
                 position: "relative",
               }}
             >

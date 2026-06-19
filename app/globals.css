@@ -72,7 +72,7 @@ html {
 }
 
 body {
-  background-color: var(--bg);
+  background-color: var(--ivory);
   color: var(--espresso);
   font-family: var(--font-sans);
   font-weight: 300;
