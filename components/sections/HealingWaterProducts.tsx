@@ -11,7 +11,7 @@ const FLAVORS = [
   {
     name: "Emerald Energy™",
     tagline: "Sea moss, chlorophyll, mint & lemon.",
-    image: "/emeral-energy.png",
+    image: "/emerald-energy.png",
     ingredients: ["Sea Moss", "Chlorophyll", "Mint", "Lemon", "Alkaline Water"],
     bg: "linear-gradient(145deg, #e8f5e9 0%, #c8e6c9 100%)",
   },
