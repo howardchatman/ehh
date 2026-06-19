@@ -57,11 +57,6 @@ export default function HealingWaterHero() {
           transition={{ duration: 0.8, ease: EASE }}
           style={{ display: "flex", alignItems: "center", justifyContent: "center", gap: "1rem", marginBottom: "clamp(2rem, 3.5vw, 3.5rem)" }}
         >
-          <div style={{ height: "1px", width: "28px", backgroundColor: "var(--aqua)", opacity: 0.6 }} />
-          <span className="micro-label" style={{ color: "var(--aqua)", letterSpacing: "0.25em" }}>
-            Hydration · Wellness · Abundance
-          </span>
-          <div style={{ height: "1px", width: "28px", backgroundColor: "var(--aqua)", opacity: 0.6 }} />
         </motion.div>
 
         {/* Headline */}

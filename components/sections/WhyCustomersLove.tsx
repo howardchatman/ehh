@@ -87,13 +87,6 @@ export default function WhyCustomersLove() {
         transition={{ duration: 0.9, ease: EASE }}
         style={{ textAlign: "center", marginBottom: "clamp(3rem, 5vw, 5rem)" }}
       >
-        <div style={{ display: "flex", alignItems: "center", justifyContent: "center", gap: "1rem", marginBottom: "1.25rem" }}>
-          <div style={{ height: "1px", width: "28px", backgroundColor: "var(--aqua)", opacity: 0.6 }} />
-          <span style={{ fontFamily: "var(--font-sans)", fontSize: "0.58rem", fontWeight: 600, letterSpacing: "0.22em", textTransform: "uppercase", color: "var(--aqua)" }}>
-            Why Customers Love It
-          </span>
-          <div style={{ height: "1px", width: "28px", backgroundColor: "var(--aqua)", opacity: 0.6 }} />
-        </div>
         <h2
           style={{
             fontFamily: "var(--font-serif)",

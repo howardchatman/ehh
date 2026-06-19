@@ -43,11 +43,6 @@ export default function PackOptions() {
           transition={{ duration: 0.9, ease: EASE }}
           style={{ textAlign: "center", marginBottom: "clamp(3rem, 5vw, 5rem)" }}
         >
-          <div style={{ display: "flex", alignItems: "center", justifyContent: "center", gap: "1rem", marginBottom: "clamp(1.25rem, 2vw, 2rem)" }}>
-            <div style={{ height: "1px", width: "28px", backgroundColor: "var(--aqua)", opacity: 0.6 }} />
-            <span className="micro-label" style={{ color: "var(--aqua)", letterSpacing: "0.2em" }}>Pack Options</span>
-            <div style={{ height: "1px", width: "28px", backgroundColor: "var(--aqua)", opacity: 0.6 }} />
-          </div>
           <h2
             style={{
               fontFamily: "var(--font-serif)",

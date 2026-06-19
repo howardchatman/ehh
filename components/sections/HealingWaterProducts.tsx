@@ -63,10 +63,6 @@ export default function HealingWaterProducts() {
           className="md:flex-row md:items-end md:justify-between"
         >
           <div>
-            <div style={{ display: "flex", alignItems: "center", gap: "1rem", marginBottom: "1.25rem" }}>
-              <div style={{ height: "1px", width: "28px", backgroundColor: "var(--aqua)", flexShrink: 0 }} />
-              <span className="micro-label" style={{ color: "var(--aqua)" }}>The Collection</span>
-            </div>
             <h2
               style={{
                 fontFamily: "var(--font-serif)",

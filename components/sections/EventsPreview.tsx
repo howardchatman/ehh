@@ -39,9 +39,6 @@ export default function EventsPreview() {
           transition={{ duration: 0.8, ease: EASE }}
           style={{ display: "flex", alignItems: "center", gap: "1rem" }}
         >
-          <div style={{ height: "1px", width: "28px", backgroundColor: "var(--aqua)", opacity: 0.6 }} />
-          <span className="micro-label" style={{ color: "var(--aqua)", letterSpacing: "0.2em" }}>Upcoming Events</span>
-          <div style={{ height: "1px", width: "28px", backgroundColor: "var(--aqua)", opacity: 0.6 }} />
         </motion.div>
 
         <motion.h2

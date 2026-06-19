@@ -82,8 +82,6 @@ export default function WhySeaMoss() {
             transition={{ duration: 0.9, ease: EASE }}
             style={{ display: "flex", alignItems: "center", gap: "1rem", marginBottom: "clamp(2rem, 3.5vw, 3rem)" }}
           >
-            <div style={{ height: "1px", width: "28px", backgroundColor: "var(--aqua)", flexShrink: 0 }} />
-            <span className="micro-label" style={{ color: "var(--aqua)" }}>Why Sea Moss</span>
           </motion.div>
 
           <motion.h2
