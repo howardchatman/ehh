@@ -1,6 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
+import WaveDivider from "@/components/ui/WaveDivider";
 
 const EASE = [0.22, 1, 0.36, 1] as const;
 const VIEW = { once: true, margin: "-80px" } as const;
@@ -11,6 +12,14 @@ export default function WhySeaMoss() {
       aria-label="Why Sea Moss"
       style={{ backgroundColor: "var(--coastal)", position: "relative", overflow: "hidden" }}
     >
+      {/* Wave from dark PackOptions above */}
+      <div style={{ position: "absolute", top: 0, left: 0, right: 0, transform: "scaleY(-1)" }}>
+        <WaveDivider fill="#0A2540" />
+      </div>
+      {/* Wave to HowToEnjoy (white) below */}
+      <div style={{ position: "absolute", bottom: 0, left: 0, right: 0 }}>
+        <WaveDivider fill="white" />
+      </div>
       <div
         style={{
           maxWidth: "var(--container)",

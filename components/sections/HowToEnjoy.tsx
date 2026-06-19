@@ -1,6 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
+import WaveDivider from "@/components/ui/WaveDivider";
 
 const EASE = [0.22, 1, 0.36, 1] as const;
 const VIEW = { once: true, margin: "-60px" } as const;
@@ -63,7 +64,8 @@ export default function HowToEnjoy() {
               transition={{ duration: 0.8, ease: EASE, delay: i * 0.09 }}
               style={{
                 padding: "clamp(1.75rem, 2.5vw, 2.5rem)",
-                borderTop: "2px solid var(--border)",
+                borderRadius: "20px",
+                background: "linear-gradient(145deg, #f0f7fa 0%, #e8f4f8 100%)",
                 position: "relative",
               }}
             >

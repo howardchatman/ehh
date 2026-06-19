@@ -2,6 +2,7 @@
 
 import { useState, useEffect, useCallback } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import WaveDivider from "@/components/ui/WaveDivider";
 
 const CARDS = [
   {
@@ -71,7 +72,7 @@ export default function WhyCustomersLove() {
         background: "linear-gradient(160deg, var(--ocean) 0%, #0d3252 60%, #0a2540 100%)",
         position: "relative",
         overflow: "hidden",
-        padding: "clamp(5rem, 10vw, 9rem) var(--section-x)",
+        padding: "clamp(5rem, 10vw, 9rem) var(--section-x) clamp(8rem, 14vw, 12rem)",
       }}
       onMouseEnter={() => setPaused(true)}
       onMouseLeave={() => setPaused(false)}
@@ -144,9 +145,9 @@ export default function WhyCustomersLove() {
                     ? "linear-gradient(145deg, #ffffff 0%, #f8fbff 100%)"
                     : "rgba(255,255,255,0.06)",
                   border: isActive
-                    ? `1px solid rgba(28,184,200,0.2)`
+                    ? `1px solid rgba(28,184,200,0.15)`
                     : "1px solid rgba(255,255,255,0.08)",
-                  borderRadius: "2px",
+                  borderRadius: "24px",
                   padding: "clamp(2rem, 3.5vw, 3rem)",
                   boxShadow: isActive
                     ? "0 32px 80px rgba(0,0,0,0.35), 0 0 0 1px rgba(28,184,200,0.1)"
@@ -230,6 +231,11 @@ export default function WhyCustomersLove() {
             </motion.div>
           );
         })}
+      </div>
+
+      {/* Wave to next section (white) */}
+      <div style={{ position: "absolute", bottom: 0, left: 0, right: 0 }}>
+        <WaveDivider fill="white" />
       </div>
 
       {/* Controls */}

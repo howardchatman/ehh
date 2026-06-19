@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { motion } from "framer-motion";
+import WaveDivider from "@/components/ui/WaveDivider";
 
 const EASE = [0.22, 1, 0.36, 1] as const;
 const VIEW = { once: true, margin: "-60px" } as const;
@@ -25,6 +26,10 @@ export default function PackOptions() {
       }}
     >
       <div aria-hidden="true" style={{ position: "absolute", inset: 0, background: "radial-gradient(ellipse 70% 50% at 50% 80%, rgba(28,184,200,0.08) 0%, transparent 65%)", pointerEvents: "none" }} />
+      {/* Wave from white section above */}
+      <div style={{ position: "absolute", top: 0, left: 0, right: 0, transform: "scaleY(-1)" }}>
+        <WaveDivider fill="white" />
+      </div>
 
       <div
         style={{
@@ -109,12 +114,15 @@ function PackCard({ pack }: { pack: typeof PACKS[number] }) {
   return (
     <div
       style={{
-        border: `1px solid ${isPopular ? "var(--aqua)" : "rgba(255,255,255,0.12)"}`,
-        backgroundColor: isPopular ? "rgba(28,184,200,0.12)" : "rgba(255,255,255,0.04)",
+        borderRadius: "20px",
+        backgroundColor: isPopular ? "rgba(28,184,200,0.15)" : "rgba(255,255,255,0.06)",
+        border: isPopular ? "1px solid rgba(28,184,200,0.4)" : "1px solid rgba(255,255,255,0.08)",
         display: "flex",
         flexDirection: "column",
         position: "relative",
         overflow: "hidden",
+        backdropFilter: "blur(8px)",
+        transition: "transform 0.3s, background 0.3s",
       }}
     >
       {isPopular && (

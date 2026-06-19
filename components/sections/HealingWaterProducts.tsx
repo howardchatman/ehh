@@ -3,6 +3,7 @@
 import Link from "next/link";
 import Image from "next/image";
 import { motion } from "framer-motion";
+import WaveDivider from "@/components/ui/WaveDivider";
 
 const EASE = [0.22, 1, 0.36, 1] as const;
 const VIEW = { once: true, margin: "-60px" } as const;
@@ -40,12 +41,12 @@ const FLAVORS = [
 
 export default function HealingWaterProducts() {
   return (
-    <section aria-label="Our Products" style={{ backgroundColor: "white", position: "relative" }}>
+    <section aria-label="Our Products" style={{ backgroundColor: "white", position: "relative", overflow: "hidden" }}>
       <div
         style={{
           maxWidth: "var(--container)",
           margin: "0 auto",
-          padding: "var(--section-y) var(--section-x)",
+          padding: "var(--section-y) var(--section-x) clamp(8rem, 14vw, 12rem)",
         }}
       >
         {/* Header */}
@@ -101,6 +102,11 @@ export default function HealingWaterProducts() {
           ))}
         </div>
 
+        {/* Wave to PackOptions (dark ocean) */}
+        <div style={{ position: "absolute", bottom: 0, left: 0, right: 0 }}>
+          <WaveDivider fill="#0A2540" />
+        </div>
+
         {/* Bottom CTA */}
         <motion.div
           initial={{ opacity: 0, y: 16 }}
@@ -129,21 +135,22 @@ function FlavorCard({ flavor }: { flavor: typeof FLAVORS[number] }) {
     >
       <div
         style={{
-          border: "1px solid var(--border)",
+          borderRadius: "20px",
           overflow: "hidden",
           display: "flex",
           flexDirection: "column",
           cursor: "pointer",
+          boxShadow: "0 4px 20px rgba(10,37,64,0.07)",
           transition: "box-shadow 0.3s, transform 0.3s",
         }}
         onMouseEnter={(e) => {
           const el = e.currentTarget as HTMLDivElement;
-          el.style.boxShadow = "0 12px 40px rgba(10,37,64,0.12)";
-          el.style.transform = "translateY(-3px)";
+          el.style.boxShadow = "0 16px 48px rgba(10,37,64,0.15)";
+          el.style.transform = "translateY(-4px)";
         }}
         onMouseLeave={(e) => {
           const el = e.currentTarget as HTMLDivElement;
-          el.style.boxShadow = "none";
+          el.style.boxShadow = "0 4px 20px rgba(10,37,64,0.07)";
           el.style.transform = "translateY(0)";
         }}
       >
