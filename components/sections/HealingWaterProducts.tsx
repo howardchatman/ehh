@@ -123,87 +123,65 @@ export default function HealingWaterProducts() {
 
 function FlavorCard({ flavor }: { flavor: typeof FLAVORS[number] }) {
   return (
-    <div
-      style={{
-        border: "1px solid var(--border)",
-        overflow: "hidden",
-        display: "flex",
-        flexDirection: "column",
-        transition: "box-shadow 0.3s",
-      }}
-      onMouseEnter={(e) => {
-        (e.currentTarget as HTMLDivElement).style.boxShadow = "0 12px 40px rgba(10,37,64,0.1)";
-      }}
-      onMouseLeave={(e) => {
-        (e.currentTarget as HTMLDivElement).style.boxShadow = "none";
-      }}
+    <Link
+      href="/shop"
+      style={{ textDecoration: "none", display: "flex", flexDirection: "column" }}
     >
-      {/* Product image */}
       <div
         style={{
-          height: "clamp(240px, 30vw, 380px)",
-          background: flavor.bg,
-          position: "relative",
+          border: "1px solid var(--border)",
+          overflow: "hidden",
           display: "flex",
-          alignItems: "center",
-          justifyContent: "center",
+          flexDirection: "column",
+          cursor: "pointer",
+          transition: "box-shadow 0.3s, transform 0.3s",
+        }}
+        onMouseEnter={(e) => {
+          const el = e.currentTarget as HTMLDivElement;
+          el.style.boxShadow = "0 12px 40px rgba(10,37,64,0.12)";
+          el.style.transform = "translateY(-3px)";
+        }}
+        onMouseLeave={(e) => {
+          const el = e.currentTarget as HTMLDivElement;
+          el.style.boxShadow = "none";
+          el.style.transform = "translateY(0)";
         }}
       >
-        <Image
-          src={flavor.image}
-          alt={flavor.name}
-          fill
-          style={{ objectFit: "contain", padding: "1.5rem" }}
-          sizes="(max-width: 768px) 100vw, 50vw"
-        />
-      </div>
+        {/* Product image */}
+        <div
+          style={{
+            height: "clamp(160px, 18vw, 240px)",
+            background: flavor.bg,
+            position: "relative",
+          }}
+        >
+          <Image
+            src={flavor.image}
+            alt={flavor.name}
+            fill
+            style={{ objectFit: "contain", padding: "1rem" }}
+            sizes="(max-width: 768px) 100vw, 50vw"
+          />
+        </div>
 
-      {/* Info */}
-      <div style={{ padding: "clamp(1.25rem, 2vw, 2rem)", flex: 1, display: "flex", flexDirection: "column", gap: "1rem" }}>
-        <div>
+        {/* Info */}
+        <div style={{ padding: "1rem 1.25rem 1.25rem", display: "flex", flexDirection: "column", gap: "0.4rem" }}>
           <h3
             style={{
               fontFamily: "var(--font-serif)",
-              fontSize: "clamp(1.2rem, 1.8vw, 1.55rem)",
+              fontSize: "clamp(1rem, 1.4vw, 1.2rem)",
               fontWeight: 400,
               color: "var(--ocean)",
-              marginBottom: "0.3rem",
               lineHeight: 1.2,
             }}
           >
             {flavor.name}
           </h3>
-          <p style={{ fontFamily: "var(--font-serif)", fontStyle: "italic", fontSize: "0.9rem", color: "var(--muted)", fontWeight: 300 }}>
+          <p style={{ fontFamily: "var(--font-serif)", fontStyle: "italic", fontSize: "0.78rem", color: "var(--muted)", fontWeight: 300 }}>
             {flavor.tagline}
           </p>
         </div>
-
-        {/* Ingredients */}
-        <div style={{ display: "flex", flexWrap: "wrap", gap: "0.35rem" }}>
-          {flavor.ingredients.map((ing) => (
-            <span
-              key={ing}
-              style={{
-                fontFamily: "var(--font-sans)",
-                fontSize: "0.68rem",
-                fontWeight: 400,
-                color: "var(--ocean-mid)",
-                backgroundColor: "var(--sea-foam)",
-                padding: "0.2rem 0.6rem",
-                border: "1px solid var(--border)",
-              }}
-            >
-              {ing}
-            </span>
-          ))}
-        </div>
-
-        <div style={{ marginTop: "auto" }}>
-          <Link href="/shop" className="btn-dark" style={{ width: "100%", justifyContent: "center" }}>
-            Shop Now
-          </Link>
-        </div>
       </div>
-    </div>
+    </Link>
   );
 }
