@@ -9,7 +9,7 @@ const VIEW = { once: true, margin: "-60px" } as const;
 
 const FLAVORS = [
   {
-    name: "Emeral Energy™",
+    name: "Emerald Energy™",
     tagline: "Sea moss, chlorophyll, mint & lemon.",
     image: "/emeral-energy.png",
     ingredients: ["Sea Moss", "Chlorophyll", "Mint", "Lemon", "Alkaline Water"],
