@@ -47,7 +47,7 @@ export default function HealingWaterProducts() {
         style={{
           maxWidth: "var(--container)",
           margin: "0 auto",
-          padding: "var(--section-y) var(--section-x) clamp(8rem, 14vw, 12rem)",
+          padding: "var(--section-y) var(--section-x)",
         }}
       >
         {/* Header */}
@@ -106,11 +106,6 @@ export default function HealingWaterProducts() {
               <FlavorCard flavor={flavor} />
             </motion.div>
           ))}
-        </div>
-
-        {/* Wave to PackOptions (dark ocean) */}
-        <div style={{ position: "absolute", bottom: 0, left: 0, right: 0 }}>
-          <WaveDivider fill="#0A2540" height={90} />
         </div>
 
         {/* Bottom CTA */}

@@ -135,10 +135,6 @@ export default function HealingWaterHero() {
         </motion.div>
       </div>
 
-      {/* Bottom wave to ivory */}
-      <div style={{ position: "absolute", bottom: 0, left: 0, right: 0, pointerEvents: "none" }}>
-        <WaveDivider fill="#F5F0E8" height={100} />
-      </div>
     </section>
   );
 }

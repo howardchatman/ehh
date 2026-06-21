@@ -72,7 +72,7 @@ export default function WhyCustomersLove() {
         background: "linear-gradient(160deg, var(--ocean) 0%, #0d3252 60%, #0a2540 100%)",
         position: "relative",
         overflow: "hidden",
-        padding: "clamp(5rem, 10vw, 9rem) var(--section-x) clamp(8rem, 14vw, 12rem)",
+        padding: "clamp(5rem, 10vw, 9rem) var(--section-x)",
       }}
       onMouseEnter={() => setPaused(true)}
       onMouseLeave={() => setPaused(false)}
